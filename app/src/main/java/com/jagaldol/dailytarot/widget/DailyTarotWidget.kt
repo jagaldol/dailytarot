@@ -9,22 +9,25 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.glance.*
+import androidx.glance.LocalContext
 import androidx.glance.action.actionStartActivity
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.SizeMode
-import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.appWidgetBackground
 import androidx.glance.appwidget.provideContent
 import androidx.glance.currentState
 import androidx.glance.layout.*
 import androidx.glance.state.PreferencesGlanceStateDefinition
-import androidx.glance.text.Text
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import androidx.annotation.DrawableRes
 import com.jagaldol.dailytarot.MainActivity
 import com.jagaldol.dailytarot.R
-import com.jagaldol.dailytarot.model.CardImageRes
 import com.jagaldol.dailytarot.model.Deck
+import androidx.core.graphics.createBitmap
 
 class DailyTarotWidget : GlanceAppWidget() {
     override val stateDefinition = PreferencesGlanceStateDefinition
@@ -48,12 +51,33 @@ class DailyTarotWidget : GlanceAppWidget() {
         // 이미지 리소스 선택
         val imageRes = if (cardId >= 0) com.jagaldol.dailytarot.model.imageResFor(cardId) else R.mipmap.ic_launcher
 
-        Image(
-            provider = ImageProvider(imageRes),
-            contentDescription = null,
-            modifier = GlanceModifier.fillMaxWidth().height(180.dp)
-        )
+        // 역방향 여부
+        val reversed = prefs[booleanPreferencesKey("w_reversed")] ?: false
+
+        val ctx = LocalContext.current
+        val provider = if (reversed) ImageProvider(rotate180(ctx, imageRes)) else ImageProvider(imageRes)
+
+        Column(
+            modifier = GlanceModifier
+                .fillMaxSize()
+                .appWidgetBackground()
+                .clickable(actionStartActivity(MainActivity::class.java))
+        ) {
+            Image(
+                provider = provider,
+                contentDescription = null,
+                modifier = GlanceModifier.fillMaxSize(),
+                contentScale = ContentScale.Fit
+            )
+        }
     }
+}
+
+private fun rotate180(context: Context, @DrawableRes resId: Int): Bitmap {
+    val src = BitmapFactory.decodeResource(context.resources, resId)
+    if (src == null) return createBitmap(1, 1)
+    val m = Matrix().apply { postRotate(180f) }
+    return Bitmap.createBitmap(src, 0, 0, src.width, src.height, m, true)
 }
 
 class DailyTarotWidgetReceiver : GlanceAppWidgetReceiver() {

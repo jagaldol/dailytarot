@@ -27,6 +27,7 @@ import androidx.annotation.DrawableRes
 import com.jagaldol.dailytarot.MainActivity
 import com.jagaldol.dailytarot.R
 import com.jagaldol.dailytarot.model.Deck
+import com.jagaldol.dailytarot.model.imageResFor
 import androidx.core.graphics.createBitmap
 
 class DailyTarotWidget : GlanceAppWidget() {
@@ -49,7 +50,7 @@ class DailyTarotWidget : GlanceAppWidget() {
             else "오늘 카드 선택"
 
         // 이미지 리소스 선택
-        val imageRes = if (cardId >= 0) com.jagaldol.dailytarot.model.imageResFor(cardId) else R.mipmap.ic_launcher
+        val imageRes = if (cardId >= 0) imageResFor(LocalContext.current, cardId) else R.mipmap.ic_launcher
 
         // 역방향 여부
         val reversed = prefs[booleanPreferencesKey("w_reversed")] ?: false

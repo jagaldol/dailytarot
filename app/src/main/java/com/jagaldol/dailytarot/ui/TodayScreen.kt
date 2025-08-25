@@ -6,7 +6,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.jagaldol.dailytarot.data.saveToday
@@ -21,40 +23,59 @@ fun TodayScreen(onSaved: () -> Unit) {
     var selectedId by remember { mutableStateOf<Int?>(null) }
     var reversed by remember { mutableStateOf(false) }
 
-    Column(Modifier.fillMaxSize().padding(16.dp)) {
-        Text("오늘의 카드", style = MaterialTheme.typography.titleLarge)
-        Spacer(Modifier.height(10.dp))
-        Row {
-            Switch(checked = reversed, onCheckedChange = { reversed = it })
-            Spacer(Modifier.width(8.dp))
-            Text(if (reversed) "역방향" else "정방향")
-            Spacer(Modifier.weight(1f))
-            Button(
-                enabled = selectedId != null,
-                onClick = {
-                    scope.launch {
-                        val id = selectedId ?: return@launch
-                        val name = Deck.first { it.id == id }.name
-                        saveToday(ctx, id, reversed)
-                        syncAllWidgetState(ctx, id, name, reversed)
-                        onSaved()
-                    }
-                }
-            ) { Text("저장") }
-        }
-        Spacer(Modifier.height(10.dp))
-        LazyColumn(Modifier.fillMaxSize()) {
-            items(Deck) { c ->
-                val sel = selectedId == c.id
-                ListItem(
-                    headlineContent = { Text(c.name) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 4.dp)
-                        .clickable { selectedId = c.id },
-                    tonalElevation = if (sel) 6.dp else 0.dp
+    Surface(
+        modifier = Modifier
+            .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.safeDrawing),
+        color = Color.Transparent,
+        contentColor = MaterialTheme.colorScheme.onBackground
+    ) {
+        Column(Modifier.fillMaxSize().padding(16.dp)) {
+            Text("오늘의 카드", style = MaterialTheme.typography.titleLarge)
+            Spacer(Modifier.height(12.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Switch(
+                    checked = reversed,
+                    onCheckedChange = { reversed = it },
+                    colors = SwitchDefaults.colors(
+                        checkedThumbColor = MaterialTheme.colorScheme.primary,
+                        checkedTrackColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.4f),
+                    )
                 )
-                Divider()
+                Spacer(Modifier.width(10.dp))
+                Text(if (reversed) "역방향" else "정방향")
+                Spacer(Modifier.weight(1f))
+                Button(
+                    enabled = selectedId != null,
+                    onClick = {
+                        scope.launch {
+                            val id = selectedId ?: return@launch
+                            val name = Deck.first { it.id == id }.name
+                            saveToday(ctx, id, reversed)
+                            syncAllWidgetState(ctx, id, name, reversed)
+                            onSaved()
+                        }
+                    }
+                ) { Text("저장") }
+            }
+            Spacer(Modifier.height(12.dp))
+            LazyColumn(Modifier.fillMaxSize()) {
+                items(Deck) { c ->
+                    val sel = selectedId == c.id
+                    ListItem(
+                        headlineContent = { Text(c.name) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp)
+                            .clickable { selectedId = c.id },
+                        tonalElevation = if (sel) 6.dp else 0.dp,
+                        colors = ListItemDefaults.colors(
+                            containerColor = if (sel) MaterialTheme.colorScheme.surfaceVariant else Color.Transparent,
+                            headlineColor = MaterialTheme.colorScheme.onSurface,
+                        )
+                    )
+                    Divider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
+                }
             }
         }
     }

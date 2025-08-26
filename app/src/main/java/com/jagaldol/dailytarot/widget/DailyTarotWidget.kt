@@ -7,7 +7,6 @@ import androidx.compose.ui.unit.dp
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.glance.*
 import androidx.glance.LocalContext
 import androidx.glance.action.actionStartActivity
@@ -26,7 +25,6 @@ import android.graphics.Matrix
 import androidx.annotation.DrawableRes
 import com.jagaldol.dailytarot.MainActivity
 import com.jagaldol.dailytarot.R
-import com.jagaldol.dailytarot.model.Deck
 import com.jagaldol.dailytarot.model.imageResFor
 import androidx.core.graphics.createBitmap
 
@@ -44,10 +42,6 @@ class DailyTarotWidget : GlanceAppWidget() {
         val idKey = intPreferencesKey("w_id")
         val cardId = prefs[idKey] ?: -1
 
-        // 이름은 저장값 없으면 fallback
-        val name = prefs[stringPreferencesKey("w_name")]
-            ?: if (cardId >= 0) Deck.firstOrNull { it.id == cardId }?.name ?: "오늘 카드 선택"
-            else "오늘 카드 선택"
 
         // 이미지 리소스 선택
         val imageRes = if (cardId >= 0) imageResFor(LocalContext.current, cardId) else R.mipmap.ic_launcher

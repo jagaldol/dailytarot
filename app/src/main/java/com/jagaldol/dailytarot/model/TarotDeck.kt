@@ -104,3 +104,69 @@ fun imageResFor(context: Context, id: Int): Int {
     val resId = context.resources.getIdentifier(name, "drawable", context.packageName)
     return if (resId != 0) resId else R.mipmap.ic_launcher
 }
+
+// Thumbnail resource for grid (smaller WebP for smooth scrolling)
+fun thumbResFor(context: Context, id: Int): Int {
+    val safeId = if (id in 0..77) id else -1
+    if (safeId == -1) return imageResFor(context, id)
+    val name = String.format("tarot_rws_thumb_%02d", safeId)
+    val resId = context.resources.getIdentifier(name, "drawable", context.packageName)
+    return if (resId != 0) resId else imageResFor(context, id)
+}
+
+private fun roman(num: Int): String {
+    // Supports 1..3999; we only need up to 21
+    if (num <= 0) return ""
+    val thousands = arrayOf("", "M", "MM", "MMM")
+    val hundreds = arrayOf("", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM")
+    val tens = arrayOf("", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC")
+    val ones = arrayOf("", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX")
+    return buildString {
+        append(thousands[(num / 1000) % 10])
+        append(hundreds[(num / 100) % 10])
+        append(tens[(num / 10) % 10])
+        append(ones[num % 10])
+    }
+}
+
+fun displayLabel(id: Int): String {
+    return when (id) {
+        in 1..21 -> {
+            val n = roman(id)
+            "$n. ${Deck.first { it.id == id }.name.uppercase()}"
+        }
+        0 -> "0. ${Deck.first { it.id == 0 }.name.uppercase()}"
+        in 22..35 -> minorLabelWords(id, suit = "Pentacles", base = 22).uppercase()
+        in 36..49 -> minorLabelWords(id, suit = "Wands", base = 36).uppercase()
+        in 50..63 -> minorLabelWords(id, suit = "Cups", base = 50).uppercase()
+        in 64..77 -> minorLabelWords(id, suit = "Swords", base = 64).uppercase()
+        else -> Deck.firstOrNull { it.id == id }?.name?.uppercase() ?: ""
+    }
+}
+
+private fun minorLabelWords(id: Int, suit: String, base: Int): String {
+    val pos = id - base // 0..13
+    return when (pos) {
+        0 -> "Ace of $suit"
+        in 1..9 -> "${numberWord(pos + 1)} of $suit" // 2..10
+        10 -> "Page of $suit"
+        11 -> "Knight of $suit"
+        12 -> "Queen of $suit"
+        13 -> "King of $suit"
+        else -> ""
+    }
+}
+
+private fun numberWord(n: Int): String = when (n) {
+    1 -> "One" // not used (Ace covers 1)
+    2 -> "Two"
+    3 -> "Three"
+    4 -> "Four"
+    5 -> "Five"
+    6 -> "Six"
+    7 -> "Seven"
+    8 -> "Eight"
+    9 -> "Nine"
+    10 -> "Ten"
+    else -> n.toString()
+}

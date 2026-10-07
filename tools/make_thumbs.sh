@@ -12,7 +12,7 @@ fi
 mkdir -p "$RES_DIR"
 
 count=0
-for src in "$RES_DIR"/tarot_rws_*.webp; do
+for src in "$RES_DIR"/tarot_rws_[0-9][0-9].webp; do
   [[ -e "$src" ]] || continue
   base=$(basename "$src")
   num=${base#tarot_rws_}

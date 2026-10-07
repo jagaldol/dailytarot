@@ -5,6 +5,7 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 RES_DIR="$ROOT_DIR/app/src/main/res"
 
 QUALITY=${QUALITY:-85}
+WIDTH=${WIDTH:-720}
 
 if ! command -v cwebp >/dev/null 2>&1; then
   echo "Error: cwebp not found. Install via 'brew install webp' on macOS." >&2
@@ -27,7 +28,7 @@ printf "%s\n" "$files" | while IFS= read -r f; do
   out="${base}.webp"
   echo "[$idx/$count] ${f#$ROOT_DIR/} -> ${out#$ROOT_DIR/}" >&2
   # Convert with good quality-size balance; preserve alpha
-  cwebp -quiet -q "$QUALITY" -m 6 -mt "$f" -o "$out"
+  cwebp -quiet -q "$QUALITY" -m 6 -mt -resize "$WIDTH" 0 "$f" -o "$out"
   # Remove original PNG to avoid resource name duplication
   rm -f "$f"
   idx=$((idx+1))

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -uo pipefail
+set -euo pipefail
 
 # Download all Rider–Waite–Smith (Pam-A) card images into Android resources.
 # Output: app/src/main/res/drawable-nodpi/tarot_rws_XX.png (00..77)
@@ -7,6 +7,7 @@ set -uo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 OUT_DIR="$ROOT_DIR/app/src/main/res/drawable-nodpi"
 TMP_DIR="$(mktemp -d)"
+trap 'rm -rf "$TMP_DIR"' EXIT
 
 mkdir -p "$OUT_DIR"
 
@@ -42,6 +43,7 @@ ALL_LIST=$( {
 } )
 
 count=$(printf "%s\n" "$ALL_LIST" | sed '/^$/d' | wc -l | tr -d ' ')
+[[ "$count" -eq 78 ]] || { echo "Expected 78 cards, got $count" >&2; exit 1; }
 echo "Downloading ${count} images (skips existing) ..." >&2
 
 idx=0
@@ -49,16 +51,17 @@ while IFS= read -r stem; do
   printf -v num "%02d" "$idx"
   url="https://steve-p.org/cards/pix/${stem}.png"
   out="$OUT_DIR/tarot_rws_${num}.png"
-  if [[ -s "$out" ]]; then
+  if [[ -s "$out" || -s "${out%.png}.webp" ]]; then
     echo "[$num] exists, skip -> ${out#$ROOT_DIR/}" >&2
   else
     echo "[$num] $url -> ${out#$ROOT_DIR/}" >&2
-    if ! curl -fSL --retry 3 --retry-delay 1 --connect-timeout 10 --max-time 120 "$url" -o "$out"; then
+    if ! curl -fSL --retry 3 --retry-delay 1 --connect-timeout 10 --max-time 120 "$url" -o "$TMP_DIR/card.png"; then
       echo "[$num] download failed: $url" >&2
+      exit 1
     fi
+    mv "$TMP_DIR/card.png" "$out"
   fi
   idx=$((idx+1))
 done <<< "$ALL_LIST"
 
-missing=$(find "$OUT_DIR" -maxdepth 1 -name 'tarot_rws_*.png' | wc -l | tr -d ' ')
-echo "Done. Saved to ${OUT_DIR#$ROOT_DIR/} (${missing}/${count})" >&2
+echo "Done. Verified ${idx}/${count} card slots in ${OUT_DIR#$ROOT_DIR/}" >&2

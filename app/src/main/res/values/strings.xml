@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">데일리 타로</string>
+    <string name="title">Daily Tarot</string>
+    <string name="upright">Upright</string>
+    <string name="reversed">Reversed</string>
+    <string name="reverse_card">Reverse cards</string>
+    <string name="choose_card">Choose a card for your home screen.</string>
+    <string name="selected_card">Selected: %1$s</string>
+    <string name="loading">Loading your card…</string>
+    <string name="load_failed">Could not load your card. Please retry.</string>
+    <string name="save_failed">Your selection was not saved. Please retry.</string>
+    <string name="widget_failed">Card saved. Widget update needs a retry.</string>
+    <string name="retry">Retry</string>
+    <string name="widget_empty">Tap to choose a tarot card</string>
+    <string name="widget_description">Your selected tarot card, upright or reversed.</string>
 </resources>

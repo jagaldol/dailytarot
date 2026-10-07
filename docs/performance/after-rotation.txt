@@ -1,0 +1,74 @@
+Applications Graphics Acceleration Info:
+Uptime: 1684719 Realtime: 1684719
+
+** Graphics info for pid 14415 [com.jagaldol.dailytarot] **
+
+Stats since: 1678878675423ns
+Total frames rendered: 350
+Janky frames: 0 (0.00%)
+Janky frames (legacy): 0 (0.00%)
+50th percentile: 16ms
+90th percentile: 16ms
+95th percentile: 17ms
+99th percentile: 17ms
+Number Missed Vsync: 0
+Number High input latency: 350
+Number Slow UI thread: 0
+Number Slow bitmap uploads: 0
+Number Slow issue draw commands: 0
+Number Frame deadline missed: 0
+Number Frame deadline missed (legacy): 0
+HISTOGRAM: 5ms=5 6ms=2 7ms=4 8ms=3 9ms=1 10ms=2 11ms=1 12ms=0 13ms=0 14ms=3 15ms=1 16ms=294 17ms=33 18ms=1 19ms=0 20ms=0 21ms=0 22ms=0 23ms=0 24ms=0 25ms=0 26ms=0 27ms=0 28ms=0 29ms=0 30ms=0 31ms=0 32ms=0 34ms=0 36ms=0 38ms=0 40ms=0 42ms=0 44ms=0 46ms=0 48ms=0 53ms=0 57ms=0 61ms=0 65ms=0 69ms=0 73ms=0 77ms=0 81ms=0 85ms=0 89ms=0 93ms=0 97ms=0 101ms=0 105ms=0 109ms=0 113ms=0 117ms=0 121ms=0 125ms=0 129ms=0 133ms=0 150ms=0 200ms=0 250ms=0 300ms=0 350ms=0 400ms=0 450ms=0 500ms=0 550ms=0 600ms=0 650ms=0 700ms=0 750ms=0 800ms=0 850ms=0 900ms=0 950ms=0 1000ms=0 1050ms=0 1100ms=0 1150ms=0 1200ms=0 1250ms=0 1300ms=0 1350ms=0 1400ms=0 1450ms=0 1500ms=0 1550ms=0 1600ms=0 1650ms=0 1700ms=0 1750ms=0 1800ms=0 1850ms=0 1900ms=0 1950ms=0 2000ms=0 2050ms=0 2100ms=0 2150ms=0 2200ms=0 2250ms=0 2300ms=0 2350ms=0 2400ms=0 2450ms=0 2500ms=0 2550ms=0 2600ms=0 2650ms=0 2700ms=0 2750ms=0 2800ms=0 2850ms=0 2900ms=0 2950ms=0 3000ms=0 3050ms=0 3100ms=0 3150ms=0 3200ms=0 3250ms=0 3300ms=0 3350ms=0 3400ms=0 3450ms=0 3500ms=0 3550ms=0 3600ms=0 3650ms=0 3700ms=0 3750ms=0 3800ms=0 3850ms=0 3900ms=0 3950ms=0 4000ms=0 4050ms=0 4100ms=0 4150ms=0 4200ms=0 4250ms=0 4300ms=0 4350ms=0 4400ms=0 4450ms=0 4500ms=0 4550ms=0 4600ms=0 4650ms=0 4700ms=0 4750ms=0 4800ms=0 4850ms=0 4900ms=0 4950ms=0
+50th gpu percentile: 15ms
+90th gpu percentile: 16ms
+95th gpu percentile: 16ms
+99th gpu percentile: 16ms
+GPU HISTOGRAM: 1ms=0 2ms=9 3ms=4 4ms=3 5ms=2 6ms=0 7ms=0 8ms=1 9ms=2 10ms=9 11ms=13 12ms=37 13ms=53 14ms=34 15ms=146 16ms=35 17ms=2 18ms=0 19ms=0 20ms=0 21ms=0 22ms=0 23ms=0 24ms=0 25ms=0 4950ms=0
+
+Pipeline=Skia (OpenGL)
+Memory policy:
+  Max surface area: 2592000
+  Max resource usage: 124.42MB (x48)
+  Background retention: 50% (altUiHidden = true)
+  GPU Context timeout: 10
+Contexts: 1 (stopped = 0)
+CPU Caches:
+  Glyph Cache: 43.50 KB (1 entry)
+  Glyph Count: 14
+Total CPU memory usage:
+  44539 bytes, 43.50 KB (0.00 bytes is purgeable)
+GPU Caches:
+  Other:
+    Other: 8.94 KB (1 entry)
+  Image:
+    Texture: 9.89 MB (12 entries)
+  Scratch:
+    Texture: 2.00 MB (1 entry)
+    Buffer Object: 142.00 KB (4 entries)
+Total GPU memory usage:
+  12619712 bytes, 12.04 MB (9.95 MB is purgeable)
+
+GraphicBufferAllocator buffers:
+            Handle |         Size |     W (Stride) x H | Layers |   Format |      Usage | Requestor
+0xb400007b2b60f680 |      unknown | 1080 (   0) x 2400 |      1 |        1 | 0x     b00 | VRI[MainActivity]#0(BLAST Consumer)0
+0xb400007b2b610100 |      unknown | 1080 (   0) x 2400 |      1 |        1 | 0x     b00 | VRI[MainActivity]#0(BLAST Consumer)0
+0xb400007b2b6101e0 |      unknown | 1080 (   0) x 2400 |      1 |        1 | 0x     b00 | VRI[MainActivity]#0(BLAST Consumer)0
+Total allocated by GraphicBufferAllocator (estimate): 0.00 KB
+Imported gralloc buffers:
++ name:VRI[MainActivity]#0(BLAST Consumer)0, id:706, size:10125.31KiB, w/h:1080x2400, usage: 0xb00, req fmt:1, fourcc/mod:875708993/0, dataspace: 0x8810000, compressed: false
++ name:VRI[MainActivity]#0(BLAST Consumer)0, id:705, size:10125.31KiB, w/h:1080x2400, usage: 0xb00, req fmt:1, fourcc/mod:875708993/0, dataspace: 0x8810000, compressed: false
++ name:VRI[MainActivity]#0(BLAST Consumer)0, id:704, size:10125.31KiB, w/h:1080x2400, usage: 0xb00, req fmt:1, fourcc/mod:875708993/0, dataspace: 0x8810000, compressed: false
+Total imported by gralloc: 30375.94KiB
+
+Profile data in ms:
+
+	com.jagaldol.dailytarot/com.jagaldol.dailytarot.MainActivity/android.view.ViewRootImpl@c69f061 (visibility=0)
+View hierarchy:
+
+  com.jagaldol.dailytarot/com.jagaldol.dailytarot.MainActivity/android.view.ViewRootImpl@c69f061
+  10 views, 18.61 kB of render nodes
+
+
+Total ViewRootImpl   : 1
+Total attached Views : 10
+Total RenderNode     : 18.61 kB (used) / 50.38 kB (capacity)

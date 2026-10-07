@@ -38,5 +38,6 @@
 
 ## Tips & Configuration
 - SDK/NDK paths live in `local.properties`; do not commit secrets/keystores.
-- App targets SDK 36, min SDK 24; test on a 24+ emulator.
+- App compiles and targets SDK 37, min SDK 24; test on a 24+ emulator.
+- AGP provides built-in Kotlin support; do not reapply the legacy Kotlin Android plugin.
 - Widget uses Glance + DataStore; after data changes, call `updateAll` to refresh.

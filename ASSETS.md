@@ -1,28 +1,29 @@
-# Card assets
+# Assets
 
-## Provenance
+## Card illustrations
 
-The existing download script identifies the images as the Rider–Waite–Smith
-Pam-A deck from [Steve's playing-card site](https://steve-p.org/cards/).
-It reads `https://steve-p.org/cards/coordefs.js` and downloads the referenced
-PNG files from `https://steve-p.org/cards/pix/`.
+The 78 cards are the Rider–Waite–Smith tarot deck, illustrated by Pamela Colman Smith
+and first published in 1909. The illustrations are in the public domain.
 
-The resource order is Major Arcana (0–21), Pentacles (22–35), Wands (36–49),
-Cups (50–63), and Swords (64–77). The source filenames are mapped by the downloader.
+The scans are the "Pam-A" set from [Steve's playing-card site](https://steve-p.org/cards/).
+`tools/fetch_rws_images.sh` reads `https://steve-p.org/cards/coordefs.js` and downloads the
+referenced PNG files from `https://steve-p.org/cards/pix/`, mapping them to the app's order:
+Major Arcana (0–21), Pentacles (22–35), Wands (36–49), Cups (50–63), Swords (64–77).
 
-## Local transformations
+Local transformations:
 
-- Full card: WebP, 720 × 1200, quality 85.
-- Grid thumbnail: WebP, 360 × 600, quality 80.
-- The 2026-10-07 optimization resized the previously committed WebP cards.
-  It did not replace the illustrations or fetch a different scan.
-- Runtime widget images are further bounded to 1000px high and rotated off the UI thread.
+- Full card: WebP, 720 × 1200, quality 85 (`tools/convert_pngs_to_webp.sh`).
+- Grid thumbnail: WebP, 360 × 600, quality 80 (`tools/make_thumbs.sh`).
+- Widget images are scaled to at most 1000 px high and rotated at runtime.
 
-## Publication status
+## Fortunes
 
-No blanket license is asserted for these scans. The download script's source URL
-alone does not establish redistribution terms. The source page returned HTTP 403
-to the automated reader on 2026-10-07, so its current terms were not verified.
-Before public redistribution, verify and record the terms for the actual scans,
-or replace them with assets whose redistribution terms are documented.
-The code license, when chosen, must distinguish code from third-party images.
+`app/src/main/assets/default_fortunes.ko.json` holds one Korean keyword line and one fortune
+sentence for each card and orientation (156 entries). They are copied verbatim from the
+author's Lifebase card dictionary with `tools/extract_lifebase_catalog.py`.
+
+## App icon and card back
+
+The launcher icon, monochrome icon and card back are original vector drawables in
+`app/src/main/res/drawable/`. `tools/make_launcher_icons.py` renders the bitmap icons used
+on Android 7.x from the same shapes.

@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                 backgroundedAt = SystemClock.elapsedRealtime()
             }
         })
-        // While visible, follow the clock so midnight and the draw time switch the card in place.
+        // While visible, follow the clock so the day start and the automatic draw switch the card in place.
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 while (true) {

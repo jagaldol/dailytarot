@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -11,14 +13,34 @@ android {
         applicationId = "com.jagaldol.dailytarot"
         minSdk = 24
         targetSdk = 37
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // Release signing comes from a properties file kept outside the repository
+    // (DAILYTAROT_KEYSTORE_PROPERTIES, else ~/.android/dailytarot/keystore.properties).
+    // Without it the release APK is built unsigned, as on CI.
+    val keystoreProperties = (System.getenv("DAILYTAROT_KEYSTORE_PROPERTIES")
+        ?: "${System.getProperty("user.home")}/.android/dailytarot/keystore.properties")
+        .let(::File)
+        .takeIf { it.isFile }
+        ?.let { file -> Properties().apply { file.inputStream().use(::load) } }
+    if (keystoreProperties != null) {
+        signingConfigs {
+            create("release") {
+                storeFile = File(keystoreProperties.getProperty("storeFile"))
+                storePassword = keystoreProperties.getProperty("storePassword")
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig = signingConfigs.findByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(

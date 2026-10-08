@@ -72,7 +72,7 @@ class DailyTarotWidget : GlanceAppWidget() {
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         val app = context.applicationContext as TarotApplication
-        // Draws only when automatic drawing is on and the draw time has passed.
+        // Draws only when automatic drawing is on and its time has passed.
         val initial = try {
             app.repository.refreshToday()
         } catch (e: CancellationException) {

@@ -50,7 +50,7 @@ import com.jagaldol.dailytarot.ui.theme.DailytarotTheme
 import com.jagaldol.dailytarot.ui.theme.gold
 
 data class TodayUi(
-    /** The calendar date today, which may differ from the shown card's date before the draw time. */
+    /** The calendar date today, which may differ from the shown card's date before the day start. */
     val day: Day?,
     val reading: DailyReading?,
     val nameKo: String?,
@@ -61,7 +61,7 @@ data class TodayUi(
     val connected: Boolean,
     /** Today's card was drawn locally while Lifebase has not delivered one yet. */
     val waitingForLifebase: Boolean,
-    /** Before the draw time: yesterday's card stays up until today's exists. */
+    /** Before the day start: yesterday's card stays up until today's exists. */
     val showingPrevious: Boolean,
     /** No card for today yet and none is shown. */
     val awaitingDraw: Boolean,

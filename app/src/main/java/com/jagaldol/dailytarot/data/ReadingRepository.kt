@@ -24,7 +24,7 @@ import kotlin.random.Random
 enum class ApplyResult { APPLIED, UNCHANGED, KEPT, STALE }
 
 /**
- * What the app and widget show for "today". Before the daily draw time the previous day's
+ * What the app and widget show for "today". Before the day start the previous day's
  * card stays up until today's exists; after it, an empty date shows a face-down card.
  */
 data class TodayView(

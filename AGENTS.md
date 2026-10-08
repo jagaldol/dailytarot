@@ -4,7 +4,7 @@
 - `:app`: Single Android app module using Jetpack Compose and Glance.
 - Code: `app/src/main/java/com/jagaldol/dailytarot/...`
 - UI/Widget: Compose screens under `ui/`, Glance widget under `widget/`.
-- Data: DataStore helpers in `data/`, models in `model/`.
+- Data: SQLite reading store, settings (DataStore) and Lifebase sync in `data/`, models in `model/`, WorkManager jobs in `work/`.
 - Resources: `app/src/main/res` (drawable, values, xml).
 - Tests: Unit tests `app/src/test`, instrumented tests `app/src/androidTest`.
 - Versions: `gradle/libs.versions.toml` (AGP, Kotlin, libraries).
@@ -28,7 +28,7 @@
 - Frameworks: JUnit4 for unit tests, Espresso/Compose Test for instrumented UI.
 - Place unit tests mirroring package under `app/src/test/...` and Android tests under `app/src/androidTest/...`.
 - Name tests with `ClassNameTest` and methods with intent-revealing names.
-- Cover new logic (models, DataStore helpers, widget actions). Prefer fast unit tests; add UI tests for critical flows.
+- Cover new logic (models, reading rules, Lifebase parsing, widget layout). Prefer fast unit tests; add UI tests for critical flows.
 
 ## Commit & Pull Request Guidelines
 - Commits: small, focused messages in imperative mood (e.g., "Add widget state sync").
@@ -40,4 +40,4 @@
 - SDK/NDK paths live in `local.properties`; do not commit secrets/keystores.
 - App compiles and targets SDK 37, min SDK 24; test on a 24+ emulator.
 - AGP provides built-in Kotlin support; do not reapply the legacy Kotlin Android plugin.
-- Widget uses Glance + DataStore; after data changes, call `updateAll` to refresh.
+- Widget uses Glance and reads the same reading store as the app; writes go through `ReadingRepository`, which refreshes widgets.

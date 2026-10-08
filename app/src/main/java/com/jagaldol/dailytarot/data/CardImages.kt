@@ -18,7 +18,22 @@ object CardImages {
     private val thumbnailLock = Mutex()
     private val widgetLock = Mutex()
 
+    private val fullImages = BitmapCache(8 * 1024 * 1024)
+    private val fullLock = Mutex()
+
     fun cachedThumbnail(@DrawableRes res: Int): Bitmap? = thumbnails[res.toString()]
+
+    fun cachedFull(@DrawableRes res: Int): Bitmap? = fullImages[res.toString()]
+
+    /** Full-size art for the one large card on screen. */
+    suspend fun full(resources: Resources, @DrawableRes res: Int): Bitmap =
+        withContext(Dispatchers.IO) {
+            fullLock.withLock {
+                fullImages[res.toString()] ?: decode(resources, res).also {
+                    fullImages.put(res.toString(), it)
+                }
+            }
+        }
 
     suspend fun thumbnail(resources: Resources, @DrawableRes res: Int): Bitmap =
         withContext(Dispatchers.IO) {

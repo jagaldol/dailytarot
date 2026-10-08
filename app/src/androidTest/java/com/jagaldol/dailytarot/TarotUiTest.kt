@@ -1,55 +1,71 @@
 package com.jagaldol.dailytarot
 
-import androidx.compose.ui.test.assertIsSelected
-import androidx.compose.ui.test.assertIsOn
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
-import androidx.compose.ui.test.hasTestTag
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.jagaldol.dailytarot.data.TarotRepository
-import com.jagaldol.dailytarot.data.TarotStore
-import com.jagaldol.dailytarot.model.TodaySelection
+import com.jagaldol.dailytarot.model.ReadingSource
+import com.jagaldol.dailytarot.work.RefreshScheduler
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/** Runs against the installed app's data: use a test device or emulator. */
 @RunWith(AndroidJUnit4::class)
 class TarotUiTest {
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
-    private lateinit var repository: TarotRepository
+    private lateinit var app: TarotApplication
 
     @Before
-    fun resetSelection() {
-        repository = (compose.activity.application as TarotApplication).repository
-        compose.waitUntil(10_000) { !repository.state.value.loading }
-        compose.runOnIdle {
-            repository.selectCard(0)
-            repository.setReversed(false)
+    fun standaloneMode() = runBlocking {
+        app = compose.activity.application as TarotApplication
+        RefreshScheduler.cancelImport(app)
+        app.sync.disconnect()
+        val today = app.repository.drawToday()
+        app.settings.markRevealed(today.day.minusDays(1).toString())
+    }
+
+    @Test
+    fun cardIsRevealedThenAHandPickedCardIsSavedForToday() {
+        compose.onNodeWithTag("today-card").performClick()
+        compose.waitUntil(5_000) {
+            compose.onAllNodes(hasTestTag("today-reading")).fetchSemanticsNodes().isNotEmpty()
         }
-        compose.waitUntil(10_000) { !repository.state.value.saving }
-    }
-
-    @Test
-    fun selectionAndOrientationSurviveActivityRecreation() {
-        compose.onNodeWithTag("card-1").performClick()
-        compose.onNodeWithTag("reverse").performClick()
-        compose.waitUntil(10_000) { !repository.state.value.saving }
-        assertEquals(TodaySelection(1, true), runBlocking { TarotStore(compose.activity).load() })
-        compose.activityRule.scenario.recreate()
-        compose.onNodeWithTag("card-1").assertIsSelected()
-        compose.onNodeWithTag("reverse").assertIsOn()
-    }
-
-    @Test
-    fun lastCardCanBeSelectedAfterScrollingThroughTheDeck() {
+        compose.onNodeWithTag("pick").performScrollTo().performClick()
+        compose.waitUntil(5_000) { compose.onAllNodes(hasTestTag("cards")).fetchSemanticsNodes().isNotEmpty() }
         compose.onNodeWithTag("cards").performScrollToNode(hasTestTag("card-77"))
-        compose.onNodeWithTag("card-77").performClick().assertIsSelected()
-        compose.waitUntil(10_000) { !repository.state.value.saving }
-        assertEquals(TodaySelection(77), runBlocking { TarotStore(compose.activity).load() })
+        compose.onNodeWithTag("card-77").performClick()
+        compose.onNodeWithTag("reversed").performClick()
+        compose.onNodeWithTag("confirm").performClick()
+        compose.waitUntil(5_000) {
+            runBlocking { app.repository.drawToday() }.source == ReadingSource.MANUAL
+        }
+        val saved = runBlocking { app.repository.drawToday() }
+        assertEquals(77, saved.cardId)
+        assertTrue(saved.reversed)
+        assertEquals(app.catalog.entry(77, true).fortuneText, saved.headline)
+
+        compose.activityRule.scenario.recreate()
+        compose.waitUntil(5_000) {
+            compose.onAllNodes(hasTestTag("today-reading")).fetchSemanticsNodes().isNotEmpty()
+        }
+    }
+
+    @Test
+    fun historyListsTodaysReading() {
+        val today = runBlocking { app.repository.drawToday() }
+        compose.onNodeWithTag("tab-history").performClick()
+        compose.waitUntil(5_000) {
+            compose.onAllNodes(hasTestTag("history-${today.day}")).fetchSemanticsNodes().isNotEmpty()
+        }
+        compose.onNodeWithTag("history-${today.day}").performClick()
+        compose.onNodeWithTag("tab-history").assertDoesNotExist()
     }
 }

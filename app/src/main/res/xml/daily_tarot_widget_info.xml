@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Meant to fill a whole page: 5x6 on 5-column launchers. Where 5x6 does not fit (4-column
+     Pixel grids) Android falls back to minWidth/minHeight, which launchers clamp to the grid,
+     giving 4x6. Still resizable down to 2x2 (card only).
+     Android 12+ attributes have API 24 fallbacks: previewImage and minWidth/minHeight. -->
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:initialLayout="@layout/glance_default_loading_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UnusedAttribute"
     android:description="@string/widget_description"
-    android:minWidth="180dp"
-    android:minHeight="180dp"
+    android:initialLayout="@layout/glance_default_loading_layout"
+    android:minWidth="400dp"
+    android:minHeight="560dp"
+    android:minResizeWidth="100dp"
+    android:minResizeHeight="100dp"
+    android:previewImage="@mipmap/ic_launcher"
+    android:previewLayout="@layout/widget_preview"
     android:resizeMode="horizontal|vertical"
+    android:targetCellWidth="5"
+    android:targetCellHeight="6"
     android:updatePeriodMillis="0"
     android:widgetCategory="home_screen" />

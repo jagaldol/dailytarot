@@ -13,6 +13,7 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.jagaldol.dailytarot.widget.DailyTarotWidgetReceiver
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -23,18 +24,17 @@ class WidgetHostTest {
     @get:Rule val compose = createAndroidComposeRule<MainActivity>()
 
     @Test
-    fun twoBoundWidgetsLoadSavedCardAndRefreshAfterRapidChanges() {
+    fun twoBoundWidgetsShowTodaysReadingAndRefreshAfterRapidChanges() {
         val activity = compose.activity
-        val repository = (activity.application as TarotApplication).repository
+        val app = activity.application as TarotApplication
         val manager = AppWidgetManager.getInstance(activity)
         val host = AppWidgetHost(activity, 73017)
         val views = mutableListOf<AppWidgetHostView>()
-        compose.waitUntil(10_000) { !repository.state.value.loading }
-        compose.runOnIdle {
-            repository.selectCard(17)
-            repository.setReversed(true)
+        runBlocking {
+            app.sync.disconnect()
+            app.repository.drawToday()
+            app.repository.selectManually(17, true)
         }
-        compose.waitUntil(10_000) { !repository.state.value.saving }
         shell("appwidget grantbind --package ${activity.packageName}")
         try {
             compose.runOnIdle {
@@ -55,13 +55,12 @@ class WidgetHostTest {
                     views.add(view)
                 }
             }
-            waitForImages(views, "The Star, Reversed")
-            compose.runOnIdle {
-                repository.selectCard(2)
-                repository.setReversed(false)
-                repository.selectCard(21)
+            waitForImages(views, "별 (The Star), 역방향")
+            runBlocking {
+                app.repository.selectManually(2, false)
+                app.repository.selectManually(21, false)
             }
-            waitForImages(views, "The World, Upright")
+            waitForImages(views, "세계 (The World), 정방향")
         } finally {
             compose.runOnIdle {
                 views.forEach { (it.parent as? ViewGroup)?.removeView(it) }

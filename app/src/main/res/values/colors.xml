@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Warm paper and ink; gold is the single accent. Night values live in values-night. -->
+    <color name="paper">#F6F2EB</color>
+    <color name="widget_text">#1E1C29</color>
+    <color name="widget_accent">#8C6527</color>
+    <color name="widget_caption">#E6FBF8F3</color>
+</resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.Dailytarot" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/bg_app</item>
+        <item name="android:windowBackground">@color/paper</item>
+        <item name="android:colorAccent">@color/widget_accent</item>
     </style>
 </resources>

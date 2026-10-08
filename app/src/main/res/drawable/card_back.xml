@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Face-down card: ink field, double gold frame, crescent medallion. 3:5 like the deck. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="120dp"
+    android:height="200dp"
+    android:viewportWidth="60"
+    android:viewportHeight="100">
+    <path android:pathData="M4,0h52a4,4 0 0,1 4,4v92a4,4 0 0,1 -4,4h-52a4,4 0 0,1 -4,-4v-92a4,4 0 0,1 4,-4z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="radial"
+                android:centerX="30"
+                android:centerY="44"
+                android:gradientRadius="62">
+                <item android:offset="0.0" android:color="#34305A" />
+                <item android:offset="1.0" android:color="#1A1830" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path
+        android:pathData="M6.5,4h47a2.5,2.5 0 0,1 2.5,2.5v87a2.5,2.5 0 0,1 -2.5,2.5h-47a2.5,2.5 0 0,1 -2.5,-2.5v-87a2.5,2.5 0 0,1 2.5,-2.5z"
+        android:strokeWidth="0.7"
+        android:strokeColor="#D9BB82" />
+    <path
+        android:pathData="M8,6.5h44a1.5,1.5 0 0,1 1.5,1.5v84a1.5,1.5 0 0,1 -1.5,1.5h-44a1.5,1.5 0 0,1 -1.5,-1.5v-84a1.5,1.5 0 0,1 1.5,-1.5z"
+        android:strokeWidth="0.3"
+        android:strokeAlpha="0.6"
+        android:strokeColor="#D9BB82" />
+    <path
+        android:pathData="M30,50m-14,0a14,14 0 1,0 28,0a14,14 0 1,0 -28,0"
+        android:strokeWidth="0.4"
+        android:strokeAlpha="0.7"
+        android:strokeColor="#D9BB82" />
+    <path
+        android:pathData="M30,50m-17.5,0a17.5,17.5 0 1,0 35,0a17.5,17.5 0 1,0 -35,0"
+        android:strokeWidth="0.25"
+        android:strokeAlpha="0.4"
+        android:strokeColor="#D9BB82" />
+    <group
+        android:pivotX="30"
+        android:pivotY="50"
+        android:rotation="-24">
+        <path
+            android:fillColor="#E6C88F"
+            android:pathData="M34,43.07A8,8 0 1,0 34,56.93A8.5,8.5 0 0,1 34,43.07z" />
+    </group>
+    <path
+        android:fillColor="#F1DDB4"
+        android:pathData="M30,19Q30,24 35,24Q30,24 30,29Q30,24 25,24Q30,24 30,19z" />
+    <path
+        android:fillColor="#F1DDB4"
+        android:pathData="M30,71Q30,76 35,76Q30,76 30,81Q30,76 25,76Q30,76 30,71z" />
+    <path
+        android:fillColor="#D9BB82"
+        android:fillAlpha="0.75"
+        android:pathData="M12,12m-0.8,0a0.8,0.8 0 1,0 1.6,0a0.8,0.8 0 1,0 -1.6,0M48,12m-0.8,0a0.8,0.8 0 1,0 1.6,0a0.8,0.8 0 1,0 -1.6,0M12,88m-0.8,0a0.8,0.8 0 1,0 1.6,0a0.8,0.8 0 1,0 -1.6,0M48,88m-0.8,0a0.8,0.8 0 1,0 1.6,0a0.8,0.8 0 1,0 -1.6,0" />
+</vector>

@@ -1,5 +1,7 @@
 package com.jagaldol.dailytarot
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -11,63 +13,68 @@ import androidx.glance.ExperimentalGlanceApi
 import androidx.glance.appwidget.compose
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.jagaldol.dailytarot.data.TarotStore
-import com.jagaldol.dailytarot.model.TodaySelection
 import com.jagaldol.dailytarot.widget.DailyTarotWidget
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.io.File
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalGlanceApi::class)
 @RunWith(AndroidJUnit4::class)
 class TarotWidgetTest {
     private val instrumentation = InstrumentationRegistry.getInstrumentation()
     private val context = instrumentation.targetContext
+    private val app = context.applicationContext as TarotApplication
 
-    @Test
-    fun newlyCreatedWidgetsReadExistingSelectionWithoutAnAppInteraction() = runBlocking {
-        val store = TarotStore(context)
-        val original = store.load()
-        try {
-            store.save(TodaySelection(17, true))
-            for (size in listOf(DpSize(180.dp, 180.dp), DpSize(300.dp, 300.dp))) {
-                val remoteViews = DailyTarotWidget().compose(context, size = size)
-                instrumentation.runOnMainSync {
-                    val view = remoteViews.apply(context, FrameLayout(context))
-                    val image = descendants(view).filterIsInstance<ImageView>().single { it.contentDescription != null }
-                    assertEquals("The Star, Reversed", image.contentDescription)
-                    assertTrue(image.drawable != null)
-                }
-            }
-            store.save(TodaySelection(21, false))
-            val updated = DailyTarotWidget().compose(context, size = DpSize(180.dp, 180.dp))
-            instrumentation.runOnMainSync {
-                val image = descendants(updated.apply(context, FrameLayout(context)))
-                    .filterIsInstance<ImageView>().single { it.contentDescription != null }
-                assertEquals("The World, Upright", image.contentDescription)
-            }
-        } finally {
-            store.save(original)
-        }
+    @Before
+    fun standaloneStar() = runBlocking {
+        app.sync.disconnect()
+        app.repository.drawToday()
+        assertTrue(app.repository.selectManually(17, true))
     }
 
     @Test
-    fun emptyWidgetExplainsHowToChooseACard() = runBlocking {
-        val store = TarotStore(context)
-        val original = store.load()
-        try {
-            store.save(TodaySelection())
-            val remoteViews = DailyTarotWidget().compose(context, size = DpSize(180.dp, 180.dp))
+    fun cardFillsSmallWidgetsAndRoomierOnesAddOneLineOfFortune() = runBlocking {
+        val headline = app.catalog.entry(17, true).fortuneText
+        val sizes = mapOf(
+            "small" to (DpSize(150.dp, 150.dp) to false),
+            "tall" to (DpSize(170.dp, 380.dp) to true),
+            "wide" to (DpSize(330.dp, 160.dp) to true),
+            "full" to (DpSize(360.dp, 560.dp) to true),
+            "tight" to (DpSize(172.dp, 212.dp) to true),
+            "tiny" to (DpSize(120.dp, 120.dp) to false),
+        )
+        for ((name, spec) in sizes) {
+            val (size, showsFortune) = spec
+            val remoteViews = DailyTarotWidget().compose(context, size = size)
             instrumentation.runOnMainSync {
-                val texts = descendants(remoteViews.apply(context, FrameLayout(context)))
-                    .filterIsInstance<TextView>().map { it.text.toString() }.toList()
-                assertTrue(texts.contains(context.getString(R.string.widget_empty)))
+                val view = remoteViews.apply(context, FrameLayout(context))
+                val image = descendants(view).filterIsInstance<ImageView>().first { it.contentDescription != null }
+                assertEquals("별 (The Star), 역방향", image.contentDescription)
+                assertTrue(image.drawable != null)
+                val texts = descendants(view).filterIsInstance<TextView>().map { it.text.toString().replace("\u2060", "") }.toList()
+                assertEquals(name, showsFortune, headline in texts)
+                save(view, size, name)
             }
-        } finally {
-            store.save(original)
         }
+    }
+
+    /** Leaves PNGs for visual review: adb pull /sdcard/Android/data/<pkg>/files/widgets */
+    private fun save(view: View, size: DpSize, name: String) {
+        val density = context.resources.displayMetrics.density
+        val width = (size.width.value * density).roundToInt()
+        val height = (size.height.value * density).roundToInt()
+        val frame = FrameLayout(context).apply { addView(view, FrameLayout.LayoutParams(width, height)) }
+        frame.measure(View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY), View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY))
+        frame.layout(0, 0, width, height)
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        frame.draw(Canvas(bitmap))
+        val dir = File(context.getExternalFilesDir(null), "widgets").apply { mkdirs() }
+        File(dir, "$name.png").outputStream().use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
     }
 
     private fun descendants(view: View): Sequence<View> = sequence {

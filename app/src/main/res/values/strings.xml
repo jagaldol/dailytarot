@@ -107,11 +107,23 @@
     <string name="settings_restore_failed">Daily Tarot 백업 파일이 아니에요</string>
     <string name="settings_about">카드 그림 · Rider–Waite–Smith (1909)</string>
 
+    <string name="widget_prompt_title">홈 화면에서 매일 만나기</string>
+    <string name="widget_prompt_body">위젯을 추가하면 앱을 열지 않아도 오늘의 카드를 볼 수 있어요.</string>
+    <string name="widget_prompt_add">위젯 추가하기</string>
+    <string name="widget_prompt_dismiss">괜찮아요</string>
+    <string name="widget_prompt_never">다시 보지 않기</string>
+    <string name="widget_prompt_later">언제든 설정 → 홈 화면에서 위젯을 추가할 수 있어요</string>
+    <string name="widget_manual_title">위젯을 직접 추가해 주세요</string>
+    <string name="widget_manual_body">홈 화면의 빈 곳을 길게 누른 뒤 위젯 → 데일리 타로를 골라 원하는 자리에 놓아 주세요.</string>
+    <string name="settings_group_widget">홈 화면</string>
+    <string name="settings_widget_add">위젯 추가하기</string>
+    <string name="settings_widget_add_sub">앱을 열지 않아도 오늘의 카드를 볼 수 있어요</string>
+    <string name="settings_widget_add_sub_installed">홈 화면에 위젯이 있어요 · 하나 더 추가할 수 있어요</string>
     <string name="card_back">카드 뒷면</string>
     <string name="widget_draw_prompt">오늘의 카드를 뽑아주세요</string>
     <string name="widget_auto_draw_at">%1$s에 오늘의 카드가 뽑혀요</string>
     <string name="widget_waiting_lifebase">Lifebase에 오늘의 카드가 아직 등록되지 않았어요</string>
     <string name="widget_description">오늘의 카드, 공간이 있으면 운세 한 줄까지</string>
-    <string name="widget_preview_date">10.7 수  ·  별 정방향</string>
+    <string name="widget_preview_date">오늘  ·  별 정방향</string>
     <string name="widget_preview_fortune">폭풍이 지난 뒤처럼 잔잔히 회복되고, 희망이 다시 차올라요</string>
 </resources>

@@ -11,6 +11,7 @@ import com.jagaldol.dailytarot.work.RefreshScheduler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class TarotApplication : Application() {
@@ -23,6 +24,9 @@ class TarotApplication : Application() {
         }
     }
     val sync by lazy { LifebaseSync(this, repository, settings) }
+
+    /** Bumped when the first widget is added or the last one removed, so the UI re-checks. */
+    val widgetChanges = MutableStateFlow(0)
 
     override fun onCreate() {
         super.onCreate()

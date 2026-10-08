@@ -24,19 +24,27 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -57,8 +65,10 @@ import com.jagaldol.dailytarot.data.lifebase.LifebaseSync
 import com.jagaldol.dailytarot.model.Day
 import com.jagaldol.dailytarot.model.ReadingSource
 import com.jagaldol.dailytarot.ui.theme.gold
+import com.jagaldol.dailytarot.widget.HomeWidgets
 import com.jagaldol.dailytarot.work.RefreshScheduler
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.util.TimeZone
 
@@ -110,6 +120,18 @@ fun TarotApp(app: TarotApplication, openRequest: OpenRequest? = null, introKey: 
         }
     }
     var message by rememberSaveable { mutableStateOf<String?>(null) }
+
+    // Whether a widget is on the home screen; re-checked on each start and when widgets come or go.
+    val widgetSignal by app.widgetChanges.collectAsState()
+    var hasWidget by remember { mutableStateOf<Boolean?>(null) }
+    LaunchedEffect(widgetSignal) { hasWidget = runCatching { HomeWidgets.installed(app) }.getOrNull() }
+    var widgetHelp by rememberSaveable { mutableStateOf(false) }
+    val uiScope = rememberCoroutineScope()
+    val snackbar = remember { SnackbarHostState() }
+    // The launcher's own "add to home screen" sheet; launchers without it get written steps.
+    val addWidget: () -> Unit = {
+        uiScope.launch { if (!runCatching { HomeWidgets.requestPin(app) }.getOrDefault(false)) widgetHelp = true }
+    }
 
     val pickFolder = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocumentTree()) { uri ->
         if (uri == null) return@rememberLauncherForActivityResult
@@ -165,6 +187,23 @@ fun TarotApp(app: TarotApplication, openRequest: OpenRequest? = null, introKey: 
     }
     val nameKo: (Int) -> String = { app.catalog.nameKo(it) }
 
+    // Asked after today's card has been turned over and read, never on launch: at most once per
+    // card day while no widget exists, until "다시 보지 않기".
+    val todayState = todayUi(app, view, current, introDone)
+    val widgetAsk = tab == Tab.TODAY && !picking && detailDay == null &&
+        shouldAskForWidget(hasWidget, current, todayState)
+    var widgetSheet by rememberSaveable { mutableStateOf(false) }
+    val answerWidget: (Boolean) -> Unit = { never ->
+        val day = todayState.day?.toString()
+        if (day != null) scope.launch { app.settings.answerWidgetPrompt(day, never) }
+    }
+    LaunchedEffect(widgetAsk) {
+        if (widgetAsk) {
+            delay(WIDGET_ASK_DELAY_MS)
+            widgetSheet = true
+        }
+    }
+
     Surface(color = MaterialTheme.colorScheme.background, modifier = Modifier.fillMaxSize()) {
         Box(Modifier.fillMaxSize()) {
             Column(Modifier.fillMaxSize()) {
@@ -210,6 +249,7 @@ fun TarotApp(app: TarotApplication, openRequest: OpenRequest? = null, introKey: 
                                             scope.launch {
                                                 if (repository.delete(item.day)) {
                                                     app.settings.forgetRevealed(item.day.toString())
+                                                    repository.refreshToday()
                                                 }
                                             }
                                         }
@@ -223,12 +263,21 @@ fun TarotApp(app: TarotApplication, openRequest: OpenRequest? = null, introKey: 
                             deviceZoneId = TimeZone.getDefault().id,
                             importProgress = importProgress,
                             message = message,
-                            actions = settingsActions(app, pickFolder::launch, exportFile::launch, restoreFile::launch) {
+                            actions = settingsActions(
+                                app, pickFolder::launch, exportFile::launch, restoreFile::launch, addWidget,
+                            ) {
                                 message = it
+                            },
+                            hasWidget = hasWidget,
+                            // While linked only the app's own records can go.
+                            recordCount = if (current.connection != null) {
+                                history.count { it.source != ReadingSource.LIFEBASE }
+                            } else {
+                                history.size
                             },
                         )
                         else -> TodayScreen(
-                            ui = todayUi(app, view, current, introDone),
+                            ui = todayState,
                             onReveal = { todayReading?.let { r -> scope.launch { app.settings.markRevealed(r.day.toString()) } } },
                             onDraw = {
                                 scope.launch {
@@ -249,6 +298,44 @@ fun TarotApp(app: TarotApplication, openRequest: OpenRequest? = null, introKey: 
                     }
                 }
             }
+            if (widgetSheet) {
+                WidgetSheet(
+                    onAdd = { never ->
+                        widgetSheet = false
+                        answerWidget(never)
+                        addWidget()
+                    },
+                    onDecline = { never ->
+                        widgetSheet = false
+                        answerWidget(never)
+                        uiScope.launch { snackbar.showSnackbar(app.getString(R.string.widget_prompt_later)) }
+                    },
+                )
+            }
+            SnackbarHost(
+                snackbar,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .navigationBarsPadding()
+                    .padding(start = 16.dp, end = 16.dp, bottom = 76.dp),
+            ) { data ->
+                Snackbar(
+                    data,
+                    shape = RoundedCornerShape(14.dp),
+                    containerColor = MaterialTheme.colorScheme.inverseSurface,
+                    contentColor = MaterialTheme.colorScheme.inverseOnSurface,
+                )
+            }
+            if (widgetHelp) {
+                AlertDialog(
+                    onDismissRequest = { widgetHelp = false },
+                    title = { Text(stringResource(R.string.widget_manual_title)) },
+                    text = { Text(stringResource(R.string.widget_manual_body)) },
+                    confirmButton = {
+                        TextButton(onClick = { widgetHelp = false }) { Text(stringResource(R.string.ok)) }
+                    },
+                )
+            }
             // Scrolled content fades under the transparent status bar instead of colliding with it.
             Box(
                 Modifier
@@ -262,10 +349,28 @@ fun TarotApp(app: TarotApplication, openRequest: OpenRequest? = null, introKey: 
 
 private const val INTRO_DELAY_MS = 450L
 
-private fun todayUi(app: TarotApplication, view: TodayView?, settings: AppSettings, introDone: Boolean): TodayUi {
+/**
+ * The home screen widget is suggested once today's own card is face up, while no widget exists,
+ * at most once per card day, and never after "다시 보지 않기".
+ */
+internal fun shouldAskForWidget(hasWidget: Boolean?, settings: AppSettings, today: TodayUi): Boolean =
+    hasWidget == false && !settings.widgetPromptNever &&
+        today.revealed && !today.showingPrevious && today.reading != null &&
+        today.day != null && settings.widgetPromptAskedDay != today.day.toString()
+
+// Lets the card turn and the fortune fade in before the widget question slides up.
+private const val WIDGET_ASK_DELAY_MS = 1_600L
+
+private fun todayUi(
+    app: TarotApplication,
+    view: TodayView?,
+    settings: AppSettings,
+    introDone: Boolean,
+): TodayUi {
     val reading = view?.reading
     val previous = view?.showingPrevious == true
     val connected = settings.connection != null
+    val revealed = introDone && reading != null && (previous || settings.revealedDay == reading.day.toString())
     return TodayUi(
         day = view?.day,
         reading = reading,
@@ -273,7 +378,7 @@ private fun todayUi(app: TarotApplication, view: TodayView?, settings: AppSettin
         defaultFortune = reading?.let { app.catalog.entry(it.cardId, it.reversed) },
         // Yesterday's card was already seen; only today's waits to be turned over by a tap.
         // Seen cards still start face-down on each launch and flip once the intro runs.
-        revealed = introDone && reading != null && (previous || settings.revealedDay == reading.day.toString()),
+        revealed = revealed,
         introPending = !introDone && reading != null && (previous || settings.revealedDay == reading.day.toString()),
         connected = connected,
         waitingForLifebase = connected && reading != null && !previous && reading.source != ReadingSource.LIFEBASE,
@@ -289,8 +394,10 @@ private fun settingsActions(
     pickFolder: (Uri?) -> Unit,
     export: (String) -> Unit,
     restore: (Array<String>) -> Unit,
+    addWidget: () -> Unit,
     setMessage: (String?) -> Unit,
 ) = SettingsActions(
+    addWidget = addWidget,
     connect = {
         setMessage(null)
         // Opens the picker near the usual Syncthing location; any folder can still be chosen.
@@ -338,9 +445,10 @@ private fun settingsActions(
         app.applicationScope.launch {
             val linked = app.settings.connection() != null
             val count = app.repository.deleteAll()
-            if (app.repository.refreshToday().reading == null) {
-                app.settings.forgetRevealed(app.repository.currentDay().toString())
-            }
+            // If today's card went too, its replacement (auto-drawn or not) waits face-down again.
+            val today = app.repository.currentDay()
+            if (app.repository.observe(today).first() == null) app.settings.forgetRevealed(today.toString())
+            app.repository.refreshToday()
             setMessage(
                 app.getString(if (linked) R.string.settings_deleted_local else R.string.settings_deleted_all, count),
             )

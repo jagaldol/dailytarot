@@ -57,6 +57,7 @@ import com.jagaldol.dailytarot.work.RefreshScheduler
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /**
@@ -325,6 +326,7 @@ class DailyTarotWidgetReceiver : GlanceAppWidgetReceiver() {
 
     private fun reconcile(context: Context) {
         val app = context.applicationContext as TarotApplication
+        app.widgetChanges.update { it + 1 }
         app.applicationScope.launch { runCatching { RefreshScheduler.reconcile(app) } }
     }
 }

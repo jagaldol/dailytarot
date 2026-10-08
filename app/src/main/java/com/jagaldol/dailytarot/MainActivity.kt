@@ -18,6 +18,7 @@ import com.jagaldol.dailytarot.ui.theme.DailytarotTheme
 import com.jagaldol.dailytarot.work.RefreshScheduler
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /** What a widget tap asks for; [id] makes repeated taps distinct events. */
@@ -42,6 +43,8 @@ class MainActivity : ComponentActivity() {
                     introKey.intValue++
                 }
                 backgroundedAt = 0L
+                // Widgets may have been added or removed from the home screen meanwhile.
+                app.widgetChanges.update { it + 1 }
                 app.applicationScope.launch {
                     if (app.settings.connection() != null) RefreshScheduler.refreshNow(app)
                 }

@@ -73,6 +73,7 @@ data class SettingsActions(
     val setDayStartMinutes: (Int) -> Unit,
     val setAutoDrawMinutes: (Int) -> Unit,
     val deleteAll: () -> Unit,
+    val addWidget: () -> Unit,
     val export: () -> Unit,
     val restore: () -> Unit,
 )
@@ -92,6 +93,8 @@ fun SettingsScreen(
     actions: SettingsActions,
     modifier: Modifier = Modifier,
     recordCount: Int = 0,
+    /** Null until checked. */
+    hasWidget: Boolean? = null,
 ) {
     Column(
         modifier
@@ -144,6 +147,17 @@ fun SettingsScreen(
         }
 
         CardGroup(settings, actions)
+
+        Group(stringResource(R.string.settings_group_widget)) {
+            SettingRow(
+                R.drawable.ic_widget, stringResource(R.string.settings_widget_add),
+                stringResource(
+                    if (hasWidget == true) R.string.settings_widget_add_sub_installed else R.string.settings_widget_add_sub,
+                ),
+                onClick = actions.addWidget,
+                modifier = Modifier.testTag("add-widget"),
+            )
+        }
 
         Group(stringResource(R.string.settings_group_records)) {
             SettingRow(
@@ -565,7 +579,7 @@ private fun SettingsPreview() {
                     sync = SyncStatus(SyncState.UPDATED, System.currentTimeMillis()),
                 ),
                 "Asia/Seoul", null, null,
-                SettingsActions({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}),
+                SettingsActions({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}),
             )
         }
     }

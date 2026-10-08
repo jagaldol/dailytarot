@@ -24,6 +24,8 @@ private val zoneKey = stringPreferencesKey("zone_id")
 private val legacyMigratedKey = booleanPreferencesKey("legacy_migrated")
 private val revealedDayKey = stringPreferencesKey("revealed_day")
 private val autoDrawKey = booleanPreferencesKey("auto_draw")
+private val widgetPromptNeverKey = booleanPreferencesKey("widget_prompt_never")
+private val widgetPromptAskedDayKey = stringPreferencesKey("widget_prompt_asked_day")
 private val dayStartKey = intPreferencesKey("day_start_minutes")
 private val autoDrawMinutesKey = intPreferencesKey("auto_draw_minutes")
 
@@ -58,6 +60,10 @@ data class AppSettings(
     val zoneId: String? = null,
     val revealedDay: String? = null,
     val autoDraw: Boolean = true,
+    /** "다시 보지 않기": never suggest the home screen widget again. */
+    val widgetPromptNever: Boolean = false,
+    /** The date the widget suggestion was last answered; it is asked at most once per card day. */
+    val widgetPromptAskedDay: String? = null,
     val dayStartMinutes: Int = DEFAULT_DAY_START_MINUTES,
     val autoDrawMinutes: Int = DEFAULT_AUTO_DRAW_MINUTES,
     val connection: LifebaseConnection? = null,
@@ -95,6 +101,8 @@ class SettingsStore(context: Context) : ReadingSettings {
             zoneId = s[zoneKey],
             revealedDay = s[revealedDayKey],
             autoDraw = s[autoDrawKey] ?: true,
+            widgetPromptNever = s[widgetPromptNeverKey] ?: false,
+            widgetPromptAskedDay = s[widgetPromptAskedDayKey],
             dayStartMinutes = s[dayStartKey] ?: DEFAULT_DAY_START_MINUTES,
             autoDrawMinutes = s[autoDrawMinutesKey] ?: DEFAULT_AUTO_DRAW_MINUTES,
             connection = c.toConnection(),
@@ -123,6 +131,14 @@ class SettingsStore(context: Context) : ReadingSettings {
     override suspend fun dayStartMinutes(): Int = settings.data.first()[dayStartKey] ?: DEFAULT_DAY_START_MINUTES
 
     override suspend fun autoDrawMinutes(): Int = settings.data.first()[autoDrawMinutesKey] ?: DEFAULT_AUTO_DRAW_MINUTES
+
+    /** Records an answer to the widget suggestion for [day]; [never] stops asking for good. */
+    suspend fun answerWidgetPrompt(day: String, never: Boolean) {
+        settings.edit {
+            it[widgetPromptAskedDayKey] = day
+            if (never) it[widgetPromptNeverKey] = true
+        }
+    }
 
     suspend fun setAutoDraw(enabled: Boolean) {
         settings.edit { it[autoDrawKey] = enabled }

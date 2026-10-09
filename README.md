@@ -1,11 +1,13 @@
 # Daily Tarot
 
+[English](README.en.md)
+
 하루에 한 장, 타로 카드와 운세를 날짜별로 남기는 Android 앱입니다.
 홈 화면 위젯이 오늘의 카드와 운세 한 줄을 보여줍니다.
 
 - 서버도 계정도 없습니다. 기록은 기기 안에만 저장됩니다.
 - 하루가 시작되면 카드 뒷면이 놓이고, 눌러서 뽑거나 정한 시간에 자동으로 뽑습니다.
-- 78장 Rider–Waite–Smith 덱과 정·역방향별 한국어 운세 156개가 들어 있습니다.
+- 78장 Rider–Waite–Smith 덱과 정·역방향별 운세 156개가 한국어와 영어로 들어 있습니다.
 - [Lifebase](#lifebase-연결) 일지를 쓰고 있다면, 일지에 기록한 카드와 운세를 그대로 가져와 보여줄 수 있습니다.
 
 ## 화면
@@ -69,6 +71,12 @@ Lifebase에 연결하지 않았다면 카드 목록에서 **직접 고르기**�
 - 운세를 중간에서 자르지 않습니다. 자리가 모자라면 글자를 조금씩 줄이고, 그래도 안 되면 카드만 보여줍니다.
 - 위젯 배경은 투명해서 배경화면 위에 카드만 떠 있습니다.
 
+### 언어
+
+화면과 기본 운세는 기기 언어를 따릅니다. 한국어 기기에서는 한국어로, 그 밖의 언어에서는 영어로 보입니다.
+Android 13 이상에서는 기기 설정 → 앱 → 데일리 타로 → 언어에서 앱 언어만 따로 고를 수 있고, 위젯도 함께 바뀝니다.
+저장된 운세 문구는 저장할 때의 언어 그대로 남고, 카드 이름과 날짜는 현재 언어를 따릅니다.
+
 ### 백업
 
 설정에서 기록을 JSON 파일로 **내보내고**, 새 기기에서 **복원**할 수 있습니다. 복원은 기록이 없는 날만 채웁니다.
@@ -79,7 +87,7 @@ Android 자동 백업에도 기록과 설정이 포함됩니다(Lifebase 폴더 
 [Lifebase](https://lifebaseai.com)는 Obsidian 기반 개인 기록 시스템입니다. 일지에 그날의 타로 카드와 운세를 적어 두었다면,
 Daily Tarot이 그 내용을 읽어 앱과 위젯에 보여줍니다. 연결하지 않아도 앱은 혼자서 모두 동작합니다.
 
-1. 설정 → **Lifebase 폴더 선택**에서 Lifebase 폴더(또는 그 안의 `Journal` 폴더)를 고릅니다.
+1. 설정 → **Lifebase 폴더 선택**에서 Lifebase 폴더(또는 그 안의 `Journal` 폴더)를 고릅니다. 한국어·영어 Lifebase 모두 됩니다.
    Syncthing으로 동기화한다면 보통 `Documents/lifebase`입니다.
 2. 연결하면 지난 기록을 한 번 모두 불러오고, 이후에는 오늘의 카드를 자동으로 가져옵니다.
 
@@ -109,9 +117,14 @@ tarot-reverse: false
 > 본문
 ```
 
-`Journal/YYYY/MM/YYYY-MM-DD.md`의 frontmatter와 `## 오늘의 운세` 섹션만 읽습니다.
+`Journal/YYYY/MM/YYYY-MM-DD.md`의 frontmatter와 운세 섹션만 읽습니다. 영어 Lifebase의 `## Today's Tarot`,
+`Keywords:`, `Upright`/`Reversed`도 같은 방식으로 읽습니다.
 한 줄·본문 없이 키워드만 있는 기록도 읽으며, 이때는 기본 해석을 따로 함께 보여줍니다.
 카드나 방향이 frontmatter와 본문에서 서로 다르면 그날 기록을 바꾸지 않습니다.
+
+일지의 운세 제목을 바꿔 쓰고 있다면 설정 → **운세 섹션 제목**에서 **직접 입력**으로 그 제목을 적습니다.
+직접 입력한 제목을 먼저 찾고, 없으면 기본 제목(`오늘의 운세`, `Today's Tarot`)으로 읽으므로 제목을 바꾸기 전의 일지도
+그대로 읽힙니다. 제목을 바꾸면 지난 기록을 한 번 다시 불러옵니다. 일기·일정·할 일·메모처럼 Lifebase 기본 섹션의 제목은 고를 수 없습니다.
 
 ## 빌드
 
@@ -152,14 +165,14 @@ python3 tools/check_assets.py
 - `data/lifebase/`: 일지 운세 파서, Storage Access Framework 읽기, 동기화
 - `work/`: WorkManager 예약 작업
 - `widget/`: Glance 위젯
-- `ui/`: Compose 화면과 테마
+- `ui/`: Compose 화면과 테마, 언어별 날짜·시간 표기(`Labels.kt`)
 
 외부 라이브러리는 AndroidX(Compose, Glance, DataStore, WorkManager)만 씁니다.
 
 ## 도구
 
-- `tools/check_assets.py`: 카드 이미지 156개와 운세 카탈로그 검사
-- `tools/extract_lifebase_catalog.py`: Lifebase 카드 사전에서 운세 카탈로그를 다시 추출하거나 비교
+- `tools/check_assets.py`: 카드 이미지 156개와 한국어·영어 운세 카탈로그 검사
+- `tools/extract_lifebase_catalog.py`: Lifebase 카드 사전에서 운세 카탈로그를 다시 추출하거나 비교(`--locale en`은 영어 Lifebase)
 - `tools/make_launcher_icons.py`: Android 7.x용 런처 아이콘 생성
 - `tools/fetch_rws_images.sh`, `convert_pngs_to_webp.sh`, `make_thumbs.sh`: 카드 이미지 준비(`cwebp` 필요)
 

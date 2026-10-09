@@ -18,9 +18,10 @@ Local transformations:
 
 ## Fortunes
 
-`app/src/main/assets/default_fortunes.ko.json` holds one Korean keyword line and one fortune
-sentence for each card and orientation (156 entries). They are copied verbatim from the
-author's Lifebase card dictionary with `tools/extract_lifebase_catalog.py`.
+`app/src/main/assets/default_fortunes.ko.json` and `default_fortunes.en.json` each hold one keyword
+line and one fortune sentence for every card and orientation (156 entries), in Korean and English.
+They are copied verbatim from the author's Lifebase card dictionary in that language with
+`tools/extract_lifebase_catalog.py` (`--locale en` for the English vault).
 
 ## App icon and card back
 

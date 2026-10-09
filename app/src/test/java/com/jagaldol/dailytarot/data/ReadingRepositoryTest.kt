@@ -26,14 +26,16 @@ import java.util.TimeZone
 import kotlin.random.Random
 
 class ReadingRepositoryTest {
-    private val catalog = FortuneCatalog.parse(File("src/main/assets/${FortuneCatalog.ASSET}").readText())
+    private val catalog = FortuneCatalog.parse(
+        File("src/main/assets/${FortuneCatalog.asset(FortuneCatalog.KOREAN)}").readText(),
+    )
     private val store = FakeStore()
     private val settings = FakeSettings()
     private var clock = millis(2026, 10, 7, 9)
     private var notifications = 0
 
     private fun repository(random: Random = Random(7)) = ReadingRepository(
-        store, settings, catalog, now = { clock }, random = random, todayChanged = { notifications++ },
+        store, settings, { catalog }, now = { clock }, random = random, todayChanged = { notifications++ },
     )
 
     @Test
@@ -162,7 +164,7 @@ class ReadingRepositoryTest {
                 listOf(false, true).map { FortuneEntry(id, it, "이름", "키워드", "바뀐 문구") }
             },
         )
-        val again = ReadingRepository(store, settings, edited, now = { clock }).drawToday()
+        val again = ReadingRepository(store, settings, { edited }, now = { clock }).drawToday()
         assertEquals(first.headline, again.headline)
     }
 

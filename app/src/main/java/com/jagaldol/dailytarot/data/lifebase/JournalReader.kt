@@ -105,16 +105,16 @@ class JournalReader(
         val entry = located.entry
         val relativePath = located.relativePath
         val limit = JournalTarotParser.MAX_NOTE_BYTES
-        if (entry.size > limit) return Read.Unreadable("일지 파일이 너무 커요")
+        if (entry.size > limit) return Read.Unreadable("The note is too large")
         val uri = DocumentsContract.buildDocumentUriUsingTree(treeUri, entry.documentId)
         val bytes = try {
             resolver.openInputStream(uri)?.use { input -> input.readNBytesCompat(limit + 1) }
         } catch (_: FileNotFoundException) {
             return Read.Missing
         } ?: return Read.Missing
-        if (bytes.size > limit) return Read.Unreadable("일지 파일이 너무 커요")
+        if (bytes.size > limit) return Read.Unreadable("The note is too large")
         // A size mismatch means a sync client is replacing the file; read it again later.
-        if (entry.size >= 0 && bytes.size.toLong() != entry.size) return Read.Unreadable("일지 파일이 갱신되는 중이에요")
+        if (entry.size >= 0 && bytes.size.toLong() != entry.size) return Read.Unreadable("The note is being replaced")
         return Read.Found(String(bytes, Charsets.UTF_8), relativePath)
     }
 

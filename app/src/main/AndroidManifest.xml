@@ -23,6 +23,13 @@
             </intent-filter>
         </activity>
         <receiver
+            android:name=".widget.LocaleChangedReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver
             android:name=".widget.DailyTarotWidgetReceiver"
             android:exported="false">
             <intent-filter>

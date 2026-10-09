@@ -31,7 +31,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -40,14 +42,12 @@ import com.jagaldol.dailytarot.R
 import com.jagaldol.dailytarot.data.FortuneEntry
 import com.jagaldol.dailytarot.model.DailyReading
 import com.jagaldol.dailytarot.model.ReadingSource
-import com.jagaldol.dailytarot.model.longLabelKo
-import com.jagaldol.dailytarot.model.weekdayKo
 import com.jagaldol.dailytarot.ui.theme.gold
 
 @Composable
 fun HistoryScreen(
     readings: List<DailyReading>,
-    nameKo: (Int) -> String,
+    cardName: (Int) -> String,
     onOpen: (DailyReading) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -65,7 +65,7 @@ fun HistoryScreen(
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    stringResource(R.string.history_count, readings.size),
+                    pluralStringResource(R.plurals.history_count, readings.size, readings.size),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -85,12 +85,12 @@ fun HistoryScreen(
         months.forEach { (month, items) ->
             item(key = "month-${month.first}-${month.second}", contentType = "month") {
                 SectionLabel(
-                    stringResource(R.string.month_label, month.first, month.second),
+                    monthLabel(LocalResources.current, month.first, month.second),
                     Modifier.padding(top = 28.dp, bottom = 6.dp),
                 )
             }
             items(items, key = { it.day.toString() }, contentType = { "reading" }) { reading ->
-                HistoryRow(reading, nameKo(reading.cardId), onOpen)
+                HistoryRow(reading, cardName(reading.cardId), onOpen)
             }
         }
         item(key = "bottom") { Spacer(Modifier.height(32.dp)) }
@@ -98,7 +98,7 @@ fun HistoryScreen(
 }
 
 @Composable
-private fun HistoryRow(reading: DailyReading, nameKo: String, onOpen: (DailyReading) -> Unit) {
+private fun HistoryRow(reading: DailyReading, name: String, onOpen: (DailyReading) -> Unit) {
     Column {
         Row(
             Modifier
@@ -115,7 +115,7 @@ private fun HistoryRow(reading: DailyReading, nameKo: String, onOpen: (DailyRead
                     color = MaterialTheme.colorScheme.onBackground,
                 )
                 Text(
-                    reading.day.weekdayKo(),
+                    reading.day.weekdayShort(LocalResources.current),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -126,7 +126,7 @@ private fun HistoryRow(reading: DailyReading, nameKo: String, onOpen: (DailyRead
             Column(Modifier.weight(1f)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        nameKo,
+                        name,
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onBackground,
                     )
@@ -172,7 +172,7 @@ private fun HistoryRow(reading: DailyReading, nameKo: String, onOpen: (DailyRead
 @Composable
 fun ReadingDetailScreen(
     reading: DailyReading,
-    nameKo: String,
+    name: String,
     defaultFortune: FortuneEntry?,
     onBack: () -> Unit,
     onDelete: (() -> Unit)?,
@@ -182,7 +182,7 @@ fun ReadingDetailScreen(
     Column(modifier.fillMaxSize().statusBarsPadding()) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             BackBar(
-                reading.day.let { "${it.year}년 ${it.longLabelKo()}" }, onBack,
+                reading.day.fullLabel(LocalResources.current), onBack,
                 Modifier.weight(1f).padding(horizontal = 8.dp),
             )
             if (onDelete != null) {
@@ -225,7 +225,7 @@ fun ReadingDetailScreen(
                 CardFace(reading.cardId, reading.reversed, Modifier.width(180.dp), full = true, elevation = 14.dp)
             }
             Spacer(Modifier.height(32.dp))
-            ReadingText(reading, nameKo, defaultFortune, waiting = false)
+            ReadingText(reading, name, defaultFortune, waiting = false)
             Spacer(Modifier.height(40.dp))
         }
     }

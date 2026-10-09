@@ -260,7 +260,7 @@ fun SourceLine(source: ReadingSource, waiting: Boolean, modifier: Modifier = Mod
 @Composable
 fun ReadingText(
     reading: DailyReading,
-    nameKo: String,
+    name: String,
     defaultFortune: FortuneEntry?,
     waiting: Boolean,
     modifier: Modifier = Modifier,
@@ -268,14 +268,16 @@ fun ReadingText(
     val card = Deck[reading.cardId]
     Column(modifier.widthIn(max = 560.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
-            nameKo,
+            name,
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onBackground,
             textAlign = TextAlign.Center,
         )
         Spacer(Modifier.height(6.dp))
         Text(
-            "${card.name.uppercase()}  ·  ${orientationLabel(reading.reversed)}",
+            // The English name repeats under a translated one; an English title needs only the orientation.
+            if (name == card.name) orientationLabel(reading.reversed).uppercase()
+            else "${card.name.uppercase()}  ·  ${orientationLabel(reading.reversed)}",
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
@@ -363,10 +365,4 @@ fun BackBar(title: String, onBack: () -> Unit, modifier: Modifier = Modifier) {
         Spacer(Modifier.width(4.dp))
         Text(title, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onBackground)
     }
-}
-
-/** "오전 8:00" for minutes after midnight. */
-fun minutesLabel(minutes: Int): String {
-    val hour = minutes / 60
-    return "${if (hour < 12) "오전" else "오후"} ${(hour + 11) % 12 + 1}:${(minutes % 60).toString().padStart(2, '0')}"
 }

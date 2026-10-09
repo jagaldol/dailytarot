@@ -42,7 +42,8 @@ data class TodayView(
 class ReadingRepository(
     private val store: ReadingStore,
     private val settings: ReadingSettings,
-    private val catalog: FortuneCatalog,
+    /** Read on every draw: the app language, and with it the catalog, can change at any time. */
+    private val catalog: () -> FortuneCatalog,
     private val now: () -> Long = System::currentTimeMillis,
     private val random: Random = Random.Default,
     private val todayChanged: suspend () -> Unit = {},
@@ -244,9 +245,8 @@ class ReadingRepository(
 
     suspend fun isFromLifebase(day: Day): Boolean = store.get(day)?.source == ReadingSource.LIFEBASE
 
-    fun defaultFortune(cardId: Int, reversed: Boolean): FortuneEntry = catalog.entry(cardId, reversed)
-
     private suspend fun snapshot(day: Day, cardId: Int, reversed: Boolean, source: ReadingSource): DailyReading {
+        val catalog = catalog()
         val entry = catalog.entry(cardId, reversed)
         val time = now()
         return DailyReading(

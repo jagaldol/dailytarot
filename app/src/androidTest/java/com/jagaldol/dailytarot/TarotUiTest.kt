@@ -7,6 +7,8 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.jagaldol.dailytarot.data.FortuneCatalog
+import com.jagaldol.dailytarot.data.withAppLanguage
 import com.jagaldol.dailytarot.model.ReadingSource
 import com.jagaldol.dailytarot.work.RefreshScheduler
 import kotlinx.coroutines.runBlocking
@@ -50,7 +52,7 @@ class TarotUiTest {
         val saved = runBlocking { app.repository.drawToday() }
         assertEquals(77, saved.cardId)
         assertTrue(saved.reversed)
-        assertEquals(app.catalog.entry(77, true).fortuneText, saved.headline)
+        assertEquals(FortuneCatalog.load(app.withAppLanguage()).entry(77, true).fortuneText, saved.headline)
 
         compose.activityRule.scenario.recreate()
         compose.waitUntil(5_000) {

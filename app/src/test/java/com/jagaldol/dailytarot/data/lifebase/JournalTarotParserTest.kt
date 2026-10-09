@@ -159,7 +159,136 @@ class JournalTarotParserTest {
         )
     }
 
+    /** The English vault: `## Today's Tarot`, `Keywords:` and Upright/Reversed (journal-daily-tarot, en). */
+    private fun englishNote(reverse: String = "true", fortune: String = ENGLISH_FORTUNE) = """
+        |---
+        |tags: [daily]
+        |tarot-card: The Empress
+        |tarot-reverse: $reverse
+        |---
+        |
+        |## Diary
+        |
+        |Private diary line
+        |
+        |## Today's Tarot
+        |
+        |$fortune
+        |
+        |## Notes
+        |
+        |- private note
+        |""".trimMargin()
+
+    @Test
+    fun englishVaultNotesAreRead() {
+        val parsed = parse(englishNote()) as Parsed
+        assertEquals(3, parsed.cardId)
+        assertTrue(parsed.reversed)
+        assertEquals("Let some of that care reach you, too", parsed.headline)
+        assertEquals("abundance, care, creativity", parsed.keywordsText)
+        assertEquals("The generosity may be flowing outward while your own needs wait.", parsed.body)
+        assertFalse(parsed.fortuneRaw.contains("Private diary"))
+        assertFalse(parsed.fortuneRaw.contains("private note"))
+        // The callout says Reversed, so an upright frontmatter contradicts it.
+        assertTrue(parse(englishNote(reverse = "false")) is Invalid)
+    }
+
+    @Test
+    fun englishKeywordOnlyNotesAreKeywordsOnly() {
+        val fortune = "> [!quote] [[The Empress]] · Reversed\n>\n> Keywords: abundance, care"
+        val parsed = parse(englishNote(fortune = fortune)) as Parsed
+        assertEquals(ContentStatus.KEYWORDS_ONLY, parsed.status)
+        assertEquals("abundance, care", parsed.keywordsText)
+    }
+
+    @Test
+    fun closingHashesAreAcceptedWithOrWithoutASpace() {
+        assertTrue(parse(note().replace("## 오늘의 운세", "## 오늘의 운세 ##")) is Parsed)
+        assertTrue(parse(note().replace("## 오늘의 운세", "## 오늘의 운세##")) is Parsed) // read by 2.1
+        val sharp = note().replace("## 오늘의 운세", "## C#")
+        assertTrue(JournalTarotParser.parse(sharp, ids, JournalTarotParser.titles("C#")) is Parsed)
+    }
+
+    @Test
+    fun onlyTheEndOfTheCalloutTitleNamesTheOrientation() {
+        val aliased = englishNote(reverse = "false").replace(
+            "> [!quote] [[The Empress]] · Reversed", "> [!quote] [[The Empress|Empress, reversed or not]] · Upright",
+        )
+        assertFalse((parse(aliased) as Parsed).reversed)
+    }
+
+    @Test
+    fun englishKeywordsNeedAColon() {
+        val fortune = ENGLISH_FORTUNE.replace("> Keywords: abundance, care, creativity", "> Keywords - abundance")
+        val parsed = parse(englishNote(fortune = fortune)) as Parsed
+        assertNull(parsed.keywordsText)
+    }
+
+    @Test
+    fun headingsMatchWithoutCaseOrTypographicApostrophes() {
+        val curly = englishNote().replace("## Today's Tarot", "## today\u2019s tarot ##")
+        assertTrue(parse(curly) is Parsed)
+    }
+
+    @Test
+    fun aCustomHeadingIsReadFirstAndTheDefaultsStillCoverOlderNotes() {
+        val titles = JournalTarotParser.titles("타로 한 장")
+        assertEquals(listOf("타로 한 장", "오늘의 운세", "Today's Tarot"), titles)
+
+        val renamed = note().replace("## 오늘의 운세", "## 타로 한 장")
+        assertTrue(parse(renamed) is Incomplete) // default headings only
+        assertEquals("작은 진심이 먼저 살아납니다", (JournalTarotParser.parse(renamed, ids, titles) as Parsed).headline)
+
+        // A note written before the rename still uses the default heading.
+        assertTrue(JournalTarotParser.parse(note(), ids, titles) is Parsed)
+
+        // With both headings present, the custom one wins.
+        val both = note(before = "## 타로 한 장\n\n$OTHER_HEADING_FORTUNE\n")
+        val parsed = JournalTarotParser.parse(both, ids, titles) as Parsed
+        assertEquals("다른 제목의 운세", parsed.headline)
+
+        // A default title typed as custom is not looked for twice.
+        assertEquals(listOf("today\u2019s tarot", "오늘의 운세"), JournalTarotParser.titles("today\u2019s tarot"))
+        assertEquals(JournalTarotParser.DEFAULT_TITLES, JournalTarotParser.titles(null))
+    }
+
+    @Test
+    fun typedHeadingsAreCleanedLikeMarkdownHeadings() {
+        assertEquals("타로 한 장", JournalTarotParser.headingTitle("  ## 타로   한 장 "))
+        assertEquals("My Tarot", JournalTarotParser.headingTitle("My Tarot"))
+        assertEquals("My Tarot", JournalTarotParser.headingTitle("## My Tarot ##"))
+        assertEquals("C#", JournalTarotParser.headingTitle("C#"))
+        // Lifebase's own sections would expose diary or schedule text.
+        for (reserved in listOf("일기", "## Diary", "notes", "할 일", "To Do")) {
+            assertNull(reserved, JournalTarotParser.headingTitle(reserved))
+            assertTrue(reserved, JournalTarotParser.isReservedTitle(reserved))
+        }
+        assertFalse(JournalTarotParser.isReservedTitle("My Tarot"))
+        assertNull(JournalTarotParser.headingTitle("  ##  "))
+        assertNull(JournalTarotParser.headingTitle("two\nlines"))
+        assertNull(JournalTarotParser.headingTitle("x".repeat(JournalTarotParser.MAX_TITLE_CHARS + 1)))
+    }
+
     companion object {
+        private val ENGLISH_FORTUNE = """
+            |![The Empress · Reversed|360](https://lifebaseai.com/tarot/rws-v1/the-empress-reversed.webp)
+            |
+            |> [!quote] [[The Empress]] · Reversed
+            |> **Let some of that care reach you, too**
+            |> Keywords: abundance, care, creativity
+            |>
+            |> The generosity may be flowing outward while your own needs wait.
+            """.trimMargin()
+
+        private val OTHER_HEADING_FORTUNE = """
+            |> [!quote] [[Page of Cups|컵 페이지 (Page of Cups)]] · 정방향
+            |> **다른 제목의 운세**
+            |> 키워드: 감수성
+            |>
+            |> 본문
+            """.trimMargin()
+
         private val CURRENT_FORTUNE = """
             |![컵 페이지 · 정방향|360](https://example.com/page-of-cups.webp)
             |

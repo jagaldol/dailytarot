@@ -13,20 +13,25 @@ import java.io.File
 import java.util.TimeZone
 
 class CatalogAndBackupTest {
-    private val catalogText = File("src/main/assets/${FortuneCatalog.ASSET}").readText()
+    private fun catalog(language: String) =
+        FortuneCatalog.parse(File("src/main/assets/${FortuneCatalog.asset(language)}").readText())
 
     @Test
-    fun bundledCatalogHasEveryCardAndOrientationMatchingTheDeck() {
-        val catalog = FortuneCatalog.parse(catalogText)
-        for (card in Deck) {
-            for (reversed in listOf(false, true)) {
-                val entry = catalog.entry(card.id, reversed)
-                assertTrue(entry.fortuneText.isNotBlank())
-                assertTrue(entry.keywordsText.isNotBlank())
+    fun bundledCatalogsHaveEveryCardAndOrientationMatchingTheDeck() {
+        for (language in listOf(FortuneCatalog.KOREAN, FortuneCatalog.ENGLISH)) {
+            val catalog = catalog(language)
+            for (card in Deck) {
+                for (reversed in listOf(false, true)) {
+                    val entry = catalog.entry(card.id, reversed)
+                    assertTrue(entry.fortuneText.isNotBlank())
+                    assertTrue(entry.keywordsText.isNotBlank())
+                }
             }
         }
-        assertEquals("컵 페이지", catalog.nameKo(60))
-        assertEquals("바보", catalog.nameKo(0))
+        assertEquals("컵 페이지", catalog(FortuneCatalog.KOREAN).name(60))
+        assertEquals("바보", catalog(FortuneCatalog.KOREAN).name(0))
+        assertEquals("Page of Cups", catalog(FortuneCatalog.ENGLISH).name(60))
+        assertEquals("The Fool", catalog(FortuneCatalog.ENGLISH).name(0))
     }
 
     @Test

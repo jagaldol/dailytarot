@@ -53,19 +53,19 @@ import com.jagaldol.dailytarot.model.Card
 import com.jagaldol.dailytarot.model.DeckSections
 import com.jagaldol.dailytarot.ui.theme.gold
 
-private val sectionNamesKo = mapOf(
-    "MAJOR ARCANA" to "메이저 아르카나",
-    "WANDS" to "완드",
-    "CUPS" to "컵",
-    "PENTACLES" to "펜타클",
-    "SWORDS" to "소드",
+private val sectionNames = mapOf(
+    "MAJOR ARCANA" to R.string.section_major,
+    "WANDS" to R.string.section_wands,
+    "CUPS" to R.string.section_cups,
+    "PENTACLES" to R.string.section_pentacles,
+    "SWORDS" to R.string.section_swords,
 )
 
 @Composable
 fun PickerScreen(
     initialCardId: Int?,
     initialReversed: Boolean,
-    nameKo: (Int) -> String,
+    cardName: (Int) -> String,
     onConfirm: (Int, Boolean) -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
@@ -91,12 +91,12 @@ fun PickerScreen(
             DeckSections.forEach { section ->
                 item(key = section.title, span = { GridItemSpan(maxLineSpan) }, contentType = "heading") {
                     SectionLabel(
-                        sectionNamesKo[section.title] ?: section.title,
+                        sectionNames[section.title]?.let { stringResource(it) } ?: section.title,
                         Modifier.padding(top = 20.dp, bottom = 2.dp, start = 4.dp),
                     )
                 }
                 items(section.cards, key = { it.id }, contentType = { "card" }) { card ->
-                    PickerCard(card, nameKo(card.id), card.id == selected, angle) { selected = card.id }
+                    PickerCard(card, cardName(card.id), card.id == selected, angle) { selected = card.id }
                 }
             }
         }
@@ -116,7 +116,7 @@ fun PickerScreen(
                     .height(54.dp)
                     .testTag("confirm"),
             ) {
-                val label = selected?.let { "${nameKo(it)} · ${orientationLabel(reversed)}" }
+                val label = selected?.let { "${cardName(it)} · ${orientationLabel(reversed)}" }
                 Text(
                     if (label == null) stringResource(R.string.picker_hint)
                     else "$label  —  ${stringResource(R.string.picker_confirm)}",
@@ -161,7 +161,7 @@ private fun OrientationToggle(reversed: Boolean, onChange: (Boolean) -> Unit, mo
 @Composable
 private fun PickerCard(
     card: Card,
-    nameKo: String,
+    name: String,
     selected: Boolean,
     angle: androidx.compose.runtime.State<Float>,
     onSelect: () -> Unit,
@@ -170,7 +170,7 @@ private fun PickerCard(
     Column(
         Modifier
             .selectable(selected = selected, role = Role.RadioButton, onClick = onSelect)
-            .semantics { contentDescription = "$nameKo (${card.name})" }
+            .semantics { contentDescription = cardDescription(card.id, name) }
             .testTag("card-${card.id}"),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -192,7 +192,7 @@ private fun PickerCard(
         }
         Spacer(Modifier.height(6.dp))
         Text(
-            nameKo,
+            name,
             style = MaterialTheme.typography.labelSmall,
             color = if (selected) MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,

@@ -1,5 +1,6 @@
 package com.jagaldol.dailytarot.ui
 
+import android.content.res.Resources
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -19,12 +20,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.TextButton
@@ -35,18 +39,24 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
@@ -57,6 +67,7 @@ import com.jagaldol.dailytarot.data.AppSettings
 import com.jagaldol.dailytarot.data.LifebaseConnection
 import com.jagaldol.dailytarot.data.SyncState
 import com.jagaldol.dailytarot.data.SyncStatus
+import com.jagaldol.dailytarot.data.lifebase.JournalTarotParser
 import com.jagaldol.dailytarot.ui.theme.DailytarotTheme
 import com.jagaldol.dailytarot.ui.theme.gold
 import com.jagaldol.dailytarot.work.ImportProgress
@@ -76,6 +87,8 @@ data class SettingsActions(
     val addWidget: () -> Unit,
     val export: () -> Unit,
     val restore: () -> Unit,
+    /** Null goes back to the Lifebase headings. */
+    val setJournalHeading: (String?) -> Unit = {},
 )
 
 // The Lifebase card shares the card back's night palette in both themes.
@@ -131,6 +144,8 @@ fun SettingsScreen(
                     importSubtitle(importProgress),
                     enabled = importProgress?.running != true, onClick = actions.startImport,
                 )
+                Divider()
+                HeadingRow(settings.journalHeading, actions.setJournalHeading)
                 Divider()
                 SettingRow(
                     R.drawable.ic_folder, stringResource(R.string.settings_reconnect),
@@ -274,7 +289,8 @@ private fun LifebaseCard(settings: AppSettings, progress: ImportProgress?, actio
                 Spacer(Modifier.height(10.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        progress.label?.let { stringResource(R.string.settings_import_progress, it, progress.imported) }
+                        progress.label?.let { importMonth(LocalResources.current, it) }
+                            ?.let { stringResource(R.string.settings_import_progress, it, progress.imported) }
                             ?: stringResource(R.string.settings_import_starting),
                         style = MaterialTheme.typography.bodySmall,
                         color = InkMuted,
@@ -312,7 +328,7 @@ private fun StatusLine(sync: SyncStatus) {
     // Parser reasons stay internal; the user sees the state and when it was checked.
     sync.checkedAt.takeIf { it > 0 }?.let {
         Text(
-            stringResource(R.string.sync_checked_at, timeLabel(it)),
+            stringResource(R.string.sync_checked_at, timeLabel(LocalResources.current, it)),
             style = MaterialTheme.typography.bodySmall,
             color = InkMuted,
             modifier = Modifier.padding(start = 15.dp, top = 2.dp),
@@ -321,13 +337,123 @@ private fun StatusLine(sync: SyncStatus) {
 }
 
 /** "오후 11:02", or "10월 6일 오후 11:02" for earlier days. */
-private fun timeLabel(millis: Long): String {
+private fun timeLabel(resources: Resources, millis: Long): String {
     val then = Calendar.getInstance().apply { timeInMillis = millis }
     val now = Calendar.getInstance()
-    val clock = minutesLabel(then.get(Calendar.HOUR_OF_DAY) * 60 + then.get(Calendar.MINUTE))
+    val clock = minutesLabel(resources, then.get(Calendar.HOUR_OF_DAY) * 60 + then.get(Calendar.MINUTE))
     val sameDay = then.get(Calendar.YEAR) == now.get(Calendar.YEAR) &&
         then.get(Calendar.DAY_OF_YEAR) == now.get(Calendar.DAY_OF_YEAR)
-    return if (sameDay) clock else "${then.get(Calendar.MONTH) + 1}월 ${then.get(Calendar.DAY_OF_MONTH)}일 $clock"
+    return if (sameDay) clock
+    else "${monthDayLabel(resources, then.get(Calendar.MONTH) + 1, then.get(Calendar.DAY_OF_MONTH))} $clock"
+}
+
+/** The import worker reports `YYYY-MM`; shown as "2026년 10월" / "October 2026". */
+private fun importMonth(resources: Resources, month: String): String {
+    val (year, number) = month.split('-').mapNotNull(String::toIntOrNull).takeIf { it.size == 2 } ?: return month
+    return if (number in 1..12) monthLabel(resources, year, number) else month
+}
+
+@Composable
+private fun HeadingRow(current: String?, onChange: (String?) -> Unit) {
+    var editing by rememberSaveable { mutableStateOf(false) }
+    SettingRow(
+        R.drawable.ic_heading, stringResource(R.string.settings_heading),
+        if (current == null) stringResource(R.string.settings_heading_auto_sub)
+        else stringResource(R.string.settings_heading_custom_sub, current),
+        onClick = { editing = true },
+        modifier = Modifier.testTag("journal-heading"),
+    )
+    if (editing) {
+        HeadingDialog(
+            current,
+            onDismiss = { editing = false },
+            onConfirm = {
+                editing = false
+                onChange(it)
+            },
+        )
+    }
+}
+
+/** Automatic reads the Lifebase headings; a custom one is tried first, with those as the fallback. */
+@Composable
+private fun HeadingDialog(current: String?, onDismiss: () -> Unit, onConfirm: (String?) -> Unit) {
+    var custom by rememberSaveable { mutableStateOf(current != null) }
+    var text by rememberSaveable { mutableStateOf(current.orEmpty()) }
+    val title = JournalTarotParser.headingTitle(text)
+    val focus = remember { FocusRequester() }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.settings_heading)) },
+        text = {
+            Column {
+                Text(stringResource(R.string.settings_heading_body), style = MaterialTheme.typography.bodyMedium)
+                Spacer(Modifier.height(12.dp))
+                HeadingOption(
+                    selected = !custom, label = stringResource(R.string.settings_heading_auto),
+                    hint = stringResource(R.string.settings_heading_auto_hint), tag = "heading-auto",
+                ) { custom = false }
+                HeadingOption(
+                    selected = custom, label = stringResource(R.string.settings_heading_custom),
+                    hint = null, tag = "heading-custom",
+                ) { custom = true }
+                if (custom) {
+                    OutlinedTextField(
+                        value = text,
+                        onValueChange = { text = it.replace("\n", "") },
+                        singleLine = true,
+                        label = { Text(stringResource(R.string.settings_heading_field)) },
+                        prefix = { Text("## ") },
+                        supportingText = {
+                            Text(
+                                stringResource(
+                                    when {
+                                        text.isBlank() || title != null -> R.string.settings_heading_fallback
+                                        JournalTarotParser.isReservedTitle(text) -> R.string.settings_heading_reserved
+                                        else -> R.string.settings_heading_too_long
+                                    },
+                                ),
+                            )
+                        },
+                        isError = text.isNotBlank() && title == null,
+                        modifier = Modifier.fillMaxWidth().padding(top = 4.dp).focusRequester(focus).testTag("heading-field"),
+                    )
+                    // Choosing "Custom" for the first time puts the cursor straight in the field.
+                    LaunchedEffect(Unit) { if (current == null) runCatching { focus.requestFocus() } }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = { onConfirm(if (custom) title else null) },
+                enabled = !custom || title != null,
+                modifier = Modifier.testTag("heading-save"),
+            ) { Text(stringResource(R.string.ok)) }
+        },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } },
+    )
+}
+
+@Composable
+private fun HeadingOption(selected: Boolean, label: String, hint: String?, tag: String, onSelect: () -> Unit) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .selectable(selected, role = Role.RadioButton, onClick = onSelect)
+            .padding(vertical = 6.dp)
+            .testTag(tag),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        RadioButton(selected = selected, onClick = null)
+        Spacer(Modifier.width(10.dp))
+        Column {
+            Text(label, style = MaterialTheme.typography.titleSmall)
+            hint?.let {
+                Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+        }
+    }
 }
 
 private enum class TimeTarget { DAY_START, AUTO_DRAW }
@@ -340,7 +466,7 @@ private fun CardGroup(settings: AppSettings, actions: SettingsActions) {
         SettingRow(
             R.drawable.ic_clock, stringResource(R.string.settings_day_start),
             stringResource(R.string.settings_day_start_sub),
-            trailing = minutesLabel(settings.dayStartMinutes),
+            trailing = minutesLabel(LocalResources.current, settings.dayStartMinutes),
             onClick = { picking = TimeTarget.DAY_START },
         )
         Divider()
@@ -359,7 +485,7 @@ private fun CardGroup(settings: AppSettings, actions: SettingsActions) {
         SettingRow(
             R.drawable.ic_clock, stringResource(R.string.settings_auto_draw_time),
             stringResource(R.string.settings_auto_draw_time_sub),
-            trailing = minutesLabel(settings.autoDrawMinutes),
+            trailing = minutesLabel(LocalResources.current, settings.autoDrawMinutes),
             enabled = settings.autoDraw,
             onClick = { picking = TimeTarget.AUTO_DRAW },
         )
@@ -416,9 +542,9 @@ private fun DeleteAllRow(connected: Boolean, count: Int, onDelete: () -> Unit) {
             },
             text = {
                 Text(
-                    stringResource(
-                        if (connected) R.string.settings_delete_local_body else R.string.settings_delete_all_body,
-                        count,
+                    pluralStringResource(
+                        if (connected) R.plurals.settings_delete_local_body else R.plurals.settings_delete_all_body,
+                        count, count,
                     ),
                 )
             },

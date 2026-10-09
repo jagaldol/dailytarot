@@ -1,0 +1,1255 @@
+{
+  "schemaVersion": 2,
+  "catalogVersion": "lifebase-en-2026-10-09",
+  "locale": "en",
+  "entries": [
+    {
+      "cardId": 0,
+      "cardName": "The Fool",
+      "name": "The Fool",
+      "reversed": false,
+      "keywordsText": "new beginnings, freedom, adventure, innocence, foolishness",
+      "fortuneText": "There is a free, excited feeling of wanting to start something new without fear."
+    },
+    {
+      "cardId": 0,
+      "cardName": "The Fool",
+      "name": "The Fool",
+      "reversed": true,
+      "keywordsText": "new beginnings, freedom, adventure, innocence, foolishness",
+      "fortuneText": "If you are weighing everything too carefully, take a light first step today without overthinking it."
+    },
+    {
+      "cardId": 1,
+      "cardName": "The Magician",
+      "name": "The Magician",
+      "reversed": false,
+      "keywordsText": "putting ideas into action, planning, getting started, creation, using resources",
+      "fortuneText": "Your resources and will come together, giving you the ability to make an intention real."
+    },
+    {
+      "cardId": 1,
+      "cardName": "The Magician",
+      "name": "The Magician",
+      "reversed": true,
+      "keywordsText": "putting ideas into action, planning, getting started, creation, using resources",
+      "fortuneText": "If you have only been turning ideas over, put at least one of them into action today."
+    },
+    {
+      "cardId": 2,
+      "cardName": "The High Priestess",
+      "name": "The High Priestess",
+      "reversed": false,
+      "keywordsText": "intuition, mystery, secrets, silence, truth, inner life",
+      "fortuneText": "Inner signals become clearer than words, and your intuition is working well."
+    },
+    {
+      "cardId": 2,
+      "cardName": "The High Priestess",
+      "name": "The High Priestess",
+      "reversed": true,
+      "keywordsText": "intuition, mystery, secrets, silence, truth, inner life",
+      "fortuneText": "If you are rushing for an answer, pause and listen to your intuition today."
+    },
+    {
+      "cardId": 3,
+      "cardName": "The Empress",
+      "name": "The Empress",
+      "reversed": false,
+      "keywordsText": "abundance, motherhood, care, creativity, the senses",
+      "fortuneText": "A warm, generous impulse to care and cultivate makes this a good time to help something grow."
+    },
+    {
+      "cardId": 3,
+      "cardName": "The Empress",
+      "name": "The Empress",
+      "reversed": true,
+      "keywordsText": "abundance, motherhood, care, creativity, the senses",
+      "fortuneText": "If you have neglected yourself, give yourself plenty of care today."
+    },
+    {
+      "cardId": 4,
+      "cardName": "The Emperor",
+      "name": "The Emperor",
+      "reversed": false,
+      "keywordsText": "stability, order, structure, leadership",
+      "fortuneText": "Your foundations and sense of order are firm, making it a good time to take charge."
+    },
+    {
+      "cardId": 4,
+      "cardName": "The Emperor",
+      "name": "The Emperor",
+      "reversed": true,
+      "keywordsText": "stability, order, structure, leadership",
+      "fortuneText": "If things feel disorganized, establish a structure and put them in order today."
+    },
+    {
+      "cardId": 5,
+      "cardName": "The Hierophant",
+      "name": "The Hierophant",
+      "reversed": false,
+      "keywordsText": "learning, teaching, tradition, values, discipline",
+      "fortuneText": "A familiar method or trustworthy advice fits better than pushing ahead alone."
+    },
+    {
+      "cardId": 5,
+      "cardName": "The Hierophant",
+      "name": "The Hierophant",
+      "reversed": true,
+      "keywordsText": "learning, teaching, tradition, values, discipline",
+      "fortuneText": "If you feel lost, ask for advice or revisit the basics today instead of struggling alone."
+    },
+    {
+      "cardId": 6,
+      "cardName": "The Lovers",
+      "name": "The Lovers",
+      "reversed": false,
+      "keywordsText": "love, relationships, unity, choice, harmony",
+      "fortuneText": "Feelings and relationships come together warmly, and your choices tend to follow your heart."
+    },
+    {
+      "cardId": 6,
+      "cardName": "The Lovers",
+      "name": "The Lovers",
+      "reversed": true,
+      "keywordsText": "love, relationships, unity, choice, harmony",
+      "fortuneText": "If something feels out of step, choose honestly in the direction your heart takes you today."
+    },
+    {
+      "cardId": 7,
+      "cardName": "The Chariot",
+      "name": "The Chariot",
+      "reversed": false,
+      "keywordsText": "willpower, drive, breakthrough, direction",
+      "fortuneText": "Scattered energies come together in one direction, giving you the momentum to push ahead."
+    },
+    {
+      "cardId": 7,
+      "cardName": "The Chariot",
+      "name": "The Chariot",
+      "reversed": true,
+      "keywordsText": "willpower, drive, breakthrough, direction",
+      "fortuneText": "If your resolve is scattered, focus on one goal and press forward today."
+    },
+    {
+      "cardId": 8,
+      "cardName": "Strength",
+      "name": "Strength",
+      "reversed": false,
+      "keywordsText": "courage, confidence, gentle strength, self-control, ease",
+      "fortuneText": "You have the strength to hold steady with gentleness and resolve, without forcing your way through."
+    },
+    {
+      "cardId": 8,
+      "cardName": "Strength",
+      "name": "Strength",
+      "reversed": true,
+      "keywordsText": "courage, confidence, gentle strength, self-control, ease",
+      "fortuneText": "If you feel impatient, ease your grip and handle things gently today."
+    },
+    {
+      "cardId": 9,
+      "cardName": "The Hermit",
+      "name": "The Hermit",
+      "reversed": false,
+      "keywordsText": "reflection, solitude, replenishment, inner life, quiet",
+      "fortuneText": "You step back from outside noise and quietly search for answers on your own."
+    },
+    {
+      "cardId": 9,
+      "cardName": "The Hermit",
+      "name": "The Hermit",
+      "reversed": true,
+      "keywordsText": "reflection, solitude, replenishment, inner life, quiet",
+      "fortuneText": "If you have lacked time alone, make room today to look inward in peace."
+    },
+    {
+      "cardId": 10,
+      "cardName": "Wheel of Fortune",
+      "name": "Wheel of Fortune",
+      "reversed": false,
+      "keywordsText": "good fortune, a turning point, flow, opportunity, change",
+      "fortuneText": "A stalled situation begins to move, bringing unexpected luck and a change of direction."
+    },
+    {
+      "cardId": 10,
+      "cardName": "Wheel of Fortune",
+      "name": "Wheel of Fortune",
+      "reversed": true,
+      "keywordsText": "good fortune, a turning point, flow, opportunity, change",
+      "fortuneText": "If you are stuck in a pattern, try moving with the changing current today."
+    },
+    {
+      "cardId": 11,
+      "cardName": "Justice",
+      "name": "Justice",
+      "reversed": false,
+      "keywordsText": "fairness, balance, judgement, responsibility",
+      "fortuneText": "As the facts and standards become clear, things settle into a fair balance."
+    },
+    {
+      "cardId": 11,
+      "cardName": "Justice",
+      "name": "Justice",
+      "reversed": true,
+      "keywordsText": "fairness, balance, judgement, responsibility",
+      "fortuneText": "If you have been putting something off, weigh the facts and make a decision today."
+    },
+    {
+      "cardId": 12,
+      "cardName": "The Hanged Man",
+      "name": "The Hanged Man",
+      "reversed": false,
+      "keywordsText": "pause, frustration, a change of perspective, a reversal in thinking, insight",
+      "fortuneText": "A pause lets you see the same situation differently, bringing an unexpected realization."
+    },
+    {
+      "cardId": 12,
+      "cardName": "The Hanged Man",
+      "name": "The Hanged Man",
+      "reversed": true,
+      "keywordsText": "pause, frustration, a change of perspective, a reversal in thinking, insight",
+      "fortuneText": "If you feel trapped and frustrated, step back and turn your perspective around today."
+    },
+    {
+      "cardId": 13,
+      "cardName": "Death",
+      "name": "Death",
+      "reversed": false,
+      "keywordsText": "endings, difficult change, transition, letting go, a fresh start",
+      "fortuneText": "An ending or a difficult change may be approaching. Let it pass instead of holding on; the sun rises on the other side."
+    },
+    {
+      "cardId": 13,
+      "cardName": "Death",
+      "name": "Death",
+      "reversed": true,
+      "keywordsText": "endings, difficult change, transition, letting go, a fresh start",
+      "fortuneText": "There is no avoiding the hard part. The quickest way through is to face it directly."
+    },
+    {
+      "cardId": 14,
+      "cardName": "Temperance",
+      "name": "Temperance",
+      "reversed": false,
+      "keywordsText": "balance, adjustment, moderation, naturalness, flow",
+      "fortuneText": "Different things blend in the right proportions, finding a balance of neither too much nor too little."
+    },
+    {
+      "cardId": 14,
+      "cardName": "Temperance",
+      "name": "Temperance",
+      "reversed": true,
+      "keywordsText": "balance, adjustment, moderation, naturalness, flow",
+      "fortuneText": "If you have leaned too far in one direction, reduce the excess and restore balance today."
+    },
+    {
+      "cardId": 15,
+      "cardName": "The Devil",
+      "name": "The Devil",
+      "reversed": false,
+      "keywordsText": "desire, attachment, captivity, addiction, illusion, anxiety",
+      "fortuneText": "Desire and attachment can easily take hold. Look at what you are tied to right now."
+    },
+    {
+      "cardId": 15,
+      "cardName": "The Devil",
+      "name": "The Devil",
+      "reversed": true,
+      "keywordsText": "desire, attachment, captivity, addiction, illusion, anxiety",
+      "fortuneText": "If you are wavering or worrying about what others think, let yourself go for what you want today."
+    },
+    {
+      "cardId": 16,
+      "cardName": "The Tower",
+      "name": "The Tower",
+      "reversed": false,
+      "keywordsText": "collapse, chaos, upheaval, awakening, liberation",
+      "fortuneText": "What you have built may shake or fall apart. This is a time to let go rather than hold on by force."
+    },
+    {
+      "cardId": 16,
+      "cardName": "The Tower",
+      "name": "The Tower",
+      "reversed": true,
+      "keywordsText": "collapse, chaos, upheaval, awakening, liberation",
+      "fortuneText": "If you are clinging to something that is not working, clear it away and start over today."
+    },
+    {
+      "cardId": 17,
+      "cardName": "The Star",
+      "name": "The Star",
+      "reversed": false,
+      "keywordsText": "hope, release, recovery, inspiration, peace",
+      "fortuneText": "Like the calm after a storm, recovery comes gently and hope begins to return."
+    },
+    {
+      "cardId": 17,
+      "cardName": "The Star",
+      "name": "The Star",
+      "reversed": true,
+      "keywordsText": "hope, release, recovery, inspiration, peace",
+      "fortuneText": "If you are worn out, ask less of yourself and take time to recover today."
+    },
+    {
+      "cardId": 18,
+      "cardName": "The Moon",
+      "name": "The Moon",
+      "reversed": false,
+      "keywordsText": "instinct, dreams, imagination, primal feelings, the unconscious",
+      "fortuneText": "Instinct and imagination grow stronger, and the path may feel a little unclear."
+    },
+    {
+      "cardId": 18,
+      "cardName": "The Moon",
+      "name": "The Moon",
+      "reversed": true,
+      "keywordsText": "instinct, dreams, imagination, primal feelings, the unconscious",
+      "fortuneText": "If you are reasoning everything out, listen to your intuition, dreams, and inner feelings today."
+    },
+    {
+      "cardId": 19,
+      "cardName": "The Sun",
+      "name": "The Sun",
+      "reversed": false,
+      "keywordsText": "vitality, joy, happiness, satisfaction, success, brightness",
+      "fortuneText": "Things become clear and go well, bringing a welcome surge of energy."
+    },
+    {
+      "cardId": 19,
+      "cardName": "The Sun",
+      "name": "The Sun",
+      "reversed": true,
+      "keywordsText": "vitality, joy, happiness, satisfaction, success, brightness",
+      "fortuneText": "If your energy is low, fill today with things that lift your spirits, however small."
+    },
+    {
+      "cardId": 20,
+      "cardName": "Judgement",
+      "name": "Judgement",
+      "reversed": false,
+      "keywordsText": "judgement, taking stock, assessment, rebirth, a calling",
+      "fortuneText": "This is a good time to look back, assess what happened, acknowledge what needs reflection, and move to the next stage."
+    },
+    {
+      "cardId": 20,
+      "cardName": "Judgement",
+      "name": "Judgement",
+      "reversed": true,
+      "keywordsText": "judgement, taking stock, assessment, rebirth, a calling",
+      "fortuneText": "If you have put off a decision, look back and bring it to a close today."
+    },
+    {
+      "cardId": 21,
+      "cardName": "The World",
+      "name": "The World",
+      "reversed": false,
+      "keywordsText": "completion, wholeness, achievement, integration, closure",
+      "fortuneText": "A full cycle reaches completion, bringing a satisfying sense of closure."
+    },
+    {
+      "cardId": 21,
+      "cardName": "The World",
+      "name": "The World",
+      "reversed": true,
+      "keywordsText": "completion, wholeness, achievement, integration, closure",
+      "fortuneText": "If something remains unfinished, tie up the last loose end and complete it today."
+    },
+    {
+      "cardId": 22,
+      "cardName": "Ace of Pentacles",
+      "name": "Ace of Pentacles",
+      "reversed": false,
+      "keywordsText": "material things, money, abundance, a practical opportunity",
+      "fortuneText": "A tangible opportunity, money, or resources arrive, bringing a welcome practical gain."
+    },
+    {
+      "cardId": 22,
+      "cardName": "Ace of Pentacles",
+      "name": "Ace of Pentacles",
+      "reversed": true,
+      "keywordsText": "material things, money, abundance, a practical opportunity",
+      "fortuneText": "If you are letting an opportunity drift past, take hold of the resources before you today."
+    },
+    {
+      "cardId": 23,
+      "cardName": "Two of Pentacles",
+      "name": "Two of Pentacles",
+      "reversed": false,
+      "keywordsText": "balance, weighing options, priorities, adjustment",
+      "fortuneText": "You weigh practical demands that do not fit together easily, working out your priorities."
+    },
+    {
+      "cardId": 23,
+      "cardName": "Two of Pentacles",
+      "name": "Two of Pentacles",
+      "reversed": true,
+      "keywordsText": "balance, weighing options, priorities, adjustment",
+      "fortuneText": "If treating everything equally has become too much to carry, set priorities and restore balance today."
+    },
+    {
+      "cardId": 24,
+      "cardName": "Three of Pentacles",
+      "name": "Three of Pentacles",
+      "reversed": false,
+      "keywordsText": "collaboration, exchange, study, learning",
+      "fortuneText": "You coordinate roles and learn with others, building results together."
+    },
+    {
+      "cardId": 24,
+      "cardName": "Three of Pentacles",
+      "name": "Three of Pentacles",
+      "reversed": true,
+      "keywordsText": "collaboration, exchange, study, learning",
+      "fortuneText": "If you are holding onto the work alone, join a collaborative setting to learn and exchange ideas today."
+    },
+    {
+      "cardId": 25,
+      "cardName": "Four of Pentacles",
+      "name": "Four of Pentacles",
+      "reversed": false,
+      "keywordsText": "attachment, clutching, fear of letting go, compulsion",
+      "fortuneText": "Fear of losing what you have can make you grip it too tightly."
+    },
+    {
+      "cardId": 25,
+      "cardName": "Four of Pentacles",
+      "name": "Four of Pentacles",
+      "reversed": true,
+      "keywordsText": "attachment, clutching, fear of letting go, compulsion",
+      "fortuneText": "If you keep being swayed into giving things away, hold firm to your share and your boundaries today."
+    },
+    {
+      "cardId": 26,
+      "cardName": "Five of Pentacles",
+      "name": "Five of Pentacles",
+      "reversed": false,
+      "keywordsText": "hardship, needing help, scarcity, nearby support",
+      "fortuneText": "Practical life feels hard today. There may be somewhere nearby to turn for help that you have overlooked."
+    },
+    {
+      "cardId": 26,
+      "cardName": "Five of Pentacles",
+      "name": "Five of Pentacles",
+      "reversed": true,
+      "keywordsText": "hardship, needing help, scarcity, nearby support",
+      "fortuneText": "Even if there is no one to lean on and you feel lost, keep walking on your own feet today instead of giving up."
+    },
+    {
+      "cardId": 27,
+      "cardName": "Six of Pentacles",
+      "name": "Six of Pentacles",
+      "reversed": false,
+      "keywordsText": "sharing, scales, balance",
+      "fortuneText": "You give and receive with a clear basis, sharing in balance rather than giving everything away."
+    },
+    {
+      "cardId": 27,
+      "cardName": "Six of Pentacles",
+      "name": "Six of Pentacles",
+      "reversed": true,
+      "keywordsText": "sharing, scales, balance",
+      "fortuneText": "If you are giving indiscriminately or clutching everything, weigh things up and establish a basis for sharing today."
+    },
+    {
+      "cardId": 28,
+      "cardName": "Seven of Pentacles",
+      "name": "Seven of Pentacles",
+      "reversed": false,
+      "keywordsText": "patience, harvest, many successes, waiting",
+      "fortuneText": "What you have tended is ripening. This is a good time to wait without rushing it."
+    },
+    {
+      "cardId": 28,
+      "cardName": "Seven of Pentacles",
+      "name": "Seven of Pentacles",
+      "reversed": true,
+      "keywordsText": "patience, harvest, many successes, waiting",
+      "fortuneText": "If you are hurrying the outcome, trust what has accumulated and give it another moment today."
+    },
+    {
+      "cardId": 29,
+      "cardName": "Eight of Pentacles",
+      "name": "Eight of Pentacles",
+      "reversed": false,
+      "keywordsText": "consistency, diligence",
+      "fortuneText": "Quietly practicing and refining the same work, you build skill and results over time."
+    },
+    {
+      "cardId": 29,
+      "cardName": "Eight of Pentacles",
+      "name": "Eight of Pentacles",
+      "reversed": true,
+      "keywordsText": "consistency, diligence",
+      "fortuneText": "If you are only looking for shortcuts or one big break, return to diligent repetition today."
+    },
+    {
+      "cardId": 30,
+      "cardName": "Nine of Pentacles",
+      "name": "Nine of Pentacles",
+      "reversed": false,
+      "keywordsText": "abundance, the fruits of effort",
+      "fortuneText": "This is a good time to enjoy the abundance and results you have built, at your leisure."
+    },
+    {
+      "cardId": 30,
+      "cardName": "Nine of Pentacles",
+      "name": "Nine of Pentacles",
+      "reversed": true,
+      "keywordsText": "abundance, the fruits of effort",
+      "fortuneText": "If enough still feels like too little, recognize and enjoy what your efforts have already produced today."
+    },
+    {
+      "cardId": 31,
+      "cardName": "Ten of Pentacles",
+      "name": "Ten of Pentacles",
+      "reversed": false,
+      "keywordsText": "abundance, parties, plenty, stability",
+      "fortuneText": "Plenty and stability are firmly established in daily life."
+    },
+    {
+      "cardId": 31,
+      "cardName": "Ten of Pentacles",
+      "name": "Ten of Pentacles",
+      "reversed": true,
+      "keywordsText": "abundance, parties, plenty, stability",
+      "fortuneText": "If you cannot see the foundations you have, take stock of the abundance and stability around you today."
+    },
+    {
+      "cardId": 32,
+      "cardName": "Page of Pentacles",
+      "name": "Page of Pentacles",
+      "reversed": false,
+      "keywordsText": "learning, small joys",
+      "fortuneText": "Learning and small joys shine in the things around you."
+    },
+    {
+      "cardId": 32,
+      "cardName": "Page of Pentacles",
+      "name": "Page of Pentacles",
+      "reversed": true,
+      "keywordsText": "learning, small joys",
+      "fortuneText": "If you have been brushing off small pleasures, enjoy learning about the one thing in your hands today."
+    },
+    {
+      "cardId": 33,
+      "cardName": "Knight of Pentacles",
+      "name": "Knight of Pentacles",
+      "reversed": false,
+      "keywordsText": "quiet persistence, consistency, diligence",
+      "fortuneText": "Though progress is slow, quiet and diligent effort builds something real, piece by piece."
+    },
+    {
+      "cardId": 33,
+      "cardName": "Knight of Pentacles",
+      "name": "Knight of Pentacles",
+      "reversed": true,
+      "keywordsText": "quiet persistence, consistency, diligence",
+      "fortuneText": "If you are only chasing visible speed, keep steadily at the same work today."
+    },
+    {
+      "cardId": 34,
+      "cardName": "Queen of Pentacles",
+      "name": "Queen of Pentacles",
+      "reversed": false,
+      "keywordsText": "abundance, wealth, happiness, practicality",
+      "fortuneText": "You tend to abundance and happiness in practical ways, enjoying them comfortably."
+    },
+    {
+      "cardId": 34,
+      "cardName": "Queen of Pentacles",
+      "name": "Queen of Pentacles",
+      "reversed": true,
+      "keywordsText": "abundance, wealth, happiness, practicality",
+      "fortuneText": "If you have only been storing things up, put them into a form you can use in everyday life today."
+    },
+    {
+      "cardId": 35,
+      "cardName": "King of Pentacles",
+      "name": "King of Pentacles",
+      "reversed": false,
+      "keywordsText": "stability, abundance, dependability, ease",
+      "fortuneText": "Dependable stability and abundance settle into place, strengthening your foundations."
+    },
+    {
+      "cardId": 35,
+      "cardName": "King of Pentacles",
+      "name": "King of Pentacles",
+      "reversed": true,
+      "keywordsText": "stability, abundance, dependability, ease",
+      "fortuneText": "If your foundations are shaky, calmly tend to your resources and build a solid base today."
+    },
+    {
+      "cardId": 36,
+      "cardName": "Ace of Wands",
+      "name": "Ace of Wands",
+      "reversed": false,
+      "keywordsText": "passion, strength, motivation, a beginning",
+      "fortuneText": "Fresh passion comes into your hands, bringing the urge to start something."
+    },
+    {
+      "cardId": 36,
+      "cardName": "Ace of Wands",
+      "name": "Ace of Wands",
+      "reversed": true,
+      "keywordsText": "passion, strength, motivation, a beginning",
+      "fortuneText": "If you are only waiting for motivation, kindle one small interest today."
+    },
+    {
+      "cardId": 37,
+      "cardName": "Two of Wands",
+      "name": "Two of Wands",
+      "reversed": false,
+      "keywordsText": "achievement, exploration, expansion, planning",
+      "fortuneText": "From what you have already achieved, you look toward more distant possibilities and a new arena."
+    },
+    {
+      "cardId": 37,
+      "cardName": "Two of Wands",
+      "name": "Two of Wands",
+      "reversed": true,
+      "keywordsText": "achievement, exploration, expansion, planning",
+      "fortuneText": "If you are staying within familiar achievements, explore new ground beyond them today."
+    },
+    {
+      "cardId": 38,
+      "cardName": "Three of Wands",
+      "name": "Three of Wands",
+      "reversed": false,
+      "keywordsText": "achievement, expansion, prospects",
+      "fortuneText": "Work that has reached outward is beginning to show visible achievement."
+    },
+    {
+      "cardId": 38,
+      "cardName": "Three of Wands",
+      "name": "Three of Wands",
+      "reversed": true,
+      "keywordsText": "achievement, expansion, prospects",
+      "fortuneText": "If you feel you have achieved nothing, notice what has already extended outward and where it is heading today."
+    },
+    {
+      "cardId": 39,
+      "cardName": "Four of Wands",
+      "name": "Four of Wands",
+      "reversed": false,
+      "keywordsText": "celebration, good results, stability, achievement",
+      "fortuneText": "A good result has arrived. Let yourself celebrate and enjoy it fully."
+    },
+    {
+      "cardId": 39,
+      "cardName": "Four of Wands",
+      "name": "Four of Wands",
+      "reversed": true,
+      "keywordsText": "celebration, good results, stability, achievement",
+      "fortuneText": "If you passed over something good, give yourself room today to enjoy what deserves celebration."
+    },
+    {
+      "cardId": 40,
+      "cardName": "Five of Wands",
+      "name": "Five of Wands",
+      "reversed": false,
+      "keywordsText": "competition, lively debate, argument, opposition",
+      "fortuneText": "Friction with people or circumstances can lead to heated exchanges."
+    },
+    {
+      "cardId": 40,
+      "cardName": "Five of Wands",
+      "name": "Five of Wands",
+      "reversed": true,
+      "keywordsText": "competition, lively debate, argument, opposition",
+      "fortuneText": "If you are avoiding even necessary clashes, take the courage to join healthy competition today."
+    },
+    {
+      "cardId": 41,
+      "cardName": "Six of Wands",
+      "name": "Six of Wands",
+      "reversed": false,
+      "keywordsText": "victory, achievement, recognition",
+      "fortuneText": "Your victory is visible, and the achievement receives proper recognition."
+    },
+    {
+      "cardId": 41,
+      "cardName": "Six of Wands",
+      "name": "Six of Wands",
+      "reversed": true,
+      "keywordsText": "victory, achievement, recognition",
+      "fortuneText": "If you are belittling your own win, acknowledge it clearly and move forward today."
+    },
+    {
+      "cardId": 42,
+      "cardName": "Seven of Wands",
+      "name": "Seven of Wands",
+      "reversed": false,
+      "keywordsText": "resistance, defense, conviction, standing",
+      "fortuneText": "Even with opposition and pushback, you defend your position and hold on."
+    },
+    {
+      "cardId": 42,
+      "cardName": "Seven of Wands",
+      "name": "Seven of Wands",
+      "reversed": true,
+      "keywordsText": "resistance, defense, conviction, standing",
+      "fortuneText": "If pressure is pushing you back, establish your position and hold it as long as needed today."
+    },
+    {
+      "cardId": 43,
+      "cardName": "Eight of Wands",
+      "name": "Eight of Wands",
+      "reversed": false,
+      "keywordsText": "momentum, speed, flow",
+      "fortuneText": "Energy gathers in one direction, and things move forward quickly."
+    },
+    {
+      "cardId": 43,
+      "cardName": "Eight of Wands",
+      "name": "Eight of Wands",
+      "reversed": true,
+      "keywordsText": "momentum, speed, flow",
+      "fortuneText": "If things have stopped flowing, spend less time thinking and pick up the pace today."
+    },
+    {
+      "cardId": 44,
+      "cardName": "Nine of Wands",
+      "name": "Nine of Wands",
+      "reversed": false,
+      "keywordsText": "vigilance, holding your ground, defense",
+      "fortuneText": "Even under outside pressure, you establish a defense and hold your position to the end."
+    },
+    {
+      "cardId": 44,
+      "cardName": "Nine of Wands",
+      "name": "Nine of Wands",
+      "reversed": true,
+      "keywordsText": "vigilance, holding your ground, defense",
+      "fortuneText": "If broken boundaries have left you pushed back, draw the line you need to protect again today."
+    },
+    {
+      "cardId": 45,
+      "cardName": "Ten of Wands",
+      "name": "Ten of Wands",
+      "reversed": false,
+      "keywordsText": "toil, burden, pressure",
+      "fortuneText": "You are carrying a great deal, and the strain and pressure feel heavy."
+    },
+    {
+      "cardId": 45,
+      "cardName": "Ten of Wands",
+      "name": "Ten of Wands",
+      "reversed": true,
+      "keywordsText": "toil, burden, pressure",
+      "fortuneText": "If you are pretending the burden is not there, acknowledge its weight and carry it in smaller loads today."
+    },
+    {
+      "cardId": 46,
+      "cardName": "Page of Wands",
+      "name": "Page of Wands",
+      "reversed": false,
+      "keywordsText": "curiosity, exploration",
+      "fortuneText": "Curiosity wakes up, making you want to explore something new."
+    },
+    {
+      "cardId": 46,
+      "cardName": "Page of Wands",
+      "name": "Page of Wands",
+      "reversed": true,
+      "keywordsText": "curiosity, exploration",
+      "fortuneText": "If you are holding only to the familiar, follow one fresh curiosity today, even awkwardly."
+    },
+    {
+      "cardId": 47,
+      "cardName": "Knight of Wands",
+      "name": "Knight of Wands",
+      "reversed": false,
+      "keywordsText": "adventure, passion, charging ahead, challenge",
+      "fortuneText": "Adventure and passion take the lead, making you want to charge straight ahead."
+    },
+    {
+      "cardId": 47,
+      "cardName": "Knight of Wands",
+      "name": "Knight of Wands",
+      "reversed": true,
+      "keywordsText": "adventure, passion, charging ahead, challenge",
+      "fortuneText": "If you have stopped at calculating everything, put your passion behind one bold move today."
+    },
+    {
+      "cardId": 48,
+      "cardName": "Queen of Wands",
+      "name": "Queen of Wands",
+      "reversed": false,
+      "keywordsText": "assurance, confidence, allure",
+      "fortuneText": "Assurance, confidence, and an attractive presence come through naturally."
+    },
+    {
+      "cardId": 48,
+      "cardName": "Queen of Wands",
+      "name": "Queen of Wands",
+      "reversed": true,
+      "keywordsText": "assurance, confidence, allure",
+      "fortuneText": "If you have been hiding yourself, show your confidence and stand tall today."
+    },
+    {
+      "cardId": 49,
+      "cardName": "King of Wands",
+      "name": "King of Wands",
+      "reversed": false,
+      "keywordsText": "self-belief, charisma, leadership",
+      "fortuneText": "Belief in yourself extends outward as charisma and leadership."
+    },
+    {
+      "cardId": 49,
+      "cardName": "King of Wands",
+      "name": "King of Wands",
+      "reversed": true,
+      "keywordsText": "self-belief, charisma, leadership",
+      "fortuneText": "If you lack confidence in leading, choose a direction, take responsibility, and step forward today."
+    },
+    {
+      "cardId": 50,
+      "cardName": "Ace of Cups",
+      "name": "Ace of Cups",
+      "reversed": false,
+      "keywordsText": "emotion, the heart, natural flow, fullness",
+      "fortuneText": "Your heart opens, and things move as naturally as flowing water."
+    },
+    {
+      "cardId": 50,
+      "cardName": "Ace of Cups",
+      "name": "Ace of Cups",
+      "reversed": true,
+      "keywordsText": "emotion, the heart, natural flow, fullness",
+      "fortuneText": "If forcing things is closing off your feelings, open your heart and accept the flow today."
+    },
+    {
+      "cardId": 51,
+      "cardName": "Two of Cups",
+      "name": "Two of Cups",
+      "reversed": false,
+      "keywordsText": "connection, a toast, sharing, harmony",
+      "fortuneText": "Like two cups raised together, your feelings meet and you share with pleasure."
+    },
+    {
+      "cardId": 51,
+      "cardName": "Two of Cups",
+      "name": "Two of Cups",
+      "reversed": true,
+      "keywordsText": "connection, a toast, sharing, harmony",
+      "fortuneText": "If you have kept your feelings to yourself, offer them today and find a point of connection."
+    },
+    {
+      "cardId": 52,
+      "cardName": "Three of Cups",
+      "name": "Three of Cups",
+      "reversed": false,
+      "keywordsText": "celebration, friendship, pleasure, sharing",
+      "fortuneText": "Good feelings spread between people, with celebration and pleasure passing back and forth."
+    },
+    {
+      "cardId": 52,
+      "cardName": "Three of Cups",
+      "name": "Three of Cups",
+      "reversed": true,
+      "keywordsText": "celebration, friendship, pleasure, sharing",
+      "fortuneText": "If you are letting joyful moments pass alone, join others and share them today."
+    },
+    {
+      "cardId": 53,
+      "cardName": "Four of Cups",
+      "name": "Four of Cups",
+      "reversed": false,
+      "keywordsText": "stagnation, boredom, weariness, an unseen opportunity",
+      "fortuneText": "Your feelings are dull and weary, making it easy to miss an opportunity being offered."
+    },
+    {
+      "cardId": 53,
+      "cardName": "Four of Cups",
+      "name": "Four of Cups",
+      "reversed": true,
+      "keywordsText": "stagnation, boredom, weariness, an unseen opportunity",
+      "fortuneText": "If chasing fresh stimulation keeps pulling you from one thing to another, settle down and focus on what you have today, even if it feels boring."
+    },
+    {
+      "cardId": 54,
+      "cardName": "Five of Cups",
+      "name": "Five of Cups",
+      "reversed": false,
+      "keywordsText": "disappointment, frustration, lost motivation, what remains",
+      "fortuneText": "Your attention is caught by the fallen cups, making it easy to miss what remains."
+    },
+    {
+      "cardId": 54,
+      "cardName": "Five of Cups",
+      "name": "Five of Cups",
+      "reversed": true,
+      "keywordsText": "disappointment, frustration, lost motivation, what remains",
+      "fortuneText": "If you are pretending to be fine, let yourself feel disappointed and acknowledge the fallen cups first."
+    },
+    {
+      "cardId": 55,
+      "cardName": "Six of Cups",
+      "name": "Six of Cups",
+      "reversed": false,
+      "keywordsText": "giving, memories, warmth, innocence",
+      "fortuneText": "Affection flows naturally into small acts of giving."
+    },
+    {
+      "cardId": 55,
+      "cardName": "Six of Cups",
+      "name": "Six of Cups",
+      "reversed": true,
+      "keywordsText": "giving, memories, warmth, innocence",
+      "fortuneText": "If your heart has grown dry and calculating, bring back warmth through a small act of generosity today."
+    },
+    {
+      "cardId": 56,
+      "cardName": "Seven of Cups",
+      "name": "Seven of Cups",
+      "reversed": false,
+      "keywordsText": "imagination, many possibilities, fantasy, choice",
+      "fortuneText": "With so many ideas and possibilities, your heart can easily pull in several directions."
+    },
+    {
+      "cardId": 56,
+      "cardName": "Seven of Cups",
+      "name": "Seven of Cups",
+      "reversed": true,
+      "keywordsText": "imagination, many possibilities, fantasy, choice",
+      "fortuneText": "If you have closed off even the possibilities, lay them out today and choose one."
+    },
+    {
+      "cardId": 57,
+      "cardName": "Eight of Cups",
+      "name": "Eight of Cups",
+      "reversed": false,
+      "keywordsText": "leaving, letting go of attachment, a deeper longing",
+      "fortuneText": "Even if something remains, it is time to withdraw your heart and leave in search of something deeper."
+    },
+    {
+      "cardId": 57,
+      "cardName": "Eight of Cups",
+      "name": "Eight of Cups",
+      "reversed": true,
+      "keywordsText": "leaving, letting go of attachment, a deeper longing",
+      "fortuneText": "If lingering attachment is keeping you there, acknowledge what remains unfulfilled and leave today."
+    },
+    {
+      "cardId": 58,
+      "cardName": "Nine of Cups",
+      "name": "Nine of Cups",
+      "reversed": false,
+      "keywordsText": "satisfaction, achievement",
+      "fortuneText": "What you hoped for has been fulfilled, bringing satisfaction and a sense of achievement."
+    },
+    {
+      "cardId": 58,
+      "cardName": "Nine of Cups",
+      "name": "Nine of Cups",
+      "reversed": true,
+      "keywordsText": "satisfaction, achievement",
+      "fortuneText": "If you still feel short of something despite what you have, count what you have achieved and let yourself be satisfied today."
+    },
+    {
+      "cardId": 59,
+      "cardName": "Ten of Cups",
+      "name": "Ten of Cups",
+      "reversed": false,
+      "keywordsText": "success, happiness, family, everyday happiness",
+      "fortuneText": "Happiness fills your everyday life with family and the people close to you."
+    },
+    {
+      "cardId": 59,
+      "cardName": "Ten of Cups",
+      "name": "Ten of Cups",
+      "reversed": true,
+      "keywordsText": "success, happiness, family, everyday happiness",
+      "fortuneText": "If you only look far away for happiness, notice the happiness in close relationships and everyday life today."
+    },
+    {
+      "cardId": 60,
+      "cardName": "Page of Cups",
+      "name": "Page of Cups",
+      "reversed": false,
+      "keywordsText": "sensitivity, new feelings, fantasy, emotional impulses",
+      "fortuneText": "New feelings and sensitivity bloom like a daydream, gently stirring your heart."
+    },
+    {
+      "cardId": 60,
+      "cardName": "Page of Cups",
+      "name": "Page of Cups",
+      "reversed": true,
+      "keywordsText": "sensitivity, new feelings, fantasy, emotional impulses",
+      "fortuneText": "If you have been stifling your feelings, notice what is coming up today, even if it is awkward or impulsive."
+    },
+    {
+      "cardId": 61,
+      "cardName": "Knight of Cups",
+      "name": "Knight of Cups",
+      "reversed": false,
+      "keywordsText": "romance, daydreams",
+      "fortuneText": "Romance and daydreams lead the way, stirring your feelings gently."
+    },
+    {
+      "cardId": 61,
+      "cardName": "Knight of Cups",
+      "name": "Knight of Cups",
+      "reversed": true,
+      "keywordsText": "romance, daydreams",
+      "fortuneText": "If calculation has left your heart dry, carry some romance into action today, even if it spills over a little."
+    },
+    {
+      "cardId": 62,
+      "cardName": "Queen of Cups",
+      "name": "Queen of Cups",
+      "reversed": false,
+      "keywordsText": "empathy, sensitivity",
+      "fortuneText": "Empathy and sensitivity help you understand feelings with gentleness."
+    },
+    {
+      "cardId": 62,
+      "cardName": "Queen of Cups",
+      "name": "Queen of Cups",
+      "reversed": true,
+      "keywordsText": "empathy, sensitivity",
+      "fortuneText": "If you have been analyzing instead of feeling, open your sensitivity and empathize today."
+    },
+    {
+      "cardId": 63,
+      "cardName": "King of Cups",
+      "name": "King of Cups",
+      "reversed": false,
+      "keywordsText": "emotional steadiness, balance, acceptance",
+      "fortuneText": "You manage shifting emotions well, finding emotional steadiness and balance."
+    },
+    {
+      "cardId": 63,
+      "cardName": "King of Cups",
+      "name": "King of Cups",
+      "reversed": true,
+      "keywordsText": "emotional steadiness, balance, acceptance",
+      "fortuneText": "If turbulent feelings have unsettled you, regain balance today by managing them without suppressing them."
+    },
+    {
+      "cardId": 64,
+      "cardName": "Ace of Swords",
+      "name": "Ace of Swords",
+      "reversed": false,
+      "keywordsText": "intellect, intuition, clear thinking, clarity",
+      "fortuneText": "Your mind clears, and the essential point stands out as sharply as a blade."
+    },
+    {
+      "cardId": 64,
+      "cardName": "Ace of Swords",
+      "name": "Ace of Swords",
+      "reversed": true,
+      "keywordsText": "intellect, intuition, clear thinking, clarity",
+      "fortuneText": "If your judgement is clouded, bring intuition and reason to bear and cut through to one essential point today."
+    },
+    {
+      "cardId": 65,
+      "cardName": "Two of Swords",
+      "name": "Two of Swords",
+      "reversed": false,
+      "keywordsText": "defense against outside influences, inward focus, reflection, balance",
+      "fortuneText": "Shutting out outside noise, you focus on inner balance."
+    },
+    {
+      "cardId": 65,
+      "cardName": "Two of Swords",
+      "name": "Two of Swords",
+      "reversed": true,
+      "keywordsText": "defense against outside influences, inward focus, reflection, balance",
+      "fortuneText": "If outside voices are sweeping you along, turn your attention inward and reflect today."
+    },
+    {
+      "cardId": 66,
+      "cardName": "Three of Swords",
+      "name": "Three of Swords",
+      "reversed": false,
+      "keywordsText": "sorrow, acknowledgement, inner growth",
+      "fortuneText": "Acknowledging a sorrow that pierces the heart, instead of avoiding it, brings greater maturity."
+    },
+    {
+      "cardId": 66,
+      "cardName": "Three of Swords",
+      "name": "Three of Swords",
+      "reversed": true,
+      "keywordsText": "sorrow, acknowledgement, inner growth",
+      "fortuneText": "If you have been covering up pain, acknowledge the sorrow first today."
+    },
+    {
+      "cardId": 67,
+      "cardName": "Four of Swords",
+      "name": "Four of Swords",
+      "reversed": false,
+      "keywordsText": "rest, recovery, mental rest, a pause",
+      "fortuneText": "Busy thoughts pause for a while, leaving your mind lighter."
+    },
+    {
+      "cardId": 67,
+      "cardName": "Four of Swords",
+      "name": "Four of Swords",
+      "reversed": true,
+      "keywordsText": "rest, recovery, mental rest, a pause",
+      "fortuneText": "If you are overheating from the belief that more thinking will solve it, stop judging and put recovery first today."
+    },
+    {
+      "cardId": 68,
+      "cardName": "Five of Swords",
+      "name": "Five of Swords",
+      "reversed": false,
+      "keywordsText": "conflict, attachment, selfishness, loss",
+      "fortuneText": "Trying to force a victory can cost you relationships or trust."
+    },
+    {
+      "cardId": 68,
+      "cardName": "Five of Swords",
+      "name": "Five of Swords",
+      "reversed": true,
+      "keywordsText": "conflict, attachment, selfishness, loss",
+      "fortuneText": "If you only yield and avoid situations where you need to stand up for yourself, claim your share today in a fight you are entitled to win."
+    },
+    {
+      "cardId": 69,
+      "cardName": "Six of Swords",
+      "name": "Six of Swords",
+      "reversed": false,
+      "keywordsText": "escape, movement, transition",
+      "fortuneText": "You quietly leave a difficult place and move toward calmer conditions."
+    },
+    {
+      "cardId": 69,
+      "cardName": "Six of Swords",
+      "name": "Six of Swords",
+      "reversed": true,
+      "keywordsText": "escape, movement, transition",
+      "fortuneText": "If you are staying somewhere you need to leave, choose a way out today, even if it looks like running away."
+    },
+    {
+      "cardId": 70,
+      "cardName": "Seven of Swords",
+      "name": "Seven of Swords",
+      "reversed": false,
+      "keywordsText": "strategy, an incomplete plan, careless action",
+      "fortuneText": "You have a strategy, but gaps in the plan make it easy to leave things behind."
+    },
+    {
+      "cardId": 70,
+      "cardName": "Seven of Swords",
+      "name": "Seven of Swords",
+      "reversed": true,
+      "keywordsText": "strategy, an incomplete plan, careless action",
+      "fortuneText": "If you are waiting for a perfect plan, do what you can today, even with an imperfect one."
+    },
+    {
+      "cardId": 71,
+      "cardName": "Eight of Swords",
+      "name": "Eight of Swords",
+      "reversed": false,
+      "keywordsText": "confinement, restriction, self-imposed limits, caution",
+      "fortuneText": "You feel trapped and frustrated, but a way out is actually open."
+    },
+    {
+      "cardId": 71,
+      "cardName": "Eight of Swords",
+      "name": "Eight of Swords",
+      "reversed": true,
+      "keywordsText": "confinement, restriction, self-imposed limits, caution",
+      "fortuneText": "If you are charging ahead or struggling to break free, hold yourself back and pause cautiously today."
+    },
+    {
+      "cardId": 72,
+      "cardName": "Nine of Swords",
+      "name": "Nine of Swords",
+      "reversed": false,
+      "keywordsText": "stress, worries, insomnia",
+      "fortuneText": "Worries and thoughts continue into the night, easily weighing on your heart."
+    },
+    {
+      "cardId": 72,
+      "cardName": "Nine of Swords",
+      "name": "Nine of Swords",
+      "reversed": true,
+      "keywordsText": "stress, worries, insomnia",
+      "fortuneText": "If avoiding your worries has made them grow, bring out what is keeping you awake, one thing at a time today."
+    },
+    {
+      "cardId": 73,
+      "cardName": "Ten of Swords",
+      "name": "Ten of Swords",
+      "reversed": false,
+      "keywordsText": "pressure, stopping, stillness, transition, a fresh start",
+      "fortuneText": "Pressure reaches its limit and stops; a quiet transition begins in that stillness."
+    },
+    {
+      "cardId": 73,
+      "cardName": "Ten of Swords",
+      "name": "Ten of Swords",
+      "reversed": true,
+      "keywordsText": "pressure, stopping, stillness, transition, a fresh start",
+      "fortuneText": "If you are holding onto something that has ended, acknowledge the ending and move toward a fresh start today."
+    },
+    {
+      "cardId": 74,
+      "cardName": "Page of Swords",
+      "name": "Page of Swords",
+      "reversed": false,
+      "keywordsText": "curiosity, vigilance, inquiry",
+      "fortuneText": "Curiosity and vigilance come alive, making you want to understand the situation better."
+    },
+    {
+      "cardId": 74,
+      "cardName": "Page of Swords",
+      "name": "Page of Swords",
+      "reversed": true,
+      "keywordsText": "curiosity, vigilance, inquiry",
+      "fortuneText": "If you have simply been accepting things, take a step back to question and examine them today."
+    },
+    {
+      "cardId": 75,
+      "cardName": "Knight of Swords",
+      "name": "Knight of Swords",
+      "reversed": false,
+      "keywordsText": "decisiveness, drive",
+      "fortuneText": "Once your judgement is formed, you decide at once and push ahead quickly."
+    },
+    {
+      "cardId": 75,
+      "cardName": "Knight of Swords",
+      "name": "Knight of Swords",
+      "reversed": true,
+      "keywordsText": "decisiveness, drive",
+      "fortuneText": "If you keep weighing things up, make a decision and press forward today."
+    },
+    {
+      "cardId": 76,
+      "cardName": "Queen of Swords",
+      "name": "Queen of Swords",
+      "reversed": false,
+      "keywordsText": "mental strength, steadiness",
+      "fortuneText": "With a steady mind, you hold clearly to your own standards."
+    },
+    {
+      "cardId": 76,
+      "cardName": "Queen of Swords",
+      "name": "Queen of Swords",
+      "reversed": true,
+      "keywordsText": "mental strength, steadiness",
+      "fortuneText": "If wavering feelings have blurred your standards, stand calmly and firmly today."
+    },
+    {
+      "cardId": 77,
+      "cardName": "King of Swords",
+      "name": "King of Swords",
+      "reversed": false,
+      "keywordsText": "reason, intellect, fair judgement, control",
+      "fortuneText": "Reason and intellect guide fair decisions, and you see the whole situation clearly enough to manage it."
+    },
+    {
+      "cardId": 77,
+      "cardName": "King of Swords",
+      "name": "King of Swords",
+      "reversed": true,
+      "keywordsText": "reason, intellect, fair judgement, control",
+      "fortuneText": "If emotion or the mood around you has clouded your judgement, use reason, take a broad view, and decide today."
+    }
+  ]
+}

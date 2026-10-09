@@ -55,12 +55,12 @@ class WidgetHostTest {
                     views.add(view)
                 }
             }
-            waitForImages(views, "별 (The Star), 역방향")
+            waitForImages(views, description(17, reversed = true))
             runBlocking {
                 app.repository.selectManually(2, false)
                 app.repository.selectManually(21, false)
             }
-            waitForImages(views, "세계 (The World), 정방향")
+            waitForImages(views, description(21, reversed = false))
         } finally {
             compose.runOnIdle {
                 views.forEach { (it.parent as? ViewGroup)?.removeView(it) }

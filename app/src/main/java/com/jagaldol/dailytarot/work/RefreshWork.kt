@@ -153,9 +153,12 @@ object RefreshScheduler {
         )
     }
 
-    fun startImport(context: Context) {
+    /** [restart] replaces a running import, which may have read notes under an older heading. */
+    fun startImport(context: Context, restart: Boolean = false) {
         WorkManager.getInstance(context).enqueueUniqueWork(
-            IMPORT, ExistingWorkPolicy.KEEP, OneTimeWorkRequestBuilder<LifebaseImportWorker>().build(),
+            IMPORT,
+            if (restart) ExistingWorkPolicy.REPLACE else ExistingWorkPolicy.KEEP,
+            OneTimeWorkRequestBuilder<LifebaseImportWorker>().build(),
         )
     }
 

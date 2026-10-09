@@ -29,6 +29,9 @@ private val widgetPromptAskedDayKey = stringPreferencesKey("widget_prompt_asked_
 private val dayStartKey = intPreferencesKey("day_start_minutes")
 private val autoDrawMinutesKey = intPreferencesKey("auto_draw_minutes")
 
+// The journal heading to read; absent means the Lifebase defaults. Kept across reconnects.
+private val journalHeadingKey = stringPreferencesKey("journal_heading")
+
 /** Midnight: a new day shows its own card (or a face-down one) right away. */
 const val DEFAULT_DAY_START_MINUTES = 0
 
@@ -66,6 +69,8 @@ data class AppSettings(
     val widgetPromptAskedDay: String? = null,
     val dayStartMinutes: Int = DEFAULT_DAY_START_MINUTES,
     val autoDrawMinutes: Int = DEFAULT_AUTO_DRAW_MINUTES,
+    /** A heading the user renamed in their journal; null reads the Lifebase defaults. */
+    val journalHeading: String? = null,
     val connection: LifebaseConnection? = null,
     val sync: SyncStatus = SyncStatus(),
 )
@@ -105,6 +110,7 @@ class SettingsStore(context: Context) : ReadingSettings {
             widgetPromptAskedDay = s[widgetPromptAskedDayKey],
             dayStartMinutes = s[dayStartKey] ?: DEFAULT_DAY_START_MINUTES,
             autoDrawMinutes = s[autoDrawMinutesKey] ?: DEFAULT_AUTO_DRAW_MINUTES,
+            journalHeading = s[journalHeadingKey],
             connection = c.toConnection(),
             sync = SyncStatus(
                 state = enumOrNull<SyncState>(c[syncStateKey]) ?: SyncState.NEVER,
@@ -150,6 +156,18 @@ class SettingsStore(context: Context) : ReadingSettings {
 
     suspend fun setAutoDrawMinutes(minutes: Int) {
         settings.edit { it[autoDrawMinutesKey] = minutes.coerceIn(0, 24 * 60 - 1) }
+    }
+
+    suspend fun journalHeading(): String? = settings.data.first()[journalHeadingKey]
+
+    /** Returns whether the heading changed; null goes back to the Lifebase defaults. */
+    suspend fun setJournalHeading(title: String?): Boolean {
+        var changed = false
+        settings.edit {
+            changed = it[journalHeadingKey] != title
+            if (title == null) it.remove(journalHeadingKey) else it[journalHeadingKey] = title
+        }
+        return changed
     }
 
     /** Clears the revealed mark of a deleted reading, so its replacement turns over again. */

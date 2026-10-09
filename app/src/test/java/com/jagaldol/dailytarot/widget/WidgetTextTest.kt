@@ -36,6 +36,23 @@ class WidgetTextTest {
     }
 
     @Test
+    fun latinWidthsNeverFallBelowNotoSerif() {
+        // Advance widths in em of NotoSerif-Regular.ttf (Android's serif family) for printable ASCII.
+        val measured = "!\"#\$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~".toList().zip(
+            listOf(0.333f, 0.408f, 0.559f, 0.559f, 0.896f, 0.742f, 0.22f, 0.346f, 0.346f, 0.5f, 0.559f, 0.25f, 0.31f, 0.25f, 0.288f, 0.559f, 0.559f, 0.559f, 0.559f, 0.559f, 0.559f, 0.559f, 0.559f, 0.559f, 0.559f, 0.286f, 0.286f, 0.559f, 0.559f, 0.559f, 0.5f, 0.921f, 0.705f, 0.654f, 0.614f, 0.727f, 0.623f, 0.59f, 0.714f, 0.793f, 0.367f, 0.357f, 0.7f, 0.623f, 0.938f, 0.763f, 0.742f, 0.604f, 0.742f, 0.656f, 0.544f, 0.613f, 0.717f, 0.675f, 1.047f, 0.66f, 0.625f, 0.592f, 0.36f, 0.288f, 0.36f, 0.559f, 0.459f, 0.577f, 0.563f, 0.614f, 0.492f, 0.614f, 0.535f, 0.369f, 0.538f, 0.635f, 0.32f, 0.3f, 0.585f, 0.31f, 0.945f, 0.645f, 0.577f, 0.614f, 0.614f, 0.471f, 0.451f, 0.352f, 0.635f, 0.579f, 0.862f, 0.578f, 0.565f, 0.511f, 0.428f, 0.559f, 0.428f, 0.559f),
+        )
+        for ((char, width) in measured) assertTrue("$char", glyphEms(char) >= width)
+    }
+
+    @Test
+    fun englishCaptionsFitLikeKoreanOnes() {
+        val english = "If you are worn out, ask less of yourself and take time to recover today."
+        assertTrue(planWidget(348f, 548f, english, 1f) is WidgetPlan.Stacked)
+        val tight = planWidget(160f, 200f, english, 1f)
+        assertTrue(tight is WidgetPlan.Stacked)
+    }
+
+    @Test
     fun everyCaptionThatIsShownFitsItsCell() {
         for (w in 100..400 step 20) for (h in 100..600 step 20) {
             when (val plan = planWidget(w.toFloat(), h.toFloat(), line, 1f)) {

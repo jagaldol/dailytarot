@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -46,17 +47,18 @@ import androidx.glance.text.TextStyle
 import com.jagaldol.dailytarot.MainActivity
 import com.jagaldol.dailytarot.R
 import com.jagaldol.dailytarot.TarotApplication
-import com.jagaldol.dailytarot.data.AppSettings
+import com.jagaldol.dailytarot.data.FortuneCatalog
 import com.jagaldol.dailytarot.data.CardImages
+import com.jagaldol.dailytarot.data.withAppLanguage
 import com.jagaldol.dailytarot.model.DailyReading
 import com.jagaldol.dailytarot.model.Day
 import com.jagaldol.dailytarot.model.Deck
-import com.jagaldol.dailytarot.model.weekdayKo
+import com.jagaldol.dailytarot.ui.cardDescription
 import com.jagaldol.dailytarot.ui.minutesLabel
+import com.jagaldol.dailytarot.ui.shortLabel
 import com.jagaldol.dailytarot.work.RefreshScheduler
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -82,29 +84,29 @@ class DailyTarotWidget : GlanceAppWidget() {
             null
         }
         val initialImage = initial?.reading to initial?.reading?.let { render(context, it) }
-        // What a face-down card waits for: the journal, the automatic draw, or the user.
-        val waitingFor: (AppSettings) -> String = { settings ->
-            when {
-                settings.connection != null -> context.getString(R.string.widget_waiting_lifebase)
-                settings.autoDraw -> context.getString(R.string.widget_auto_draw_at, minutesLabel(settings.autoDrawMinutes))
-                else -> context.getString(R.string.widget_draw_prompt)
-            }
-        }
-        val initialWaiting = waitingFor(app.settings.state.first())
-        val waitingFlow = app.settings.state.map(waitingFor)
-        val initialDraw = app.settings.connection() == null
-        val drawFlow = app.settings.state.map { it.connection == null }
+        val initialSettings = app.settings.state.first()
         provideContent {
+            // A language change recomposes in the language set now, including a per-app choice.
+            val language by app.languageChanges.collectAsState()
+            val localized = remember(language, context.resources.configuration) { context.withAppLanguage() }
             val view by app.repository.todayView.collectAsState(initial)
-            val waiting by waitingFlow.collectAsState(initialWaiting)
+            val settings by app.settings.state.collectAsState(initialSettings)
+            // What a face-down card waits for: the journal, the automatic draw, or the user.
+            val waiting = when {
+                settings.connection != null -> localized.getString(R.string.widget_waiting_lifebase)
+                settings.autoDraw -> localized.getString(
+                    R.string.widget_auto_draw_at, minutesLabel(localized.resources, settings.autoDrawMinutes),
+                )
+                else -> localized.getString(R.string.widget_draw_prompt)
+            }
             val reading = view?.reading
             val image by produceState(initialImage, reading) {
                 value = reading to reading?.let { render(context, it) }
             }
             val (shown, bitmap) = image
             // Only a standalone, face-down widget draws on tap; with Lifebase it just opens the app.
-            val drawOnTap by drawFlow.collectAsState(initialDraw)
-            WidgetBody(context, app, view?.day, shown, bitmap, waiting, drawOnTap && view?.awaitingDraw == true)
+            val drawOnTap = settings.connection == null && view?.awaitingDraw == true
+            WidgetBody(localized, view?.day, shown, bitmap, waiting, drawOnTap)
         }
     }
 
@@ -122,7 +124,6 @@ private val accent = ColorProvider(day = Color(0xFF8C6527), night = Color(0xFFDC
 @Composable
 private fun WidgetBody(
     context: Context,
-    app: TarotApplication,
     today: Day?,
     reading: DailyReading?,
     bitmap: Bitmap?,
@@ -148,16 +149,16 @@ private fun WidgetBody(
         val description: String
         val card: ImageProvider
         if (reading != null && bitmap != null) {
-            val nameKo = app.catalog.nameKo(reading.cardId)
+            val name = FortuneCatalog.load(context).name(reading.cardId)
             val orientation = context.getString(if (reading.reversed) R.string.reversed else R.string.upright)
-            description = "$nameKo (${Deck[reading.cardId].name}), $orientation"
-            label = "${shortDate(reading.day)}  ·  $nameKo $orientation"
+            description = "${cardDescription(reading.cardId, name)}, $orientation"
+            label = "${reading.day.shortLabel(context.resources)}  ·  $name $orientation"
             line = reading.headline ?: reading.keywords.joinToString(" · ").ifEmpty { null }
             card = ImageProvider(bitmap)
         } else {
             // No card for today yet: the face-down card and what is being waited for.
             description = context.getString(R.string.card_back)
-            label = today?.let(::shortDate).orEmpty()
+            label = today?.shortLabel(context.resources).orEmpty()
             line = waiting
             card = ImageProvider(R.drawable.card_back)
         }
@@ -255,11 +256,19 @@ internal fun captionHeight(style: CaptionStyle, fontScale: Float): Float =
 
 private const val SPACE_EMS = 0.3f
 
-// Hangul and CJK are full-width; Latin, digits and punctuation are roughly half.
-private fun glyphEms(char: Char): Float = when {
+// Hangul and CJK are full-width. Latin widths are the upper bound of each group in Noto Serif,
+// Android's serif font, so English captions are never underestimated (and so never cut).
+internal fun glyphEms(char: Char): Float = when {
     char.code in 0xAC00..0xD7A3 || char.code in 0x3130..0x318F || char.code in 0x4E00..0x9FFF -> 1f
     char == ' ' -> SPACE_EMS
-    else -> 0.6f
+    char in ",.'·‘’" -> 0.25f
+    char in ":;/\\j-li!()" -> 0.35f
+    char in "tJ[]If\"{}“”" -> 0.45f
+    char in "s_rc*?zegS–" -> 0.55f
+    char in "BRXVKAGUD&OQNH" -> 0.8f
+    char in "w%@MmW…" -> 1.05f
+    char.code < 0x7F -> 0.65f
+    else -> 1f
 }
 
 @Composable
@@ -301,8 +310,6 @@ private fun Caption(label: String, line: String?, center: Boolean, style: Captio
 
 private val OpenToday = ActionParameters.Key<Boolean>(MainActivity.EXTRA_OPEN_TODAY)
 private val Draw = ActionParameters.Key<Boolean>(MainActivity.EXTRA_DRAW)
-
-private fun shortDate(day: Day) = "${day.month}.${day.dayOfMonth} ${day.weekdayKo()}"
 
 /**
  * RemoteViews cannot opt into phrase-based line breaking, so Korean would wrap mid-word.

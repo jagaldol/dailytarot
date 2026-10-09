@@ -1,5 +1,6 @@
 package com.jagaldol.dailytarot.ui
 
+import android.content.res.Resources
 import android.net.Uri
 import android.provider.DocumentsContract
 import androidx.activity.compose.BackHandler
@@ -50,6 +51,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -60,6 +63,7 @@ import com.jagaldol.dailytarot.R
 import com.jagaldol.dailytarot.TarotApplication
 import com.jagaldol.dailytarot.data.AppSettings
 import com.jagaldol.dailytarot.data.BackupCodec
+import com.jagaldol.dailytarot.data.FortuneCatalog
 import com.jagaldol.dailytarot.data.TodayView
 import com.jagaldol.dailytarot.data.lifebase.LifebaseSync
 import com.jagaldol.dailytarot.model.Day
@@ -156,7 +160,7 @@ fun TarotApp(app: TarotApplication, openRequest: OpenRequest? = null, introKey: 
                 app.contentResolver.openOutputStream(uri, "wt")!!.use {
                     it.write(BackupCodec.encode(readings, System.currentTimeMillis()).toByteArray(Charsets.UTF_8))
                 }
-                app.getString(R.string.settings_exported, readings.size)
+                app.resources.getQuantityString(R.plurals.settings_exported, readings.size, readings.size)
             }.getOrElse { it.message }
         }
     }
@@ -167,7 +171,7 @@ fun TarotApp(app: TarotApplication, openRequest: OpenRequest? = null, introKey: 
                 val bytes = app.contentResolver.openInputStream(uri)!!.use { it.readBytes() }
                 require(bytes.size <= MAX_BACKUP_BYTES)
                 val added = repository.restore(BackupCodec.decode(String(bytes, Charsets.UTF_8)))
-                app.getString(R.string.settings_restored, added)
+                app.resources.getQuantityString(R.plurals.settings_restored, added, added)
             }.getOrElse { app.getString(R.string.settings_restore_failed) }
         }
     }
@@ -185,11 +189,13 @@ fun TarotApp(app: TarotApplication, openRequest: OpenRequest? = null, introKey: 
         Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background))
         return
     }
-    val nameKo: (Int) -> String = { app.catalog.nameKo(it) }
+    // The Activity always carries the current language; the cached Application may not.
+    val catalog = FortuneCatalog.load(LocalContext.current)
+    val cardName: (Int) -> String = { catalog.name(it) }
 
     // Asked after today's card has been turned over and read, never on launch: at most once per
     // card day while no widget exists, until "다시 보지 않기".
-    val todayState = todayUi(app, view, current, introDone)
+    val todayState = todayUi(FortuneCatalog.load(LocalContext.current), LocalResources.current, view, current, introDone)
     val widgetAsk = tab == Tab.TODAY && !picking && detailDay == null &&
         shouldAskForWidget(hasWidget, current, todayState)
     var widgetSheet by rememberSaveable { mutableStateOf(false) }
@@ -222,7 +228,7 @@ fun TarotApp(app: TarotApplication, openRequest: OpenRequest? = null, introKey: 
                         "picker" -> PickerScreen(
                             initialCardId = todayReading?.cardId,
                             initialReversed = todayReading?.reversed == true,
-                            nameKo = nameKo,
+                            cardName = cardName,
                             onConfirm = { cardId, reversed ->
                                 picking = false
                                 scope.launch {
@@ -239,8 +245,8 @@ fun TarotApp(app: TarotApplication, openRequest: OpenRequest? = null, introKey: 
                                 Box(Modifier.fillMaxSize())
                             } else {
                                 ReadingDetailScreen(
-                                    item, nameKo(item.cardId),
-                                    repository.defaultFortune(item.cardId, item.reversed),
+                                    item, cardName(item.cardId),
+                                    catalog.entry(item.cardId, item.reversed),
                                     onBack = { detailDay = null },
                                     // Imported records come back from the journal while linked.
                                     onDelete = if (current.connection != null && item.source == ReadingSource.LIFEBASE) null else {
@@ -257,7 +263,7 @@ fun TarotApp(app: TarotApplication, openRequest: OpenRequest? = null, introKey: 
                                 )
                             }
                         }
-                        Tab.HISTORY.name -> HistoryScreen(history, nameKo, onOpen = { detailDay = it.day.toString() })
+                        Tab.HISTORY.name -> HistoryScreen(history, cardName, onOpen = { detailDay = it.day.toString() })
                         Tab.SETTINGS.name -> SettingsScreen(
                             settings = current,
                             deviceZoneId = TimeZone.getDefault().id,
@@ -362,7 +368,8 @@ internal fun shouldAskForWidget(hasWidget: Boolean?, settings: AppSettings, toda
 private const val WIDGET_ASK_DELAY_MS = 1_600L
 
 private fun todayUi(
-    app: TarotApplication,
+    catalog: FortuneCatalog,
+    resources: Resources,
     view: TodayView?,
     settings: AppSettings,
     introDone: Boolean,
@@ -374,8 +381,8 @@ private fun todayUi(
     return TodayUi(
         day = view?.day,
         reading = reading,
-        nameKo = reading?.let { app.catalog.nameKo(it.cardId) },
-        defaultFortune = reading?.let { app.catalog.entry(it.cardId, it.reversed) },
+        name = reading?.let { catalog.name(it.cardId) },
+        defaultFortune = reading?.let { catalog.entry(it.cardId, it.reversed) },
         // Yesterday's card was already seen; only today's waits to be turned over by a tap.
         // Seen cards still start face-down on each launch and flip once the intro runs.
         revealed = revealed,
@@ -384,8 +391,8 @@ private fun todayUi(
         waitingForLifebase = connected && reading != null && !previous && reading.source != ReadingSource.LIFEBASE,
         showingPrevious = previous,
         awaitingDraw = view?.awaitingDraw == true,
-        dayStartLabel = minutesLabel(settings.dayStartMinutes),
-        autoDrawLabel = if (settings.autoDraw) minutesLabel(settings.autoDrawMinutes) else null,
+        dayStartLabel = minutesLabel(resources, settings.dayStartMinutes),
+        autoDrawLabel = if (settings.autoDraw) minutesLabel(resources, settings.autoDrawMinutes) else null,
     )
 }
 
@@ -441,6 +448,14 @@ private fun settingsActions(
             RefreshScheduler.reconcile(app)
         }
     },
+    setJournalHeading = { title ->
+        app.applicationScope.launch {
+            if (app.sync.setJournalHeading(title)) {
+                RefreshScheduler.refreshNow(app)
+                RefreshScheduler.startImport(app, restart = true)
+            }
+        }
+    },
     deleteAll = {
         app.applicationScope.launch {
             val linked = app.settings.connection() != null
@@ -450,7 +465,9 @@ private fun settingsActions(
             if (app.repository.observe(today).first() == null) app.settings.forgetRevealed(today.toString())
             app.repository.refreshToday()
             setMessage(
-                app.getString(if (linked) R.string.settings_deleted_local else R.string.settings_deleted_all, count),
+                app.resources.getQuantityString(
+                    if (linked) R.plurals.settings_deleted_local else R.plurals.settings_deleted_all, count, count,
+                ),
             )
         }
     },

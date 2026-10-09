@@ -27,23 +27,26 @@ def webp_size(path):
     raise ValueError(f"No dimensions: {path}")
 
 
-def check_catalog(repo):
+def check_catalog(repo, locale):
     deck = dict(
         (int(i), n) for i, n in re.findall(
             r'Card\((\d+), "([^"]+)"',
             (repo / "app/src/main/java/com/jagaldol/dailytarot/model/TarotDeck.kt").read_text(),
         )
     )
-    catalog = json.loads((repo / "app/src/main/assets/default_fortunes.ko.json").read_text(encoding="utf-8"))
+    path = repo / f"app/src/main/assets/default_fortunes.{locale}.json"
+    catalog = json.loads(path.read_text(encoding="utf-8"))
     entries = catalog["entries"]
     keys = {(e["cardId"], e["reversed"]) for e in entries}
-    if catalog["schemaVersion"] != 1 or len(entries) != 156 or len(keys) != 156:
-        raise ValueError("Catalog must hold 78 cards x 2 orientations")
+    if catalog["schemaVersion"] != 2 or catalog["locale"] != locale or len(entries) != 156 or len(keys) != 156:
+        raise ValueError(f"{path.name} must hold 78 cards x 2 orientations in {locale}")
     for e in entries:
         if deck.get(e["cardId"]) != e["cardName"]:
             raise ValueError(f"Catalog card {e['cardId']} does not match the deck")
-        if not e["fortuneText"].strip() or not e["keywordsText"].strip() or not e["nameKo"].strip():
+        if not e["fortuneText"].strip() or not e["keywordsText"].strip() or not e["name"].strip():
             raise ValueError(f"Empty text for {e['cardName']}")
+    if locale != "ko" and re.search("[\uac00-\ud7a3]", json.dumps(catalog, ensure_ascii=False)):
+        raise ValueError(f"{path.name} must not fall back to Korean text")
     if "/Users/" in json.dumps(catalog) or "Journal/" in json.dumps(catalog):
         raise ValueError("Catalog must not contain local paths or journal references")
     print(f"Fortune catalog verified: {len(entries)} entries, {catalog['catalogVersion']}")
@@ -51,7 +54,8 @@ def check_catalog(repo):
 
 def main():
     repo = Path(__file__).resolve().parents[1]
-    check_catalog(repo)
+    for locale in ("ko", "en"):
+        check_catalog(repo, locale)
     resources = repo / "app/src/main/res/drawable-nodpi"
     expected = {
         f"tarot_rws_{prefix}{index:02}.webp"

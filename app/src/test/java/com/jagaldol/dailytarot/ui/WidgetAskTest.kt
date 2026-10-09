@@ -10,7 +10,7 @@ class WidgetAskTest {
     private val today = Day(2026, 10, 8)
 
     private fun ui(revealed: Boolean = true, previous: Boolean = false) = TodayUi(
-        day = today, reading = previewReading(), nameKo = "컵 페이지", defaultFortune = null,
+        day = today, reading = previewReading(), name = "컵 페이지", defaultFortune = null,
         revealed = revealed, connected = false, waitingForLifebase = false,
         showingPrevious = previous, awaitingDraw = false, dayStartLabel = "", autoDrawLabel = null,
     )

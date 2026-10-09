@@ -13,6 +13,8 @@ import androidx.glance.ExperimentalGlanceApi
 import androidx.glance.appwidget.compose
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.jagaldol.dailytarot.data.FortuneCatalog
+import com.jagaldol.dailytarot.data.withAppLanguage
 import com.jagaldol.dailytarot.widget.DailyTarotWidget
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -39,7 +41,7 @@ class TarotWidgetTest {
 
     @Test
     fun cardFillsSmallWidgetsAndRoomierOnesAddOneLineOfFortune() = runBlocking {
-        val headline = app.catalog.entry(17, true).fortuneText
+        val headline = FortuneCatalog.load(context.withAppLanguage()).entry(17, true).fortuneText
         val sizes = mapOf(
             "small" to (DpSize(150.dp, 150.dp) to false),
             "tall" to (DpSize(170.dp, 380.dp) to true),
@@ -54,7 +56,7 @@ class TarotWidgetTest {
             instrumentation.runOnMainSync {
                 val view = remoteViews.apply(context, FrameLayout(context))
                 val image = descendants(view).filterIsInstance<ImageView>().first { it.contentDescription != null }
-                assertEquals("별 (The Star), 역방향", image.contentDescription)
+                assertEquals(description(17, reversed = true), image.contentDescription)
                 assertTrue(image.drawable != null)
                 val texts = descendants(view).filterIsInstance<TextView>().map { it.text.toString().replace("\u2060", "") }.toList()
                 assertEquals(name, showsFortune, headline in texts)

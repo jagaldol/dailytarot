@@ -34,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -44,9 +45,7 @@ import com.jagaldol.dailytarot.data.FortuneEntry
 import com.jagaldol.dailytarot.model.ContentStatus
 import com.jagaldol.dailytarot.model.DailyReading
 import com.jagaldol.dailytarot.model.Day
-import com.jagaldol.dailytarot.model.Deck
 import com.jagaldol.dailytarot.model.ReadingSource
-import com.jagaldol.dailytarot.model.longLabelKo
 import com.jagaldol.dailytarot.ui.theme.DailytarotTheme
 import com.jagaldol.dailytarot.ui.theme.gold
 
@@ -54,7 +53,8 @@ data class TodayUi(
     /** The calendar date today, which may differ from the shown card's date before the day start. */
     val day: Day?,
     val reading: DailyReading?,
-    val nameKo: String?,
+    /** The card name in the app language. */
+    val name: String?,
     val defaultFortune: FortuneEntry?,
     val revealed: Boolean,
     /** An already seen card waiting for its launch flip: no hint, no tap. */
@@ -92,7 +92,7 @@ fun TodayScreen(
     ) {
         Spacer(Modifier.height(20.dp))
         Text(
-            ui.day?.longLabelKo().orEmpty(),
+            ui.day?.longLabel(LocalResources.current).orEmpty(),
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.gold,
             modifier = Modifier.testTag("today-date"),
@@ -120,7 +120,7 @@ fun TodayScreen(
                 Glow(Modifier.matchParentSize().graphicsLayer { scaleX = 2.2f; scaleY = 1.45f })
                 val description = when {
                     reading != null && ui.revealed ->
-                        "${ui.nameKo} (${Deck[reading.cardId].name}), ${orientationLabel(reading.reversed)}"
+                        "${cardDescription(reading.cardId, ui.name.orEmpty())}, ${orientationLabel(reading.reversed)}"
                     reading != null -> stringResource(R.string.today_tap_to_reveal)
                     ui.connected -> stringResource(R.string.today_waiting_lifebase)
                     else -> stringResource(R.string.today_tap_to_draw)
@@ -169,7 +169,7 @@ fun TodayScreen(
                     }
                     ReadingText(
                         reading = reading,
-                        nameKo = ui.nameKo.orEmpty(),
+                        name = ui.name.orEmpty(),
                         defaultFortune = ui.defaultFortune,
                         waiting = ui.waitingForLifebase,
                         modifier = Modifier.testTag("today-reading"),

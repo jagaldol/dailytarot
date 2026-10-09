@@ -15,6 +15,7 @@ import com.jagaldol.dailytarot.model.Day
 import com.jagaldol.dailytarot.model.Deck
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.Locale
 import java.util.UUID
 
 class LifebaseSync(
@@ -61,6 +62,16 @@ class LifebaseSync(
         ConnectResult.Connected(connection)
     }
 
+    /**
+     * A new heading can match notes that were skipped before: forget the file fingerprints so
+     * the next checks read every note again.
+     */
+    suspend fun setJournalHeading(title: String?): Boolean {
+        if (!settings.setJournalHeading(title)) return false
+        settings.connection()?.let { settings.setFingerprints(it.id, emptyMap()) }
+        return true
+    }
+
     /** Imported readings stay; only the grant and the connection are removed. */
     suspend fun disconnect() = withContext(Dispatchers.IO) {
         val previous = settings.connection() ?: return@withContext
@@ -79,6 +90,7 @@ class LifebaseSync(
         val connection = settings.connection() ?: return@withContext SyncState.NEVER
         val today = repository.currentDay()
         val reader = reader(connection)
+        val titles = JournalTarotParser.titles(settings.journalHeading())
         val previous = settings.fingerprints()
         val seen = HashMap<String, String>()
         var status = SyncStatus(SyncState.WAITING, System.currentTimeMillis())
@@ -93,7 +105,7 @@ class LifebaseSync(
                         seen[day.toString()] = fingerprint
                         unchangedState(day) to null
                     }
-                    else -> importDay(reader.read(located), connection, day).also { (state, _) ->
+                    else -> importDay(reader.read(located), connection, day, titles).also { (state, _) ->
                         if (fingerprint != null && state != SyncState.ERROR) seen[day.toString()] = fingerprint
                     }
                 }
@@ -102,6 +114,8 @@ class LifebaseSync(
         } catch (_: SecurityException) {
             status = SyncStatus(SyncState.PERMISSION_LOST, System.currentTimeMillis())
         }
+        // A heading changed meanwhile: this run read with the old one, so it records nothing.
+        if (JournalTarotParser.titles(settings.journalHeading()) != titles) return@withContext status.state
         // Keep fingerprints for dates still inside the window; older ones are never skipped anyway.
         val window = (0 until Mode.FULL.days).map { today.minusDays(it).toString() }.toSet()
         settings.setFingerprints(connection.id, (previous + seen).filterKeys { it in window })
@@ -119,28 +133,35 @@ class LifebaseSync(
      */
     suspend fun importHistory(
         isStopped: () -> Boolean,
-        progress: suspend (monthsDone: Int, monthsTotal: Int, imported: Int, label: String) -> Unit,
+        /** [month] is `YYYY-MM`; the screen words it in the app language. */
+        progress: suspend (monthsDone: Int, monthsTotal: Int, imported: Int, month: String) -> Unit,
     ): Int = withContext(Dispatchers.IO) {
         val connection = settings.connection() ?: return@withContext 0
         val reader = reader(connection)
+        val titles = JournalTarotParser.titles(settings.journalHeading())
         val months = reader.months()
         var imported = 0
         for ((index, month) in months.withIndex()) {
             if (isStopped() || settings.connectionId() != connection.id) break
             for (day in reader.days(month.first, month.second)) {
                 if (isStopped()) break
-                if (importDay(reader.read(day), connection, day).first == SyncState.UPDATED) imported++
+                if (importDay(reader.read(day), connection, day, titles).first == SyncState.UPDATED) imported++
             }
-            progress(index + 1, months.size, imported, "${month.first}년 ${month.second}월")
+            progress(index + 1, months.size, imported, "%04d-%02d".format(Locale.ROOT, month.first, month.second))
         }
         imported
     }
 
-    private suspend fun importDay(read: JournalReader.Read, connection: LifebaseConnection, day: Day): Pair<SyncState, String?> =
+    private suspend fun importDay(
+        read: JournalReader.Read,
+        connection: LifebaseConnection,
+        day: Day,
+        titles: List<String>,
+    ): Pair<SyncState, String?> =
         when (read) {
             JournalReader.Read.Missing -> SyncState.WAITING to null
             is JournalReader.Read.Unreadable -> SyncState.ERROR to read.reason
-            is JournalReader.Read.Found -> when (val parsed = JournalTarotParser.parse(read.text, cardIds)) {
+            is JournalReader.Read.Found -> when (val parsed = JournalTarotParser.parse(read.text, cardIds, titles)) {
                 is JournalTarotParser.Parsed -> {
                     val result = repository.applyLifebase(day, parsed, read.relativePath, connection.id)
                     (if (result == ApplyResult.STALE) SyncState.WAITING else SyncState.UPDATED) to null

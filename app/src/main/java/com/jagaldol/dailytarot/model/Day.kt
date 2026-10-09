@@ -56,10 +56,3 @@ data class Day(val year: Int, val month: Int, val dayOfMonth: Int) : Comparable<
             Day(get(Calendar.YEAR), get(Calendar.MONTH) + 1, get(Calendar.DAY_OF_MONTH))
     }
 }
-
-private val koreanWeekdays = listOf("월", "화", "수", "목", "금", "토", "일")
-
-fun Day.weekdayKo(): String = koreanWeekdays[dayOfWeek - 1]
-
-/** e.g. "10월 7일 수요일" */
-fun Day.longLabelKo(): String = "${month}월 ${dayOfMonth}일 ${weekdayKo()}요일"

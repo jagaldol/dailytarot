@@ -1,12 +1,12 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "catalogVersion": "lifebase-ko-2026-10-07",
   "locale": "ko",
   "entries": [
     {
       "cardId": 0,
       "cardName": "The Fool",
-      "nameKo": "바보",
+      "name": "바보",
       "reversed": false,
       "keywordsText": "새로운 시작, 자유, 모험, 순수, 어리석음",
       "fortuneText": "겁 없이 새 출발을 해보고 싶은, 자유롭고 설레는 기운이 돌아요"
@@ -14,7 +14,7 @@
     {
       "cardId": 0,
       "cardName": "The Fool",
-      "nameKo": "바보",
+      "name": "바보",
       "reversed": true,
       "keywordsText": "새로운 시작, 자유, 모험, 순수, 어리석음",
       "fortuneText": "너무 재고 있다면, 오늘은 따지지 말고 가볍게 첫발을 떼보세요"
@@ -22,7 +22,7 @@
     {
       "cardId": 1,
       "cardName": "The Magician",
-      "nameKo": "마법사",
+      "name": "마법사",
       "reversed": false,
       "keywordsText": "실행력, 계획, 착수, 창조, 자원 활용",
       "fortuneText": "가진 자원과 의지가 한데 모여, 마음먹은 걸 실제로 펼쳐낼 힘이 생겨요"
@@ -30,7 +30,7 @@
     {
       "cardId": 1,
       "cardName": "The Magician",
-      "nameKo": "마법사",
+      "name": "마법사",
       "reversed": true,
       "keywordsText": "실행력, 계획, 착수, 창조, 자원 활용",
       "fortuneText": "생각만 굴리고 있다면, 오늘은 하나라도 바로 행동으로 옮기세요"
@@ -38,7 +38,7 @@
     {
       "cardId": 2,
       "cardName": "The High Priestess",
-      "nameKo": "여사제",
+      "name": "여사제",
       "reversed": false,
       "keywordsText": "직관, 신비, 비밀, 침묵, 진리, 내면",
       "fortuneText": "말보다 마음속 신호가 또렷해지고, 직관이 잘 통해요"
@@ -46,7 +46,7 @@
     {
       "cardId": 2,
       "cardName": "The High Priestess",
-      "nameKo": "여사제",
+      "name": "여사제",
       "reversed": true,
       "keywordsText": "직관, 신비, 비밀, 침묵, 진리, 내면",
       "fortuneText": "답을 서두르고 있다면, 오늘은 잠시 멈춰 직관에 귀를 기울이세요"
@@ -54,7 +54,7 @@
     {
       "cardId": 3,
       "cardName": "The Empress",
-      "nameKo": "여황제",
+      "name": "여황제",
       "reversed": false,
       "keywordsText": "풍요, 모성, 돌봄, 창조성, 감각",
       "fortuneText": "넉넉히 품고 가꾸는 따뜻한 기운이 살아나, 무언가를 키워내기 좋아요"
@@ -62,7 +62,7 @@
     {
       "cardId": 3,
       "cardName": "The Empress",
-      "nameKo": "여황제",
+      "name": "여황제",
       "reversed": true,
       "keywordsText": "풍요, 모성, 돌봄, 창조성, 감각",
       "fortuneText": "자신을 못 챙겼다면, 오늘은 나부터 넉넉히 돌보세요"
@@ -70,7 +70,7 @@
     {
       "cardId": 4,
       "cardName": "The Emperor",
-      "nameKo": "황제",
+      "name": "황제",
       "reversed": false,
       "keywordsText": "안정, 질서, 구조, 주도",
       "fortuneText": "기반과 질서가 단단히 서고, 주도권을 쥐고 끌어가기 좋아요"
@@ -78,7 +78,7 @@
     {
       "cardId": 4,
       "cardName": "The Emperor",
-      "nameKo": "황제",
+      "name": "황제",
       "reversed": true,
       "keywordsText": "안정, 질서, 구조, 주도",
       "fortuneText": "어수선하다면, 오늘은 틀을 세우고 질서부터 잡으세요"
@@ -86,7 +86,7 @@
     {
       "cardId": 5,
       "cardName": "The Hierophant",
-      "nameKo": "교황",
+      "name": "교황",
       "reversed": false,
       "keywordsText": "배움, 가르침, 전통, 가치관, 엄격함",
       "fortuneText": "혼자 밀어붙이기보다, 배운 방식이나 믿을 만한 조언이 잘 맞아들어요"
@@ -94,7 +94,7 @@
     {
       "cardId": 5,
       "cardName": "The Hierophant",
-      "nameKo": "교황",
+      "name": "교황",
       "reversed": true,
       "keywordsText": "배움, 가르침, 전통, 가치관, 엄격함",
       "fortuneText": "막막하다면, 오늘은 혼자 끙끙대지 말고 조언을 구하거나 기본을 다시 배우세요"
@@ -102,7 +102,7 @@
     {
       "cardId": 6,
       "cardName": "The Lovers",
-      "nameKo": "연인",
+      "name": "연인",
       "reversed": false,
       "keywordsText": "사랑, 관계, 화합, 선택, 조화",
       "fortuneText": "마음과 관계가 따뜻하게 맞아들고, 무엇을 택하든 마음 쪽으로 기울어요"
@@ -110,7 +110,7 @@
     {
       "cardId": 6,
       "cardName": "The Lovers",
-      "nameKo": "연인",
+      "name": "연인",
       "reversed": true,
       "keywordsText": "사랑, 관계, 화합, 선택, 조화",
       "fortuneText": "어긋난 게 있다면, 오늘은 마음 가는 쪽으로 솔직하게 정하세요"
@@ -118,7 +118,7 @@
     {
       "cardId": 7,
       "cardName": "The Chariot",
-      "nameKo": "전차",
+      "name": "전차",
       "reversed": false,
       "keywordsText": "의지, 추진, 돌파, 방향",
       "fortuneText": "흩어지던 힘이 한 방향으로 모여, 거침없이 밀고 나가는 추진력이 붙어요"
@@ -126,7 +126,7 @@
     {
       "cardId": 7,
       "cardName": "The Chariot",
-      "nameKo": "전차",
+      "name": "전차",
       "reversed": true,
       "keywordsText": "의지, 추진, 돌파, 방향",
       "fortuneText": "의지가 흩어졌다면, 오늘은 목표 하나에 집중해 밀어붙이세요"
@@ -134,7 +134,7 @@
     {
       "cardId": 8,
       "cardName": "Strength",
-      "nameKo": "힘",
+      "name": "힘",
       "reversed": false,
       "keywordsText": "용기, 자신감, 부드러운 힘, 자제, 편안함",
       "fortuneText": "거칠게가 아니라 부드럽고 단단하게, 흔들림 없이 버텨내는 힘이 있어요"
@@ -142,7 +142,7 @@
     {
       "cardId": 8,
       "cardName": "Strength",
-      "nameKo": "힘",
+      "name": "힘",
       "reversed": true,
       "keywordsText": "용기, 자신감, 부드러운 힘, 자제, 편안함",
       "fortuneText": "조급하다면, 오늘은 힘을 빼고 부드럽게 다스리세요"
@@ -150,7 +150,7 @@
     {
       "cardId": 9,
       "cardName": "The Hermit",
-      "nameKo": "은둔자",
+      "name": "은둔자",
       "reversed": false,
       "keywordsText": "성찰, 고독, 충전, 내면, 조용함",
       "fortuneText": "바깥 소음에서 한 발 물러나, 혼자 조용히 답을 찾아가게 돼요"
@@ -158,7 +158,7 @@
     {
       "cardId": 9,
       "cardName": "The Hermit",
-      "nameKo": "은둔자",
+      "name": "은둔자",
       "reversed": true,
       "keywordsText": "성찰, 고독, 충전, 내면, 조용함",
       "fortuneText": "혼자만의 시간이 부족했다면, 오늘은 조용히 자신을 들여다볼 시간을 확보하세요"
@@ -166,7 +166,7 @@
     {
       "cardId": 10,
       "cardName": "Wheel of Fortune",
-      "nameKo": "운명의 수레바퀴",
+      "name": "운명의 수레바퀴",
       "reversed": false,
       "keywordsText": "행운, 전환, 흐름, 기회, 변화",
       "fortuneText": "멈춰 있던 판이 움직이고, 뜻밖의 행운과 전환이 찾아와요"
@@ -174,7 +174,7 @@
     {
       "cardId": 10,
       "cardName": "Wheel of Fortune",
-      "nameKo": "운명의 수레바퀴",
+      "name": "운명의 수레바퀴",
       "reversed": true,
       "keywordsText": "행운, 전환, 흐름, 기회, 변화",
       "fortuneText": "틀에 갇혀 있다면, 오늘은 바뀌는 흐름에 한번 올라타세요"
@@ -182,7 +182,7 @@
     {
       "cardId": 11,
       "cardName": "Justice",
-      "nameKo": "정의",
+      "name": "정의",
       "reversed": false,
       "keywordsText": "공정, 균형, 판단, 책임",
       "fortuneText": "사실과 기준이 또렷해지면서, 공정하게 균형이 잡혀요"
@@ -190,7 +190,7 @@
     {
       "cardId": 11,
       "cardName": "Justice",
-      "nameKo": "정의",
+      "name": "정의",
       "reversed": true,
       "keywordsText": "공정, 균형, 판단, 책임",
       "fortuneText": "미뤄둔 게 있다면, 오늘은 사실대로 따져 결정을 내리세요"
@@ -198,7 +198,7 @@
     {
       "cardId": 12,
       "cardName": "The Hanged Man",
-      "nameKo": "매달린 사람",
+      "name": "매달린 사람",
       "reversed": false,
       "keywordsText": "멈춤, 답답함, 관점 전환, 생각의 반전, 깨달음",
       "fortuneText": "잠시 멈춘 자리에서 같은 일이 다르게 보이고, 뜻밖의 깨달음이 와요"
@@ -206,7 +206,7 @@
     {
       "cardId": 12,
       "cardName": "The Hanged Man",
-      "nameKo": "매달린 사람",
+      "name": "매달린 사람",
       "reversed": true,
       "keywordsText": "멈춤, 답답함, 관점 전환, 생각의 반전, 깨달음",
       "fortuneText": "답답하게 매여 있다면, 오늘은 한 발 떨어져 시야를 뒤집어 보세요"
@@ -214,7 +214,7 @@
     {
       "cardId": 13,
       "cardName": "Death",
-      "nameKo": "죽음",
+      "name": "죽음",
       "reversed": false,
       "keywordsText": "끝맺음, 힘든 변화, 전환, 비움, 새 출발",
       "fortuneText": "끝과 힘든 변화가 닥칠 수 있어요. 붙잡지 말고 흘려보내면 그 뒤로 해가 떠요"
@@ -222,7 +222,7 @@
     {
       "cardId": 13,
       "cardName": "Death",
-      "nameKo": "죽음",
+      "name": "죽음",
       "reversed": true,
       "keywordsText": "끝맺음, 힘든 변화, 전환, 비움, 새 출발",
       "fortuneText": "힘든 길은 피할 수 없어요. 가장 빠른 길은 우회하지 말고 맞닥뜨리는 거예요"
@@ -230,7 +230,7 @@
     {
       "cardId": 14,
       "cardName": "Temperance",
-      "nameKo": "절제",
+      "name": "절제",
       "reversed": false,
       "keywordsText": "균형, 조율, 절제, 자연스러움, 흐름",
       "fortuneText": "서로 다른 것들이 알맞게 섞이며, 과하지도 모자라지도 않은 균형으로 흘러가요"
@@ -238,7 +238,7 @@
     {
       "cardId": 14,
       "cardName": "Temperance",
-      "nameKo": "절제",
+      "name": "절제",
       "reversed": true,
       "keywordsText": "균형, 조율, 절제, 자연스러움, 흐름",
       "fortuneText": "한쪽으로 치우쳤다면, 오늘은 과한 걸 덜어 균형을 맞추세요"
@@ -246,7 +246,7 @@
     {
       "cardId": 15,
       "cardName": "The Devil",
-      "nameKo": "악마",
+      "name": "악마",
       "reversed": false,
       "keywordsText": "욕망, 집착, 사로잡힘, 중독, 허상, 불안",
       "fortuneText": "욕망과 집착에 사로잡히기 쉬워요. 지금 무엇에 매여 있는지 살펴보세요"
@@ -254,7 +254,7 @@
     {
       "cardId": 15,
       "cardName": "The Devil",
-      "nameKo": "악마",
+      "name": "악마",
       "reversed": true,
       "keywordsText": "욕망, 집착, 사로잡힘, 중독, 허상, 불안",
       "fortuneText": "갈팡질팡하거나 눈치만 보고 있다면, 오늘은 욕망대로 한번 시원하게 질러보세요"
@@ -262,7 +262,7 @@
     {
       "cardId": 16,
       "cardName": "The Tower",
-      "nameKo": "탑",
+      "name": "탑",
       "reversed": false,
       "keywordsText": "붕괴, 혼돈, 격변, 깨어남, 해방",
       "fortuneText": "쌓아둔 게 흔들리거나 무너질 수 있어요. 억지로 붙잡기보다 흘려보내기 좋아요"
@@ -270,7 +270,7 @@
     {
       "cardId": 16,
       "cardName": "The Tower",
-      "nameKo": "탑",
+      "name": "탑",
       "reversed": true,
       "keywordsText": "붕괴, 혼돈, 격변, 깨어남, 해방",
       "fortuneText": "잘 안 풀리는 걸 붙잡고 있다면, 오늘은 미련 없이 갈아엎으세요"
@@ -278,7 +278,7 @@
     {
       "cardId": 17,
       "cardName": "The Star",
-      "nameKo": "별",
+      "name": "별",
       "reversed": false,
       "keywordsText": "희망, 해방, 회복, 영감, 평온",
       "fortuneText": "폭풍이 지난 뒤처럼 잔잔히 회복되고, 희망이 다시 차올라요"
@@ -286,7 +286,7 @@
     {
       "cardId": 17,
       "cardName": "The Star",
-      "nameKo": "별",
+      "name": "별",
       "reversed": true,
       "keywordsText": "희망, 해방, 회복, 영감, 평온",
       "fortuneText": "지쳐 있다면, 오늘은 욕심내지 말고 천천히 자신을 회복시키세요"
@@ -294,7 +294,7 @@
     {
       "cardId": 18,
       "cardName": "The Moon",
-      "nameKo": "달",
+      "name": "달",
       "reversed": false,
       "keywordsText": "본능, 꿈, 상상력, 원초적, 무의식",
       "fortuneText": "본능과 상상이 짙어지고, 길이 살짝 흐릿하게 느껴져요"
@@ -302,7 +302,7 @@
     {
       "cardId": 18,
       "cardName": "The Moon",
-      "nameKo": "달",
+      "name": "달",
       "reversed": true,
       "keywordsText": "본능, 꿈, 상상력, 원초적, 무의식",
       "fortuneText": "머리로만 따지고 있다면, 오늘은 직관과 꿈, 마음의 소리를 읽어보세요"
@@ -310,7 +310,7 @@
     {
       "cardId": 19,
       "cardName": "The Sun",
-      "nameKo": "태양",
+      "name": "태양",
       "reversed": false,
       "keywordsText": "활력, 기쁨, 행복, 만족, 성공, 밝음",
       "fortuneText": "모든 게 환하게 드러나고 잘 풀리며, 기분 좋은 활력이 솟아요"
@@ -318,7 +318,7 @@
     {
       "cardId": 19,
       "cardName": "The Sun",
-      "nameKo": "태양",
+      "name": "태양",
       "reversed": true,
       "keywordsText": "활력, 기쁨, 행복, 만족, 성공, 밝음",
       "fortuneText": "기운이 가라앉았다면, 오늘은 작게라도 기분 좋아지는 일을 많이 하세요"
@@ -326,7 +326,7 @@
     {
       "cardId": 20,
       "cardName": "Judgement",
-      "nameKo": "심판",
+      "name": "심판",
       "reversed": false,
       "keywordsText": "심판, 결산, 평가, 부활, 부름",
       "fortuneText": "지난 일을 돌아보고 평가하며, 반성할 것은 반성하고 다음 단계로 넘어가기 좋은 때예요"
@@ -334,7 +334,7 @@
     {
       "cardId": 20,
       "cardName": "Judgement",
-      "nameKo": "심판",
+      "name": "심판",
       "reversed": true,
       "keywordsText": "심판, 결산, 평가, 부활, 부름",
       "fortuneText": "미뤄둔 결단이 있다면, 오늘은 돌아보고 매듭을 지어보세요"
@@ -342,7 +342,7 @@
     {
       "cardId": 21,
       "cardName": "The World",
-      "nameKo": "세계",
+      "name": "세계",
       "reversed": false,
       "keywordsText": "완성, 완전함, 성취, 통합, 마무리",
       "fortuneText": "한 사이클이 온전히 완성되어, 뿌듯하게 마무리돼요"
@@ -350,7 +350,7 @@
     {
       "cardId": 21,
       "cardName": "The World",
-      "nameKo": "세계",
+      "name": "세계",
       "reversed": true,
       "keywordsText": "완성, 완전함, 성취, 통합, 마무리",
       "fortuneText": "끝맺지 못한 게 있다면, 오늘은 마지막 매듭을 지어 완성하세요"
@@ -358,7 +358,7 @@
     {
       "cardId": 22,
       "cardName": "Ace of Pentacles",
-      "nameKo": "펜타클 에이스",
+      "name": "펜타클 에이스",
       "reversed": false,
       "keywordsText": "물질, 돈, 풍요, 현실적 기회",
       "fortuneText": "손에 잡히는 기회나 돈·자원이 새로 들어와, 현실적으로 반가워요"
@@ -366,7 +366,7 @@
     {
       "cardId": 22,
       "cardName": "Ace of Pentacles",
-      "nameKo": "펜타클 에이스",
+      "name": "펜타클 에이스",
       "reversed": true,
       "keywordsText": "물질, 돈, 풍요, 현실적 기회",
       "fortuneText": "기회를 막연히 흘려보내고 있다면, 오늘은 눈앞의 자원을 실제로 붙잡으세요"
@@ -374,7 +374,7 @@
     {
       "cardId": 23,
       "cardName": "Two of Pentacles",
-      "nameKo": "펜타클 2",
+      "name": "펜타클 2",
       "reversed": false,
       "keywordsText": "균형, 저울질, 우선순위, 조율",
       "fortuneText": "쉽게 맞지 않는 현실 조건들을 저울질하며, 우선순위를 잡아가요"
@@ -382,7 +382,7 @@
     {
       "cardId": 23,
       "cardName": "Two of Pentacles",
-      "nameKo": "펜타클 2",
+      "name": "펜타클 2",
       "reversed": true,
       "keywordsText": "균형, 저울질, 우선순위, 조율",
       "fortuneText": "다 똑같이 들고 버겁다면, 오늘은 우선순위를 정해 균형을 맞추세요"
@@ -390,7 +390,7 @@
     {
       "cardId": 24,
       "cardName": "Three of Pentacles",
-      "nameKo": "펜타클 3",
+      "name": "펜타클 3",
       "reversed": false,
       "keywordsText": "협업, 교류, 공부, 배움",
       "fortuneText": "사람들과 역할을 맞추고 배우며, 함께 결과물을 쌓아가요"
@@ -398,7 +398,7 @@
     {
       "cardId": 24,
       "cardName": "Three of Pentacles",
-      "nameKo": "펜타클 3",
+      "name": "펜타클 3",
       "reversed": true,
       "keywordsText": "협업, 교류, 공부, 배움",
       "fortuneText": "혼자만 붙들고 있다면, 오늘은 협업의 자리로 들어가 배우고 주고받으세요"
@@ -406,7 +406,7 @@
     {
       "cardId": 25,
       "cardName": "Four of Pentacles",
-      "nameKo": "펜타클 4",
+      "name": "펜타클 4",
       "reversed": false,
       "keywordsText": "집착, 끌어안음, 놓는 두려움, 강박",
       "fortuneText": "가진 걸 놓칠까 봐, 너무 꽉 움켜쥐기 쉬워요"
@@ -414,7 +414,7 @@
     {
       "cardId": 25,
       "cardName": "Four of Pentacles",
-      "nameKo": "펜타클 4",
+      "name": "펜타클 4",
       "reversed": true,
       "keywordsText": "집착, 끌어안음, 놓는 두려움, 강박",
       "fortuneText": "휘둘려 자꾸 내주고 있다면, 오늘은 내 몫과 경계를 단단히 지키세요"
@@ -422,7 +422,7 @@
     {
       "cardId": 26,
       "cardName": "Five of Pentacles",
-      "nameKo": "펜타클 5",
+      "name": "펜타클 5",
       "reversed": false,
       "keywordsText": "힘듦, 도움 필요, 결핍, 주변의 도움",
       "fortuneText": "현실이 팍팍한 날. 곁에 손 내밀 데가 있는데, 놓치고 있을 수 있어요"
@@ -430,7 +430,7 @@
     {
       "cardId": 26,
       "cardName": "Five of Pentacles",
-      "nameKo": "펜타클 5",
+      "name": "펜타클 5",
       "reversed": true,
       "keywordsText": "힘듦, 도움 필요, 결핍, 주변의 도움",
       "fortuneText": "기댈 데가 없어 막막해도, 오늘은 주저앉지 말고 묵묵히 제 발로 걸어나가세요"
@@ -438,7 +438,7 @@
     {
       "cardId": 27,
       "cardName": "Six of Pentacles",
-      "nameKo": "펜타클 6",
+      "name": "펜타클 6",
       "reversed": false,
       "keywordsText": "나눔, 저울, 균형",
       "fortuneText": "무작정 퍼주기보다, 기준을 가지고 주고받으며 균형 있게 나눠요"
@@ -446,7 +446,7 @@
     {
       "cardId": 27,
       "cardName": "Six of Pentacles",
-      "nameKo": "펜타클 6",
+      "name": "펜타클 6",
       "reversed": true,
       "keywordsText": "나눔, 저울, 균형",
       "fortuneText": "무작정 퍼주거나 움켜쥐고 있다면, 오늘은 무게를 재서 나눔의 기준을 세우세요"
@@ -454,7 +454,7 @@
     {
       "cardId": 28,
       "cardName": "Seven of Pentacles",
-      "nameKo": "펜타클 7",
+      "name": "펜타클 7",
       "reversed": false,
       "keywordsText": "인내, 수확, 많은 성공, 기다림",
       "fortuneText": "키워온 일이 무르익는 중이라, 조급해 말고 기다리기 좋은 때예요"
@@ -462,7 +462,7 @@
     {
       "cardId": 28,
       "cardName": "Seven of Pentacles",
-      "nameKo": "펜타클 7",
+      "name": "펜타클 7",
       "reversed": true,
       "keywordsText": "인내, 수확, 많은 성공, 기다림",
       "fortuneText": "결과를 재촉하고 있다면, 오늘은 쌓인 걸 믿고 한 박자 기다리세요"
@@ -470,7 +470,7 @@
     {
       "cardId": 29,
       "cardName": "Eight of Pentacles",
-      "nameKo": "펜타클 8",
+      "name": "펜타클 8",
       "reversed": false,
       "keywordsText": "꾸준함, 성실",
       "fortuneText": "같은 일을 묵묵히 갈고닦으며, 실력과 결실이 쌓여가요"
@@ -478,7 +478,7 @@
     {
       "cardId": 29,
       "cardName": "Eight of Pentacles",
-      "nameKo": "펜타클 8",
+      "name": "펜타클 8",
       "reversed": true,
       "keywordsText": "꾸준함, 성실",
       "fortuneText": "요령이나 한 방만 찾고 있다면, 오늘은 성실한 반복으로 돌아가세요"
@@ -486,7 +486,7 @@
     {
       "cardId": 30,
       "cardName": "Nine of Pentacles",
-      "nameKo": "펜타클 9",
+      "name": "펜타클 9",
       "reversed": false,
       "keywordsText": "풍요, 결실",
       "fortuneText": "그동안 쌓아온 결실과 풍요를, 여유롭게 누리기 좋아요"
@@ -494,7 +494,7 @@
     {
       "cardId": 30,
       "cardName": "Nine of Pentacles",
-      "nameKo": "펜타클 9",
+      "name": "펜타클 9",
       "reversed": true,
       "keywordsText": "풍요, 결실",
       "fortuneText": "충분한데도 부족하게만 느낀다면, 오늘은 이미 가진 결실을 인정하고 누리세요"
@@ -502,7 +502,7 @@
     {
       "cardId": 31,
       "cardName": "Ten of Pentacles",
-      "nameKo": "펜타클 10",
+      "name": "펜타클 10",
       "reversed": false,
       "keywordsText": "풍요, 파티, 넉넉함, 안정",
       "fortuneText": "넉넉한 풍요와 안정이, 생활 속에 든든히 자리 잡아요"
@@ -510,7 +510,7 @@
     {
       "cardId": 31,
       "cardName": "Ten of Pentacles",
-      "nameKo": "펜타클 10",
+      "name": "펜타클 10",
       "reversed": true,
       "keywordsText": "풍요, 파티, 넉넉함, 안정",
       "fortuneText": "가진 기반을 못 보고 있다면, 오늘은 곁의 풍요와 안정을 확인하세요"
@@ -518,7 +518,7 @@
     {
       "cardId": 32,
       "cardName": "Page of Pentacles",
-      "nameKo": "펜타클 페이지",
+      "name": "펜타클 페이지",
       "reversed": false,
       "keywordsText": "배움, 소소한 행복",
       "fortuneText": "배움과 소소한 행복이, 곳곳에서 반짝여요"
@@ -526,7 +526,7 @@
     {
       "cardId": 32,
       "cardName": "Page of Pentacles",
-      "nameKo": "펜타클 페이지",
+      "name": "펜타클 페이지",
       "reversed": true,
       "keywordsText": "배움, 소소한 행복",
       "fortuneText": "작은 기쁨을 대수롭지 않게 넘기고 있다면, 오늘은 손에 든 하나를 신나게 익히세요"
@@ -534,7 +534,7 @@
     {
       "cardId": 33,
       "cardName": "Knight of Pentacles",
-      "nameKo": "펜타클 기사",
+      "name": "펜타클 기사",
       "reversed": false,
       "keywordsText": "묵묵함, 꾸준함, 성실",
       "fortuneText": "빠르진 않아도 묵묵하고 성실하게, 현실을 차곡차곡 쌓아가요"
@@ -542,7 +542,7 @@
     {
       "cardId": 33,
       "cardName": "Knight of Pentacles",
-      "nameKo": "펜타클 기사",
+      "name": "펜타클 기사",
       "reversed": true,
       "keywordsText": "묵묵함, 꾸준함, 성실",
       "fortuneText": "눈에 띄는 속도만 좇고 있다면, 오늘은 묵묵히 같은 일을 이어가세요"
@@ -550,7 +550,7 @@
     {
       "cardId": 34,
       "cardName": "Queen of Pentacles",
-      "nameKo": "펜타클 여왕",
+      "name": "펜타클 여왕",
       "reversed": false,
       "keywordsText": "풍부함, 부, 행복, 실용",
       "fortuneText": "풍요와 행복을 현실적으로 챙기며, 편안하게 누려요"
@@ -558,7 +558,7 @@
     {
       "cardId": 34,
       "cardName": "Queen of Pentacles",
-      "nameKo": "펜타클 여왕",
+      "name": "펜타클 여왕",
       "reversed": true,
       "keywordsText": "풍부함, 부, 행복, 실용",
       "fortuneText": "쌓아두기만 했다면, 오늘은 생활에 쓸 수 있게 실용적으로 풀어내세요"
@@ -566,7 +566,7 @@
     {
       "cardId": 35,
       "cardName": "King of Pentacles",
-      "nameKo": "펜타클 왕",
+      "name": "펜타클 왕",
       "reversed": false,
       "keywordsText": "안정, 풍요, 듬직함, 편안함",
       "fortuneText": "안정과 풍요가 듬직하게 자리 잡아, 기반이 단단해져요"
@@ -574,7 +574,7 @@
     {
       "cardId": 35,
       "cardName": "King of Pentacles",
-      "nameKo": "펜타클 왕",
+      "name": "펜타클 왕",
       "reversed": true,
       "keywordsText": "안정, 풍요, 듬직함, 편안함",
       "fortuneText": "기반이 흔들린다면, 오늘은 자원을 차분히 챙겨 든든한 토대를 세우세요"
@@ -582,7 +582,7 @@
     {
       "cardId": 36,
       "cardName": "Ace of Wands",
-      "nameKo": "완드 에이스",
+      "name": "완드 에이스",
       "reversed": false,
       "keywordsText": "열정, 힘, 의욕, 시작",
       "fortuneText": "새 열정이 손에 들어와, 뭔가 시작해보고 싶은 의욕이 솟아요"
@@ -590,7 +590,7 @@
     {
       "cardId": 36,
       "cardName": "Ace of Wands",
-      "nameKo": "완드 에이스",
+      "name": "완드 에이스",
       "reversed": true,
       "keywordsText": "열정, 힘, 의욕, 시작",
       "fortuneText": "의욕을 기다리기만 한다면, 오늘은 작은 끌림 하나에 바로 불을 붙이세요"
@@ -598,7 +598,7 @@
     {
       "cardId": 37,
       "cardName": "Two of Wands",
-      "nameKo": "완드 2",
+      "name": "완드 2",
       "reversed": false,
       "keywordsText": "성취, 탐색, 확장, 구상",
       "fortuneText": "이미 이룬 것 위에서, 더 먼 가능성과 새 무대를 내다봐요"
@@ -606,7 +606,7 @@
     {
       "cardId": 37,
       "cardName": "Two of Wands",
-      "nameKo": "완드 2",
+      "name": "완드 2",
       "reversed": true,
       "keywordsText": "성취, 탐색, 확장, 구상",
       "fortuneText": "익숙한 성취에 머물고 있다면, 오늘은 그 너머 새 영역을 탐색하세요"
@@ -614,7 +614,7 @@
     {
       "cardId": 38,
       "cardName": "Three of Wands",
-      "nameKo": "완드 3",
+      "name": "완드 3",
       "reversed": false,
       "keywordsText": "성취, 확장, 전망",
       "fortuneText": "밖으로 뻗어나간 일이, 슬슬 성취의 모습으로 보이기 시작해요"
@@ -622,7 +622,7 @@
     {
       "cardId": 38,
       "cardName": "Three of Wands",
-      "nameKo": "완드 3",
+      "name": "완드 3",
       "reversed": true,
       "keywordsText": "성취, 확장, 전망",
       "fortuneText": "이룬 게 없다고만 느낀다면, 오늘은 이미 뻗어간 일과 그 방향을 확인하세요"
@@ -630,7 +630,7 @@
     {
       "cardId": 39,
       "cardName": "Four of Wands",
-      "nameKo": "완드 4",
+      "name": "완드 4",
       "reversed": false,
       "keywordsText": "축하, 좋은 결과, 안정, 성취",
       "fortuneText": "좋은 결과가 나와, 마음껏 축하하고 기뻐해도 좋아요"
@@ -638,7 +638,7 @@
     {
       "cardId": 39,
       "cardName": "Four of Wands",
-      "nameKo": "완드 4",
+      "name": "완드 4",
       "reversed": true,
       "keywordsText": "축하, 좋은 결과, 안정, 성취",
       "fortuneText": "좋은 일을 그냥 넘겼다면, 오늘은 축하받을 일을 분명히 누리세요"
@@ -646,7 +646,7 @@
     {
       "cardId": 40,
       "cardName": "Five of Wands",
-      "nameKo": "완드 5",
+      "name": "완드 5",
       "reversed": false,
       "keywordsText": "경쟁, 열띤 토론, 논쟁, 대립",
       "fortuneText": "사람·상황과 마찰이 생기고, 열띤 논쟁이 오가기 쉬워요"
@@ -654,7 +654,7 @@
     {
       "cardId": 40,
       "cardName": "Five of Wands",
-      "nameKo": "완드 5",
+      "name": "완드 5",
       "reversed": true,
       "keywordsText": "경쟁, 열띤 토론, 논쟁, 대립",
       "fortuneText": "필요한 부딪침마저 피하고 있다면, 오늘은 건강한 경쟁에 용기 내 뛰어드세요"
@@ -662,7 +662,7 @@
     {
       "cardId": 41,
       "cardName": "Six of Wands",
-      "nameKo": "완드 6",
+      "name": "완드 6",
       "reversed": false,
       "keywordsText": "승리, 성취, 인정",
       "fortuneText": "승리가 드러나고, 그 성과를 제대로 인정받아요"
@@ -670,7 +670,7 @@
     {
       "cardId": 41,
       "cardName": "Six of Wands",
-      "nameKo": "완드 6",
+      "name": "완드 6",
       "reversed": true,
       "keywordsText": "승리, 성취, 인정",
       "fortuneText": "이긴 걸 스스로 깎아내린다면, 오늘은 승리를 분명히 인정하고 나아가세요"
@@ -678,7 +678,7 @@
     {
       "cardId": 42,
       "cardName": "Seven of Wands",
-      "nameKo": "완드 7",
+      "name": "완드 7",
       "reversed": false,
       "keywordsText": "저항, 방어, 소신, 입지",
       "fortuneText": "반대와 반발이 있어도, 내 자리를 지키며 버텨내요"
@@ -686,7 +686,7 @@
     {
       "cardId": 42,
       "cardName": "Seven of Wands",
-      "nameKo": "완드 7",
+      "name": "완드 7",
       "reversed": true,
       "keywordsText": "저항, 방어, 소신, 입지",
       "fortuneText": "압력에 밀리고 있다면, 오늘은 자리를 잡고 필요한 만큼 버티세요"
@@ -694,7 +694,7 @@
     {
       "cardId": 43,
       "cardName": "Eight of Wands",
-      "nameKo": "완드 8",
+      "name": "완드 8",
       "reversed": false,
       "keywordsText": "추진, 속도, 흐름",
       "fortuneText": "에너지가 한 방향으로 붙어, 일이 빠르게 추진돼요"
@@ -702,7 +702,7 @@
     {
       "cardId": 43,
       "cardName": "Eight of Wands",
-      "nameKo": "완드 8",
+      "name": "완드 8",
       "reversed": true,
       "keywordsText": "추진, 속도, 흐름",
       "fortuneText": "흐름이 멈춰 있다면, 오늘은 생각을 줄이고 속도를 내 밀어붙이세요"
@@ -710,7 +710,7 @@
     {
       "cardId": 44,
       "cardName": "Nine of Wands",
-      "nameKo": "완드 9",
+      "name": "완드 9",
       "reversed": false,
       "keywordsText": "경계, 지킴, 방어",
       "fortuneText": "외압이 느껴져도 방어선을 세우고, 끝까지 자리를 지켜요"
@@ -718,7 +718,7 @@
     {
       "cardId": 44,
       "cardName": "Nine of Wands",
-      "nameKo": "완드 9",
+      "name": "완드 9",
       "reversed": true,
       "keywordsText": "경계, 지킴, 방어",
       "fortuneText": "경계가 무너져 밀린다면, 오늘은 지킬 선을 다시 세우세요"
@@ -726,7 +726,7 @@
     {
       "cardId": 45,
       "cardName": "Ten of Wands",
-      "nameKo": "완드 10",
+      "name": "완드 10",
       "reversed": false,
       "keywordsText": "고됨, 부담감, 압박",
       "fortuneText": "짊어진 짐이 많아, 고됨과 압박이 크게 느껴져요"
@@ -734,7 +734,7 @@
     {
       "cardId": 45,
       "cardName": "Ten of Wands",
-      "nameKo": "완드 10",
+      "name": "완드 10",
       "reversed": true,
       "keywordsText": "고됨, 부담감, 압박",
       "fortuneText": "부담을 못 본 척하고 있다면, 오늘은 무게를 인정하고 하나씩 덜어 나르세요"
@@ -742,7 +742,7 @@
     {
       "cardId": 46,
       "cardName": "Page of Wands",
-      "nameKo": "완드 페이지",
+      "name": "완드 페이지",
       "reversed": false,
       "keywordsText": "호기심, 탐험",
       "fortuneText": "호기심이 발동해, 새로운 걸 탐험하고 싶어져요"
@@ -750,7 +750,7 @@
     {
       "cardId": 46,
       "cardName": "Page of Wands",
-      "nameKo": "완드 페이지",
+      "name": "완드 페이지",
       "reversed": true,
       "keywordsText": "호기심, 탐험",
       "fortuneText": "익숙한 것만 붙잡고 있다면, 오늘은 서툴러도 새 호기심 하나를 따라가세요"
@@ -758,7 +758,7 @@
     {
       "cardId": 47,
       "cardName": "Knight of Wands",
-      "nameKo": "완드 기사",
+      "name": "완드 기사",
       "reversed": false,
       "keywordsText": "모험, 열정, 돌진, 도전",
       "fortuneText": "모험심과 열정이 앞서, 곧장 달려나가고 싶어져요"
@@ -766,7 +766,7 @@
     {
       "cardId": 47,
       "cardName": "Knight of Wands",
-      "nameKo": "완드 기사",
+      "name": "완드 기사",
       "reversed": true,
       "keywordsText": "모험, 열정, 돌진, 도전",
       "fortuneText": "계산만 하며 멈춰 있다면, 오늘은 열정을 싣고 한 번 돌진하세요"
@@ -774,7 +774,7 @@
     {
       "cardId": 48,
       "cardName": "Queen of Wands",
-      "nameKo": "완드 여왕",
+      "name": "완드 여왕",
       "reversed": false,
       "keywordsText": "당당함, 자신감, 매혹",
       "fortuneText": "당당함과 자신감, 사람을 끄는 매력이 자연스럽게 드러나요"
@@ -782,7 +782,7 @@
     {
       "cardId": 48,
       "cardName": "Queen of Wands",
-      "nameKo": "완드 여왕",
+      "name": "완드 여왕",
       "reversed": true,
       "keywordsText": "당당함, 자신감, 매혹",
       "fortuneText": "자신을 숨기고 있다면, 오늘은 자신감을 드러내고 당당히 서세요"
@@ -790,7 +790,7 @@
     {
       "cardId": 49,
       "cardName": "King of Wands",
-      "nameKo": "완드 왕",
+      "name": "완드 왕",
       "reversed": false,
       "keywordsText": "자신에 대한 믿음, 카리스마, 리더십",
       "fortuneText": "나를 향한 믿음이, 카리스마와 리더십으로 뻗어나가요"
@@ -798,7 +798,7 @@
     {
       "cardId": 49,
       "cardName": "King of Wands",
-      "nameKo": "완드 왕",
+      "name": "완드 왕",
       "reversed": true,
       "keywordsText": "자신에 대한 믿음, 카리스마, 리더십",
       "fortuneText": "이끌 자신이 없다면, 오늘은 방향을 정하고 책임지고 앞에 서세요"
@@ -806,7 +806,7 @@
     {
       "cardId": 50,
       "cardName": "Ace of Cups",
-      "nameKo": "컵 에이스",
+      "name": "컵 에이스",
       "reversed": false,
       "keywordsText": "감정, 마음, 자연스러운 흐름, 충만",
       "fortuneText": "마음이 활짝 열리고, 일이 물 흐르듯 자연스럽게 풀려요"
@@ -814,7 +814,7 @@
     {
       "cardId": 50,
       "cardName": "Ace of Cups",
-      "nameKo": "컵 에이스",
+      "name": "컵 에이스",
       "reversed": true,
       "keywordsText": "감정, 마음, 자연스러운 흐름, 충만",
       "fortuneText": "억지로 밀어붙여 마음을 막고 있다면, 오늘은 감정을 열고 흐름을 받아들이세요"
@@ -822,7 +822,7 @@
     {
       "cardId": 51,
       "cardName": "Two of Cups",
-      "nameKo": "컵 2",
+      "name": "컵 2",
       "reversed": false,
       "keywordsText": "연결, 축배, 나눔, 화합",
       "fortuneText": "서로 컵을 맞대듯, 마음이 통하고 기쁘게 나누게 돼요"
@@ -830,7 +830,7 @@
     {
       "cardId": 51,
       "cardName": "Two of Cups",
-      "nameKo": "컵 2",
+      "name": "컵 2",
       "reversed": true,
       "keywordsText": "연결, 축배, 나눔, 화합",
       "fortuneText": "혼자만 품고 있다면, 오늘은 마음을 건네 함께할 접점을 만드세요"
@@ -838,7 +838,7 @@
     {
       "cardId": 52,
       "cardName": "Three of Cups",
-      "nameKo": "컵 3",
+      "name": "컵 3",
       "reversed": false,
       "keywordsText": "축하, 우정, 즐거움, 공유",
       "fortuneText": "좋은 감정이 사람들 사이로 번지며, 축하와 즐거움이 오가요"
@@ -846,7 +846,7 @@
     {
       "cardId": 52,
       "cardName": "Three of Cups",
-      "nameKo": "컵 3",
+      "name": "컵 3",
       "reversed": true,
       "keywordsText": "축하, 우정, 즐거움, 공유",
       "fortuneText": "기쁨을 혼자 흘려보내고 있다면, 오늘은 사람들과 어울려 나누세요"
@@ -854,7 +854,7 @@
     {
       "cardId": 53,
       "cardName": "Four of Cups",
-      "nameKo": "컵 4",
+      "name": "컵 4",
       "reversed": false,
       "keywordsText": "정체, 지루함, 따분함, 못 보는 기회",
       "fortuneText": "마음이 권태롭고 시들해, 건네지는 기회를 놓치기 쉬워요"
@@ -862,7 +862,7 @@
     {
       "cardId": 53,
       "cardName": "Four of Cups",
-      "nameKo": "컵 4",
+      "name": "컵 4",
       "reversed": true,
       "keywordsText": "정체, 지루함, 따분함, 못 보는 기회",
       "fortuneText": "새 자극만 좇아 이리저리 휩쓸리고 있다면, 오늘은 들뜨지 말고 지루해도 가진 것에 집중하세요"
@@ -870,7 +870,7 @@
     {
       "cardId": 54,
       "cardName": "Five of Cups",
-      "nameKo": "컵 5",
+      "name": "컵 5",
       "reversed": false,
       "keywordsText": "실망, 좌절, 의욕 잃음, 남은 것",
       "fortuneText": "쓰러진 컵에 마음이 붙잡혀 남은 것을 놓치기 쉬워요"
@@ -878,7 +878,7 @@
     {
       "cardId": 54,
       "cardName": "Five of Cups",
-      "nameKo": "컵 5",
+      "name": "컵 5",
       "reversed": true,
       "keywordsText": "실망, 좌절, 의욕 잃음, 남은 것",
       "fortuneText": "괜찮은 척 넘기고 있다면, 실망할 일은 실망하고 무너진 컵을 먼저 인정하세요"
@@ -886,7 +886,7 @@
     {
       "cardId": 55,
       "cardName": "Six of Cups",
-      "nameKo": "컵 6",
+      "name": "컵 6",
       "reversed": false,
       "keywordsText": "베풂, 추억, 따뜻함, 순수",
       "fortuneText": "다정한 마음이 자연스레, 작은 베풂으로 흘러요"
@@ -894,7 +894,7 @@
     {
       "cardId": 55,
       "cardName": "Six of Cups",
-      "nameKo": "컵 6",
+      "name": "컵 6",
       "reversed": true,
       "keywordsText": "베풂, 추억, 따뜻함, 순수",
       "fortuneText": "마음이 메말라 계산만 남았다면, 오늘은 작은 베풂으로 다정함을 되살리세요"
@@ -902,7 +902,7 @@
     {
       "cardId": 56,
       "cardName": "Seven of Cups",
-      "nameKo": "컵 7",
+      "name": "컵 7",
       "reversed": false,
       "keywordsText": "상상력, 많은 선택지, 공상, 선택",
       "fortuneText": "상상과 선택지가 많아, 마음이 여러 갈래로 흩어지기 쉬워요"
@@ -910,7 +910,7 @@
     {
       "cardId": 56,
       "cardName": "Seven of Cups",
-      "nameKo": "컵 7",
+      "name": "컵 7",
       "reversed": true,
       "keywordsText": "상상력, 많은 선택지, 공상, 선택",
       "fortuneText": "가능성조차 막아뒀다면, 오늘은 펼쳐본 뒤 그중 하나를 골라 잡으세요"
@@ -918,7 +918,7 @@
     {
       "cardId": 57,
       "cardName": "Eight of Cups",
-      "nameKo": "컵 8",
+      "name": "컵 8",
       "reversed": false,
       "keywordsText": "떠남, 미련 버리기, 더 깊은 갈망",
       "fortuneText": "아직 남은 게 있어도, 마음을 거두고 더 깊은 곳을 향해 떠날 때예요"
@@ -926,7 +926,7 @@
     {
       "cardId": 57,
       "cardName": "Eight of Cups",
-      "nameKo": "컵 8",
+      "name": "컵 8",
       "reversed": true,
       "keywordsText": "떠남, 미련 버리기, 더 깊은 갈망",
       "fortuneText": "미련에 붙잡혀 머물고 있다면, 오늘은 채워지지 않음을 인정하고 떠나세요"
@@ -934,7 +934,7 @@
     {
       "cardId": 58,
       "cardName": "Nine of Cups",
-      "nameKo": "컵 9",
+      "name": "컵 9",
       "reversed": false,
       "keywordsText": "만족, 달성",
       "fortuneText": "바라던 게 채워져, 만족과 달성감이 차올라요"
@@ -942,7 +942,7 @@
     {
       "cardId": 58,
       "cardName": "Nine of Cups",
-      "nameKo": "컵 9",
+      "name": "컵 9",
       "reversed": true,
       "keywordsText": "만족, 달성",
       "fortuneText": "채워졌는데도 부족하게만 느낀다면, 오늘은 이룬 걸 헤아리고 만족을 받아들이세요"
@@ -950,7 +950,7 @@
     {
       "cardId": 59,
       "cardName": "Ten of Cups",
-      "nameKo": "컵 10",
+      "name": "컵 10",
       "reversed": false,
       "keywordsText": "성공, 행복, 가족, 일상 속 행복",
       "fortuneText": "가족과 가까운 사람들, 일상 속 행복이 가득 차올라요"
@@ -958,7 +958,7 @@
     {
       "cardId": 59,
       "cardName": "Ten of Cups",
-      "nameKo": "컵 10",
+      "name": "컵 10",
       "reversed": true,
       "keywordsText": "성공, 행복, 가족, 일상 속 행복",
       "fortuneText": "행복을 먼 데서만 찾고 있다면, 오늘은 가까운 관계와 일상의 행복부터 보세요"
@@ -966,7 +966,7 @@
     {
       "cardId": 60,
       "cardName": "Page of Cups",
-      "nameKo": "컵 페이지",
+      "name": "컵 페이지",
       "reversed": false,
       "keywordsText": "감수성, 새 마음, 공상, 감정적인 충동",
       "fortuneText": "새 마음과 감수성이 공상처럼 피어나, 감정이 살랑여요"
@@ -974,7 +974,7 @@
     {
       "cardId": 60,
       "cardName": "Page of Cups",
-      "nameKo": "컵 페이지",
+      "name": "컵 페이지",
       "reversed": true,
       "keywordsText": "감수성, 새 마음, 공상, 감정적인 충동",
       "fortuneText": "감정을 너무 말리고 있다면, 오늘은 서툴고 충동적이어도 올라오는 마음을 살피세요"
@@ -982,7 +982,7 @@
     {
       "cardId": 61,
       "cardName": "Knight of Cups",
-      "nameKo": "컵 기사",
+      "name": "컵 기사",
       "reversed": false,
       "keywordsText": "낭만, 몽상",
       "fortuneText": "낭만과 몽상이 마음을 이끌고, 감성이 살랑여요"
@@ -990,7 +990,7 @@
     {
       "cardId": 61,
       "cardName": "Knight of Cups",
-      "nameKo": "컵 기사",
+      "name": "컵 기사",
       "reversed": true,
       "keywordsText": "낭만, 몽상",
       "fortuneText": "계산만 남아 마음이 메말랐다면, 오늘은 조금 넘쳐도 낭만을 품고 움직이세요"
@@ -998,7 +998,7 @@
     {
       "cardId": 62,
       "cardName": "Queen of Cups",
-      "nameKo": "컵 여왕",
+      "name": "컵 여왕",
       "reversed": false,
       "keywordsText": "공감, 감수성",
       "fortuneText": "공감과 감수성으로, 마음을 부드럽게 헤아리게 돼요"
@@ -1006,7 +1006,7 @@
     {
       "cardId": 62,
       "cardName": "Queen of Cups",
-      "nameKo": "컵 여왕",
+      "name": "컵 여왕",
       "reversed": true,
       "keywordsText": "공감, 감수성",
       "fortuneText": "느끼기보다 분석만 하고 있다면, 오늘은 감수성을 열고 공감하세요"
@@ -1014,7 +1014,7 @@
     {
       "cardId": 63,
       "cardName": "King of Cups",
-      "nameKo": "컵 왕",
+      "name": "컵 왕",
       "reversed": false,
       "keywordsText": "정서적 안정, 균형, 포용",
       "fortuneText": "출렁이는 감정을 잘 다스려, 정서적 안정과 균형을 잡아요"
@@ -1022,7 +1022,7 @@
     {
       "cardId": 63,
       "cardName": "King of Cups",
-      "nameKo": "컵 왕",
+      "name": "컵 왕",
       "reversed": true,
       "keywordsText": "정서적 안정, 균형, 포용",
       "fortuneText": "마음이 출렁여 중심을 잃었다면, 오늘은 억누르지 말고 감정을 다스려 균형을 되찾으세요"
@@ -1030,7 +1030,7 @@
     {
       "cardId": 64,
       "cardName": "Ace of Swords",
-      "nameKo": "소드 에이스",
+      "name": "소드 에이스",
       "reversed": false,
       "keywordsText": "지성, 직관, 명확한 사고, 명료",
       "fortuneText": "머릿속이 맑아지고, 핵심이 칼처럼 또렷하게 잡혀요"
@@ -1038,7 +1038,7 @@
     {
       "cardId": 64,
       "cardName": "Ace of Swords",
-      "nameKo": "소드 에이스",
+      "name": "소드 에이스",
       "reversed": true,
       "keywordsText": "지성, 직관, 명확한 사고, 명료",
       "fortuneText": "판단이 흐리다면, 오늘은 직관과 이성을 세워 핵심 하나를 잘라내세요"
@@ -1046,7 +1046,7 @@
     {
       "cardId": 65,
       "cardName": "Two of Swords",
-      "nameKo": "소드 2",
+      "name": "소드 2",
       "reversed": false,
       "keywordsText": "외부 방어, 내면 집중, 사색, 균형",
       "fortuneText": "바깥 소음을 막아둔 채, 내면의 균형에 집중하게 돼요"
@@ -1054,7 +1054,7 @@
     {
       "cardId": 65,
       "cardName": "Two of Swords",
-      "nameKo": "소드 2",
+      "name": "소드 2",
       "reversed": true,
       "keywordsText": "외부 방어, 내면 집중, 사색, 균형",
       "fortuneText": "외부 소리에 휩쓸린다면, 오늘은 시선을 안으로 돌려 사색하세요"
@@ -1062,7 +1062,7 @@
     {
       "cardId": 66,
       "cardName": "Three of Swords",
-      "nameKo": "소드 3",
+      "name": "소드 3",
       "reversed": false,
       "keywordsText": "슬픔, 인정, 내면의 성장",
       "fortuneText": "마음을 찌르는 슬픔을 피하지 않고 인정할 때, 한층 성숙해져요"
@@ -1070,7 +1070,7 @@
     {
       "cardId": 66,
       "cardName": "Three of Swords",
-      "nameKo": "소드 3",
+      "name": "소드 3",
       "reversed": true,
       "keywordsText": "슬픔, 인정, 내면의 성장",
       "fortuneText": "아픔을 덮고 있다면, 오늘은 슬픔을 먼저 인정하세요"
@@ -1078,7 +1078,7 @@
     {
       "cardId": 67,
       "cardName": "Four of Swords",
-      "nameKo": "소드 4",
+      "name": "소드 4",
       "reversed": false,
       "keywordsText": "휴식, 회복, 머리 쉼, 멈춤",
       "fortuneText": "복잡하던 생각이 잠시 멈추고, 머리가 한결 가벼워져요"
@@ -1086,7 +1086,7 @@
     {
       "cardId": 67,
       "cardName": "Four of Swords",
-      "nameKo": "소드 4",
+      "name": "소드 4",
       "reversed": true,
       "keywordsText": "휴식, 회복, 머리 쉼, 멈춤",
       "fortuneText": "더 생각하면 풀릴 거라 과열돼 있다면, 오늘은 판단을 멈추고 회복을 우선하세요"
@@ -1094,7 +1094,7 @@
     {
       "cardId": 68,
       "cardName": "Five of Swords",
-      "nameKo": "소드 5",
+      "name": "소드 5",
       "reversed": false,
       "keywordsText": "갈등, 집착, 이기심, 상실",
       "fortuneText": "억지로 이기려다, 관계나 신뢰를 잃기 쉬워요"
@@ -1102,7 +1102,7 @@
     {
       "cardId": 68,
       "cardName": "Five of Swords",
-      "nameKo": "소드 5",
+      "name": "소드 5",
       "reversed": true,
       "keywordsText": "갈등, 집착, 이기심, 상실",
       "fortuneText": "맞서야 할 때 양보하고 피하기만 한다면, 오늘은 물러서지 말고 이겨도 되는 싸움에서 네 몫을 챙기세요"
@@ -1110,7 +1110,7 @@
     {
       "cardId": 69,
       "cardName": "Six of Swords",
-      "nameKo": "소드 6",
+      "name": "소드 6",
       "reversed": false,
       "keywordsText": "도피, 이동, 전환",
       "fortuneText": "힘든 자리에서 조용히 빠져나와, 더 잔잔한 곳으로 옮겨가요"
@@ -1118,7 +1118,7 @@
     {
       "cardId": 69,
       "cardName": "Six of Swords",
-      "nameKo": "소드 6",
+      "name": "소드 6",
       "reversed": true,
       "keywordsText": "도피, 이동, 전환",
       "fortuneText": "떠나야 할 데 머물고 있다면, 오늘은 도피처럼 보여도 벗어나는 쪽을 택하세요"
@@ -1126,7 +1126,7 @@
     {
       "cardId": 70,
       "cardName": "Seven of Swords",
-      "nameKo": "소드 7",
+      "name": "소드 7",
       "reversed": false,
       "keywordsText": "전략, 엉성한 계획, 부주의한 행동",
       "fortuneText": "전략은 있는데 계획이 엉성해, 빠뜨리는 게 생기기 쉬워요"
@@ -1134,7 +1134,7 @@
     {
       "cardId": 70,
       "cardName": "Seven of Swords",
-      "nameKo": "소드 7",
+      "name": "소드 7",
       "reversed": true,
       "keywordsText": "전략, 엉성한 계획, 부주의한 행동",
       "fortuneText": "완벽한 계획만 기다린다면, 오늘은 엉성해도 할 수 있는 만큼 움직이세요"
@@ -1142,7 +1142,7 @@
     {
       "cardId": 71,
       "cardName": "Eight of Swords",
-      "nameKo": "소드 8",
+      "name": "소드 8",
       "reversed": false,
       "keywordsText": "갇힘, 제약, 자기 한계, 신중",
       "fortuneText": "갇힌 듯 답답하지만, 사실 빠져나갈 길은 열려 있어요"
@@ -1150,7 +1150,7 @@
     {
       "cardId": 71,
       "cardName": "Eight of Swords",
-      "nameKo": "소드 8",
+      "name": "소드 8",
       "reversed": true,
       "keywordsText": "갇힘, 제약, 자기 한계, 신중",
       "fortuneText": "거침없이 내달리거나 벗어나려 발버둥치고 있다면, 오늘은 몸을 사리고 신중하게 멈춰 서세요"
@@ -1158,7 +1158,7 @@
     {
       "cardId": 72,
       "cardName": "Nine of Swords",
-      "nameKo": "소드 9",
+      "name": "소드 9",
       "reversed": false,
       "keywordsText": "스트레스, 걱정거리, 불면증",
       "fortuneText": "걱정과 생각이 밤까지 이어져, 마음이 무거워지기 쉬워요"
@@ -1166,7 +1166,7 @@
     {
       "cardId": 72,
       "cardName": "Nine of Swords",
-      "nameKo": "소드 9",
+      "name": "소드 9",
       "reversed": true,
       "keywordsText": "스트레스, 걱정거리, 불면증",
       "fortuneText": "걱정을 안 보려다 더 커졌다면, 오늘은 무엇이 잠을 막는지 하나씩 꺼내 보세요"
@@ -1174,7 +1174,7 @@
     {
       "cardId": 73,
       "cardName": "Ten of Swords",
-      "nameKo": "소드 10",
+      "name": "소드 10",
       "reversed": false,
       "keywordsText": "압박, 멈춤, 고요, 전환, 새 출발",
       "fortuneText": "압박이 끝까지 차올라 멈추고, 그 자리에서 고요한 전환이 시작돼요"
@@ -1182,7 +1182,7 @@
     {
       "cardId": 73,
       "cardName": "Ten of Swords",
-      "nameKo": "소드 10",
+      "name": "소드 10",
       "reversed": true,
       "keywordsText": "압박, 멈춤, 고요, 전환, 새 출발",
       "fortuneText": "끝난 일을 붙들고 있다면, 오늘은 끝을 인정하고 새 출발로 넘어가세요"
@@ -1190,7 +1190,7 @@
     {
       "cardId": 74,
       "cardName": "Page of Swords",
-      "nameKo": "소드 페이지",
+      "name": "소드 페이지",
       "reversed": false,
       "keywordsText": "호기심, 경계심, 탐구",
       "fortuneText": "호기심과 경계심이 살아나, 상황을 더 알고 싶어져요"
@@ -1198,7 +1198,7 @@
     {
       "cardId": 74,
       "cardName": "Page of Swords",
-      "nameKo": "소드 페이지",
+      "name": "소드 페이지",
       "reversed": true,
       "keywordsText": "호기심, 경계심, 탐구",
       "fortuneText": "그냥 받아들이고 있다면, 오늘은 한 걸음 물러서 의심하고 살피세요"
@@ -1206,7 +1206,7 @@
     {
       "cardId": 75,
       "cardName": "Knight of Swords",
-      "nameKo": "소드 기사",
+      "name": "소드 기사",
       "reversed": false,
       "keywordsText": "결단, 추진",
       "fortuneText": "판단이 서면 곧장 결단하고, 빠르게 밀고 나가요"
@@ -1214,7 +1214,7 @@
     {
       "cardId": 75,
       "cardName": "Knight of Swords",
-      "nameKo": "소드 기사",
+      "name": "소드 기사",
       "reversed": true,
       "keywordsText": "결단, 추진",
       "fortuneText": "계속 재고만 있다면, 오늘은 결단을 세우고 앞으로 밀어붙이세요"
@@ -1222,7 +1222,7 @@
     {
       "cardId": 76,
       "cardName": "Queen of Swords",
-      "nameKo": "소드 여왕",
+      "name": "소드 여왕",
       "reversed": false,
       "keywordsText": "강한 멘탈, 흔들림 없음",
       "fortuneText": "흔들림 없는 멘탈로, 내 기준을 분명히 지켜내요"
@@ -1230,7 +1230,7 @@
     {
       "cardId": 76,
       "cardName": "Queen of Swords",
-      "nameKo": "소드 여왕",
+      "name": "소드 여왕",
       "reversed": true,
       "keywordsText": "강한 멘탈, 흔들림 없음",
       "fortuneText": "마음이 흔들려 기준이 흐려졌다면, 오늘은 차분하고 단단하게 서세요"
@@ -1238,7 +1238,7 @@
     {
       "cardId": 77,
       "cardName": "King of Swords",
-      "nameKo": "소드 왕",
+      "name": "소드 왕",
       "reversed": false,
       "keywordsText": "이성, 지성, 공정한 판단, 통제",
       "fortuneText": "이성과 지성으로 공정하게 판단하고, 상황을 한눈에 통제해요"
@@ -1246,7 +1246,7 @@
     {
       "cardId": 77,
       "cardName": "King of Swords",
-      "nameKo": "소드 왕",
+      "name": "소드 왕",
       "reversed": true,
       "keywordsText": "이성, 지성, 공정한 판단, 통제",
       "fortuneText": "감정이나 분위기에 판단이 흐려졌다면, 오늘은 합리성을 세워 넓게 보고 결정하세요"
